@@ -10,6 +10,9 @@ repositories {
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.21.0")
+    implementation("tools.jackson.module:jackson-module-kotlin:3.0.4")
+
     testImplementation(kotlin("test"))
 }
 
