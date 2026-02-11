@@ -1,5 +1,6 @@
 package org.gorych.alice.skill
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import tools.jackson.databind.JsonNode
 import tools.jackson.module.kotlin.jacksonObjectMapper
 
@@ -11,8 +12,25 @@ val quiz = mapOf(
     Pair("Как звали собаку в сказке репка?", listOf("жучка")),
 )
 
-fun handle(input: Map<String, Any>): Map<String, Any> {
+data class ResponseValue(
+    val text: String,
+    @JsonProperty("end_session") val endSession: Boolean,
+)
+
+data class Response(
+    val response: ResponseValue,
+    val version: String = "1.0",
+) {
+    companion object {
+        fun of(text: String, endSession: Boolean): Response {
+            return Response(ResponseValue(text, endSession))
+        }
+    }
+}
+
+fun handle(input: Map<String, Any>): String {
     val mapper = jacksonObjectMapper()
+
     val requestNode = mapper.valueToTree<JsonNode>(input)
 
     val command = requestNode["request"]?.get("command")?.asString()?.lowercase() ?: ""
@@ -25,14 +43,10 @@ fun handle(input: Map<String, Any>): Map<String, Any> {
         else -> "Я вас не поняла, повторите, пожалуйста."
     }
 
-    val responseMap = mapOf(
-        "response" to mapOf(
-            "text" to responseText,
-            "tts" to responseText,
-            "end_session" to command.contains("пока")
-        ),
-        "version" to "1.0.0"
+    val response = mapper.writeValueAsString(
+        Response.of(responseText, command.contains("пока"))
     )
+    println("Response= $response")
 
-    return responseMap
+    return response
 }
