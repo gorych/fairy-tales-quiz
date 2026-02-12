@@ -1,0 +1,9 @@
+root:
+    $phrase
+
+$phrase:
+    %lemma
+    не знаю | не уверен
+
+filler:
+    я | мы

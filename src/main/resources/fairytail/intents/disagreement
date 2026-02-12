@@ -1,0 +1,9 @@
+root:
+    $phrase
+
+$phrase:
+    %lemma
+    нет | неа | не хочу
+
+filler:
+    я | хочу | мы
