@@ -1,4 +1,4 @@
-package org.gorych.alice.skill.api
+package org.gorych.alice.skill.core.api
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

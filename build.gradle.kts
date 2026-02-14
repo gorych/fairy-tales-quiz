@@ -16,7 +16,12 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.21.0")
     implementation("tools.jackson.module:jackson-module-kotlin:3.0.4")
 
+    // Testing
     testImplementation(kotlin("test"))
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:6.0.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:6.0.2")
 }
 
 tasks.register<Zip>("zipContent") {
