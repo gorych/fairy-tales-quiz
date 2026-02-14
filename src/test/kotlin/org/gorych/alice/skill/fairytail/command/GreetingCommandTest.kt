@@ -36,11 +36,12 @@ class GreetingCommandTest {
 
     @ParameterizedTest(name = "Should return {0} when NLU tokens {2}")
     @CsvSource(
-        "И тебе%2C привет!,              привет,                         contain 'привет' value",
-        "И тебе%2C здравствуй!,          здравствуй,                     contain 'здравствуй' value",
-        "И вам%2C здравствуйте!,         здравствуйте,                   contain 'здравствуйте' value",
+        "И тебе%2C привет!,            привет,                         contain 'привет' value",
+        "И тебе%2C здравствуй!,        здравствуй,                     contain 'здравствуй' value",
+        "И вам%2C здравствуйте!,       здравствуйте,                   contain 'здравствуйте' value",
+        "И вам доброго времени суток!, здрАВСТвуйте,                   contain 'здрАВСТвуйте' value",
         "И вам доброго времени суток!, hello,                          contain 'hello' value",
-        "И тебе%2C привет!,              привет&здравствуй&здравствуйте, contain 'привет, здравствуй, здравствуйте' values",
+        "И тебе%2C привет!,            привет&здравствуй&здравствуйте, contain 'привет, здравствуй, здравствуйте' values",
         "И вам доброго времени суток!, special_characters,             contain special characters only",
         "И вам доброго времени суток!, empty,                          don't contain any value",
         "И вам доброго времени суток!, null,                           are NULL",
