@@ -5,8 +5,6 @@ import org.gorych.alice.skill.core.api.getByIntentKey
 import org.gorych.alice.skill.core.api.getByNluTokenKey
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.net.URLDecoder
-import java.nio.charset.StandardCharsets.UTF_8
 import kotlin.test.assertEquals
 
 class PartingCommandTest {
@@ -36,14 +34,16 @@ class PartingCommandTest {
 
     @ParameterizedTest(name = "Should return {0} when NLU tokens {2}")
     @CsvSource(
-        "Пока. Заходи еще!,                    пока,               contain 'пока' value",
-        "Прощай. Надеюсь%2C тебе понравилось!, прощай,             contain 'прощай' value",
-        "До новых встреч!,                     прОЩай,             contain 'прОЩай' value",
-        "До новых встреч!,                     bye,                contain 'bye' value",
-        "Пока. Заходи еще!,                    пока&прощай,        contain 'пока, прощай' values",
-        "До новых встреч!,                     special_characters, contain special characters only",
-        "До новых встреч!,                     empty,              don't contain any value",
-        "До новых встреч!,                     null,               are NULL",
+        value = [
+            "Пока. Заходи еще!;                    пока;               contain 'пока' value",
+            "Прощай. Надеюсь, тебе понравилось!;   прощай;             contain 'прощай' value",
+            "До новых встреч!;                     прОЩай;             contain 'прОЩай' value",
+            "До новых встреч!;                     bye;                contain 'bye' value",
+            "Пока. Заходи еще!;                    пока&прощай;        contain 'пока, прощай' values",
+            "До новых встреч!;                     special_characters; contain special characters only",
+            "До новых встреч!;                     empty;              don't contain any value",
+            "До новых встреч!;                     null;               are NULL", ],
+        delimiter = ';'
     )
     fun `WHEN execute call THEN should return expected text`(
         expectedValue: String,
@@ -58,7 +58,7 @@ class PartingCommandTest {
         val result = command.execute(requestObject)
 
         //then
-        assertEquals(URLDecoder.decode(expectedValue, UTF_8.name()), result)
+        assertEquals(expectedValue, result)
     }
 
 }
