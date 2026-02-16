@@ -102,3 +102,24 @@ private val requestObjectWithNluTokenRegistry = mapOf(
 fun RequestObject.Companion.getByNluTokenKey(key: String): RequestObject =
     requestObjectWithNluTokenRegistry.getValue(key)
 //endregion
+
+//region Request Objects with session
+
+fun RequestObject.Companion.newSession(): RequestObject =
+    RequestObject(null, Session(true), null, listOf())
+
+fun RequestObject.Companion.notNewSession(): RequestObject =
+    RequestObject(null, Session(false), null, listOf("g911.greeting"))
+
+fun RequestObject.Companion.nullSession(): RequestObject =
+    RequestObject(null, null, null, listOf("g911.parting"))
+
+private val requestObjectWithSessionRegistry = mapOf(
+    Pair("new", RequestObject.newSession()),
+    Pair("not_new", RequestObject.notNewSession()),
+    Pair("null", RequestObject.nullSession()),
+)
+
+fun RequestObject.Companion.getBySessionKey(key: String): RequestObject = requestObjectWithSessionRegistry.getValue(key)
+
+//endregion
