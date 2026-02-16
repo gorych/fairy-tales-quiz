@@ -1,102 +1,45 @@
 package org.gorych.alice.skill.core.api
 
+fun RequestObject.Companion.ofEmpty() = RequestObject()
+
+fun RequestObject.Companion.of(vararg intentKeys: String) =
+    RequestObject(Request("", NLU(listOf(), intentKeys.associateWith { "{}" })))
+
+fun RequestObject.Companion.of(tokens: List<String>) = RequestObject(Request("", NLU(tokens)))
+
+fun RequestObject.Companion.of(session: Session?): RequestObject = RequestObject(null, session)
+
 //region Request Objects with intents
-
-fun RequestObject.Companion.emptyIntents(): RequestObject =
-    RequestObject(null, null, null, listOf())
-
-fun RequestObject.Companion.greetingIntent(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting"))
-
-fun RequestObject.Companion.partingIntent(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.parting"))
-
-fun RequestObject.Companion.agreementIntent(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.agreement"))
-
-fun RequestObject.Companion.greetingAndPartingIntents(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting", "g911.parting"))
-
-private val requestObjectWithIntentsRegistry = mapOf(
-    Pair("g911.greeting", RequestObject.greetingIntent()),
-    Pair("g911.parting", RequestObject.partingIntent()),
-    Pair("g911.agreement", RequestObject.agreementIntent()),
-    Pair("g911.greeting&g911.parting", RequestObject.greetingAndPartingIntents()),
-    Pair("empty", RequestObject.emptyIntents()),
+private val requestObjectWithIntentsRegistry: Map<String, RequestObject> = mapOf(
+    Pair("g911.greeting", RequestObject.of("g911.greeting")),
+    Pair("g911.parting", RequestObject.of("g911.parting")),
+    Pair("g911.agreement", RequestObject.of("g911.agreement")),
+    Pair("g911.greeting&g911.parting", RequestObject.of("g911.greeting", "g911.parting")),
+    Pair("empty", RequestObject.ofEmpty()),
 )
 
-fun RequestObject.Companion.getByIntentKey(key: String): RequestObject = requestObjectWithIntentsRegistry.getValue(key)
+fun RequestObject.Companion.getByIntentKey(key: String): RequestObject =
+    requestObjectWithIntentsRegistry.getValue(key)
 //endregion
 
 //region Request Objects with NLU tokens
+private val requestObjectWithNluTokenRegistry: Map<String, RequestObject> = mapOf(
+    Pair("привет", RequestObject.of(listOf("привет"))),
+    Pair("здравствуй", RequestObject.of(listOf("здравствуй"))),
+    Pair("здравствуйте", RequestObject.of(listOf("здравствуйте"))),
+    Pair("здрАВСТвуйте", RequestObject.of(listOf("здрАВСТвуйте"))),
+    Pair("привет&здравствуй&здравствуйте", RequestObject.of(listOf("привет", "здравствуй", "здравствуйте"))),
+    Pair("hello", RequestObject.of(listOf("hello"))),
 
-fun RequestObject.Companion.tokens_привет(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting"), NLU(listOf("привет")))
+    Pair("пока", RequestObject.of(listOf("пока"))),
+    Pair("прощай", RequestObject.of(listOf("прощай"))),
+    Pair("прОЩай", RequestObject.of(listOf("прОЩай"))),
+    Pair("пока&прощай", RequestObject.of(listOf("пока", "прощай"))),
+    Pair("bye", RequestObject.of(listOf("bye"))),
 
-fun RequestObject.Companion.tokens_здравствуй(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting"), NLU(listOf("здравствуй")))
-
-fun RequestObject.Companion.tokens_здравствуйте(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting"), NLU(listOf("здравствуйте")))
-
-fun RequestObject.Companion.tokens_здрАВСТвуйте(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting"), NLU(listOf("здрАВСТвуйте")))
-
-fun RequestObject.Companion.tokens_привет_здравствуй_здравствуйте(): RequestObject =
-    RequestObject(
-        null,
-        null,
-        null,
-        listOf("g911.greeting"),
-        NLU(listOf("привет", "здравствуй", "здравствуйте"))
-    )
-
-fun RequestObject.Companion.tokens_hello(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting"), NLU(listOf("hello")))
-
-
-fun RequestObject.Companion.tokens_пока(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.parting"), NLU(listOf("пока")))
-
-fun RequestObject.Companion.tokens_прощай(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.parting"), NLU(listOf("прощай")))
-
-fun RequestObject.Companion.tokens_прОЩай(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.parting"), NLU(listOf("прОЩай")))
-
-fun RequestObject.Companion.tokens_пока_прощай(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.parting"), NLU(listOf("пока", "прощай")))
-
-fun RequestObject.Companion.tokens_bye(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.parting"), NLU(listOf("bye")))
-
-
-fun RequestObject.Companion.tokens_specialCharacters(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting", "g911.parting"), NLU(listOf(".", "!", ",")))
-
-fun RequestObject.Companion.tokens_empty(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting", "g911.parting"), NLU(listOf()))
-
-fun RequestObject.Companion.tokens_null(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.greeting", "g911.parting"), null)
-
-private val requestObjectWithNluTokenRegistry = mapOf(
-    Pair("привет", RequestObject.tokens_привет()),
-    Pair("здравствуй", RequestObject.tokens_здравствуй()),
-    Pair("здравствуйте", RequestObject.tokens_здравствуйте()),
-    Pair("здрАВСТвуйте", RequestObject.tokens_здрАВСТвуйте()),
-    Pair("привет&здравствуй&здравствуйте", RequestObject.tokens_привет_здравствуй_здравствуйте()),
-    Pair("hello", RequestObject.tokens_hello()),
-
-    Pair("пока", RequestObject.tokens_пока()),
-    Pair("прощай", RequestObject.tokens_прощай()),
-    Pair("прОЩай", RequestObject.tokens_прОЩай()),
-    Pair("пока&прощай", RequestObject.tokens_пока_прощай()),
-    Pair("bye", RequestObject.tokens_bye()),
-
-    Pair("special_characters", RequestObject.tokens_specialCharacters()),
-    Pair("empty", RequestObject.tokens_empty()),
-    Pair("null", RequestObject.tokens_null()),
+    Pair("special_characters", RequestObject.of(listOf(".", "!", ","))),
+    Pair("empty", RequestObject.of(listOf())),
+    Pair("null", RequestObject.ofEmpty()),
 )
 
 fun RequestObject.Companion.getByNluTokenKey(key: String): RequestObject =
@@ -104,20 +47,10 @@ fun RequestObject.Companion.getByNluTokenKey(key: String): RequestObject =
 //endregion
 
 //region Request Objects with session
-
-fun RequestObject.Companion.newSession(): RequestObject =
-    RequestObject(null, Session(true), null, listOf())
-
-fun RequestObject.Companion.notNewSession(): RequestObject =
-    RequestObject(null, Session(false), null, listOf("g911.greeting"))
-
-fun RequestObject.Companion.nullSession(): RequestObject =
-    RequestObject(null, null, null, listOf("g911.parting"))
-
-private val requestObjectWithSessionRegistry = mapOf(
-    Pair("new", RequestObject.newSession()),
-    Pair("not_new", RequestObject.notNewSession()),
-    Pair("null", RequestObject.nullSession()),
+private val requestObjectWithSessionRegistry: Map<String, RequestObject> = mapOf(
+    Pair("new", RequestObject.of(Session(true))),
+    Pair("not_new", RequestObject.of(Session(false))),
+    Pair("null", RequestObject.of(null)),
 )
 
 fun RequestObject.Companion.getBySessionKey(key: String): RequestObject = requestObjectWithSessionRegistry.getValue(key)

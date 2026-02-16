@@ -8,16 +8,14 @@ private const val PARTING_INTENT_ID = "g911.parting"
 class PartingCommand : Command {
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.intents
-            .map { it.lowercase() }
-            .any { it == PARTING_INTENT_ID }
+        return requestObject.request?.containsIntent(PARTING_INTENT_ID) ?: false
     }
 
     override fun execute(requestObject: RequestObject): String {
-        requestObject.nlu?.let {
+        requestObject.request?.let {
             return when {
-                it.tokens.contains("пока") -> "Пока. Заходи еще!"
-                it.tokens.contains("прощай") -> "Прощай. Надеюсь, тебе понравилось!"
+                it.containsToken("пока") -> "Пока. Заходи еще!"
+                it.containsToken("прощай") -> "Прощай. Надеюсь, тебе понравилось!"
                 else -> "До новых встреч!"
             }
         }

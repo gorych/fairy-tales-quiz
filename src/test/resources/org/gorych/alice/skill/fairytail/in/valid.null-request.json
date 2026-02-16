@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "locale": "ru-RU",
+    "timezone": "UTC",
+    "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)"
+  },
+  "session": {
+    "new": false
+  },
+  "version": "1.0"
+}

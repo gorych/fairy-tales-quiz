@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "locale": "ru-RU",
+    "timezone": "UTC",
+    "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)",
+    "interfaces": {
+      "screen": {},
+      "payments": {},
+      "account_linking": {}
+    }
+  },
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "пока",
+    "original_utterance": "пока",
+    "nlu": {
+      "tokens": [
+        "пока"
+      ],
+      "entities": [],
+      "intents": {
+        "YANDEX.PARTING": {
+          "slots": {}
+        },
+        "g911.parting": {}
+      }
+    },
+    "markup": {
+      "dangerous_context": true
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "value": 10
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

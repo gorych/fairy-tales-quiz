@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "locale": "ru-RU",
+    "timezone": "UTC",
+    "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)"
+  },
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "привет",
+    "original_utterance": "привет",
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "version": "1.0"
+}

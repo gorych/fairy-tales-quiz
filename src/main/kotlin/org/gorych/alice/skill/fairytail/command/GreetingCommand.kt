@@ -8,17 +8,15 @@ private const val GREETING_INTENT_ID = "g911.greeting"
 class GreetingCommand : Command {
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.intents
-            .map { it.lowercase() }
-            .any { it == GREETING_INTENT_ID }
+        return requestObject.request?.containsIntent(GREETING_INTENT_ID) ?: false
     }
 
     override fun execute(requestObject: RequestObject): String {
-        requestObject.nlu?.let {
+        requestObject.request?.let {
             return when {
-                it.tokens.contains("привет") -> "И тебе, привет!"
-                it.tokens.contains("здравствуй") -> "И тебе, здравствуй!"
-                it.tokens.contains("здравствуйте") -> "И вам, здравствуйте!"
+                it.containsToken("привет") -> "И тебе, привет!"
+                it.containsToken("здравствуй") -> "И тебе, здравствуй!"
+                it.containsToken("здравствуйте") -> "И вам, здравствуйте!"
                 else -> "И вам доброго времени суток!"
             }
         }
