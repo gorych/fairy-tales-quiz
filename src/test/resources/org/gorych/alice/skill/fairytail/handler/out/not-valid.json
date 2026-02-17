@@ -4,5 +4,9 @@
   "response": {
     "text": "Извините, произошла техническая ошибка. Попробуйте еще раз.",
     "end_session": false
+  },
+  "session_state": {
+    "currentQuestion": null,
+    "transitionCommands": []
   }
 }

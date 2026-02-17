@@ -2,21 +2,38 @@ package org.gorych.alice.skill.core.api
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
+private const val HTTP_VERSION = "1.0"
+
+data class ResponseObject(
+    val response: ResponseValue,
+    val version: String = HTTP_VERSION,
+    val buttons: List<Button> = listOf(),
+    @JsonProperty("session_state") val sessionState: SessionState = SessionState()
+) {
+    constructor(response: ResponseValue, sessionState: SessionState) : this(
+        response,
+        HTTP_VERSION,
+        listOf(),
+        sessionState
+    )
+
+    companion object {
+        fun of(text: String, endSession: Boolean): ResponseObject {
+            return ResponseObject(ResponseValue(text, endSession))
+        }
+
+        fun of(text: String, state: SessionState, endSession: Boolean): ResponseObject {
+            return ResponseObject(ResponseValue(text, endSession), state)
+        }
+
+        fun ofUnclearCommand() = of("Я вас не поняла, повторите, пожалуйста.", false)
+        fun ofTechnicalError() = of("Извините, произошла техническая ошибка. Попробуйте еще раз.", false)
+    }
+}
+
 data class ResponseValue(
     val text: String,
     @JsonProperty("end_session") val endSession: Boolean,
 )
 
 data class Button(val title: String, val hide: Boolean = true)
-
-data class ResponseObject(
-    val response: ResponseValue,
-    val version: String = "1.0",
-    val buttons: List<Button> = listOf()
-) {
-    companion object {
-        fun of(text: String, endSession: Boolean): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession))
-        }
-    }
-}

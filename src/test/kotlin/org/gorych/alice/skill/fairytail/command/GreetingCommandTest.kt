@@ -1,13 +1,29 @@
 package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.RequestObject
+import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getByIntentKey
 import org.gorych.alice.skill.core.api.getByNluTokenKey
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class GreetingCommandTest {
+
+    @Test
+    fun `WHEN name call THEN should return class simple name`() {
+        //given
+        val command = GreetingCommand()
+        val expected = GreetingCommand::class.java.simpleName
+
+        //when
+        val actual = command.name()
+
+        //then
+        assertEquals(expected, actual)
+        assertEquals(command.name(), GreetingCommand.name())
+    }
 
     @ParameterizedTest(name = "Should return {0} when intents {2}")
     @CsvSource(
@@ -56,9 +72,9 @@ class GreetingCommandTest {
         val requestObject = RequestObject.Companion.getByNluTokenKey(key)
 
         //when
-        val result = command.execute(requestObject)
+        val result: ResponseObject = command.execute(requestObject)
 
         //then
-        assertEquals(expectedValue, result)
+        assertEquals(expectedValue, result.response.text)
     }
 }

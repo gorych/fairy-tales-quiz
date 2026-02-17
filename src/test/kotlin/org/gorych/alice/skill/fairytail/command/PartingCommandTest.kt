@@ -1,13 +1,30 @@
 package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.RequestObject
+import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getByIntentKey
 import org.gorych.alice.skill.core.api.getByNluTokenKey
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class PartingCommandTest {
+
+    @Test
+    fun `WHEN name call THEN should return class simple name`() {
+        //given
+        val command = PartingCommand()
+        val expected = PartingCommand::class.java.simpleName
+
+        //when
+        val actual = command.name()
+
+        //then
+        assertEquals(expected, actual)
+        assertEquals(command.name(), PartingCommand.name())
+    }
+
 
     @ParameterizedTest(name = "Should return {0} when intents {2}")
     @CsvSource(
@@ -42,7 +59,8 @@ class PartingCommandTest {
             "Пока. Заходи еще!;                    пока&прощай;        contain 'пока, прощай' values",
             "До новых встреч!;                     special_characters; contain special characters only",
             "До новых встреч!;                     empty;              don't contain any value",
-            "До новых встреч!;                     null;               are NULL", ],
+            "До новых встреч!;                     null;               are NULL",
+        ],
         delimiter = ';'
     )
     fun `WHEN execute call THEN should return expected text`(
@@ -55,10 +73,10 @@ class PartingCommandTest {
         val requestObject = RequestObject.Companion.getByNluTokenKey(key)
 
         //when
-        val result = command.execute(requestObject)
+        val result: ResponseObject = command.execute(requestObject)
 
         //then
-        assertEquals(expectedValue, result)
+        assertEquals(expectedValue, result.response.text)
     }
 
 }

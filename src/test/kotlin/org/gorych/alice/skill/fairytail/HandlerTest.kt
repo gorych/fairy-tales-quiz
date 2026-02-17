@@ -24,8 +24,8 @@ class HandlerTest {
         inputFileName: String,
     ) {
         //given
-        val inputJson = readJsonResourceFile(this.javaClass, "in/$inputFileName")
-        val expectedJson = readJsonResourceFile(this.javaClass, "out/$inputFileName")
+        val inputJson = readJsonResourceFile(this.javaClass, "handler/in/$inputFileName")
+        val expectedJson = readJsonResourceFile(this.javaClass, "handler/out/$inputFileName")
 
         //when
         val actualJson = handle(inputJson)

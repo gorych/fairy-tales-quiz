@@ -3,9 +3,7 @@ package org.gorych.alice.skill.fairytail
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.command.Command
-import org.gorych.alice.skill.fairytail.command.GreetingCommand
-import org.gorych.alice.skill.fairytail.command.IntroductionCommand
-import org.gorych.alice.skill.fairytail.command.PartingCommand
+import org.gorych.alice.skill.fairytail.command.*
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
@@ -15,7 +13,13 @@ private val commandRegistry: List<Command> = listOf(
     IntroductionCommand(),
 
     GreetingCommand(),
-    PartingCommand()
+
+    AgreementCommand(),
+    DisagreementCommand(),
+
+    NextQuestionCommand(),
+
+    PartingCommand(),
 )
 
 fun handle(input: String): String {
@@ -34,7 +38,7 @@ fun handle(input: String): String {
     } catch (t: Throwable) {
         err.println("Error while request processing. Exception= $t")
         response = mapper.writeValueAsString(
-            ResponseObject.of("Извините, произошла техническая ошибка. Попробуйте еще раз.", false)
+            ResponseObject.ofTechnicalError()
         )
     }
 
@@ -44,18 +48,15 @@ fun handle(input: String): String {
 }
 
 private fun processRequest(requestObject: RequestObject): ResponseObject {
-    requestObject.request?.nlu?.intents
-
     val command: Command? = commandRegistry.firstOrNull { it.canHandle(requestObject) }
-    val responseObject = when {
+    return when {
         command != null -> {
-            val responseText = command.execute(requestObject)
-            ResponseObject.of(responseText, command.isClosingPhrase())
+            command.execute(requestObject)
         }
 
         else -> {
-            ResponseObject.of("Я вас не поняла, повторите, пожалуйста.", false)
+            //TODO add state
+            ResponseObject.ofUnclearCommand()
         }
     }
-    return responseObject
 }
