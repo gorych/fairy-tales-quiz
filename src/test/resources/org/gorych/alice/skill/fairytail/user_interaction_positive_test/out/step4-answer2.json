@@ -1,0 +1,14 @@
+{
+  "response": {
+    "text": "Верно. Слушай следующий вопрос. Кто испёк колобка?",
+    "end_session": false
+  },
+  "version": "1.0",
+  "buttons": [],
+  "session_state": {
+    "currentQuestion": 3,
+    "transitionCommands": [
+      "NextQuestionCommand"
+    ]
+  }
+}

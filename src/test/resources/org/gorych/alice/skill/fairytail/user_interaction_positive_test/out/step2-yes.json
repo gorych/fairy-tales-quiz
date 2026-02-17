@@ -1,0 +1,14 @@
+{
+  "response": {
+    "text": "Отлично. Cлушай первый вопрос. Кто посадил репку?",
+    "end_session": false
+  },
+  "version": "1.0",
+  "buttons": [],
+  "session_state": {
+    "currentQuestion": 1,
+    "transitionCommands": [
+      "NextQuestionCommand"
+    ]
+  }
+}

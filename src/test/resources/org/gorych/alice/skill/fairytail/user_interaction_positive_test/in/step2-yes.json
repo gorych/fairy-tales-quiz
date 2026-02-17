@@ -1,0 +1,37 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "да",
+    "original_utterance": "да",
+    "nlu": {
+      "tokens": [
+        "да"
+      ],
+      "entities": [],
+      "intents": {
+        "YANDEX.CONFIRM": {
+          "slots": {}
+        },
+        "g911.agreement": {
+          "slots": {}
+        }
+      }
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": null,
+      "transitionCommands": [
+        "AgreementCommand",
+        "DisagreementCommand"
+      ]
+    }
+  },
+  "version": "1.0"
+}

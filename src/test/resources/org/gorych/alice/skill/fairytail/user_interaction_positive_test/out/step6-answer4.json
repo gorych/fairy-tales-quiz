@@ -1,0 +1,14 @@
+{
+  "response": {
+    "text": "Верно. Слушай следующий вопрос. Как звали собаку в сказке репка?",
+    "end_session": false
+  },
+  "version": "1.0",
+  "buttons": [],
+  "session_state": {
+    "currentQuestion": 5,
+    "transitionCommands": [
+      "NextQuestionCommand"
+    ]
+  }
+}
