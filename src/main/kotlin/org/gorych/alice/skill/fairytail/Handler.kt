@@ -26,9 +26,10 @@ fun handle(input: String): String {
     println("Raw input: $input")
     val mapper = jacksonObjectMapper()
 
+    var requestObject = RequestObject()
     var response: String
     try {
-        val requestObject: RequestObject = mapper.readValue(input)
+        requestObject = mapper.readValue(input)
         println("Request object: $requestObject")
 
         val responseObject = processRequest(requestObject)
@@ -38,7 +39,7 @@ fun handle(input: String): String {
     } catch (t: Throwable) {
         err.println("Error while request processing. Exception= $t")
         response = mapper.writeValueAsString(
-            ResponseObject.ofTechnicalError()
+            ResponseObject.ofTechnicalError(requestObject.state?.session)
         )
     }
 
@@ -55,8 +56,7 @@ private fun processRequest(requestObject: RequestObject): ResponseObject {
         }
 
         else -> {
-            //TODO add state
-            ResponseObject.ofUnclearCommand()
+            ResponseObject.ofUnclearCommand(requestObject.state?.session)
         }
     }
 }

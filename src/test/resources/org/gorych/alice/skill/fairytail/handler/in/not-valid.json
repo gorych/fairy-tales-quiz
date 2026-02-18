@@ -1,3 +1,13 @@
 {
-  qqqq
+  qqqq,
+  "state": {
+    "session": {
+      "currentQuestion": 1,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  }
 }

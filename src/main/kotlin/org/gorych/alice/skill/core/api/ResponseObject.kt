@@ -26,8 +26,15 @@ data class ResponseObject(
             return ResponseObject(ResponseValue(text, endSession), state)
         }
 
-        fun ofUnclearCommand() = of("Я вас не поняла, повторите, пожалуйста.", false)
-        fun ofTechnicalError() = of("Извините, произошла техническая ошибка. Попробуйте еще раз.", false)
+        fun ofUnclearCommand(sessionState: SessionState?) =
+            of("Я вас не поняла, повторите, пожалуйста.", sessionState ?: SessionState(), false)
+
+        fun ofUnclearCommand() = ofUnclearCommand(SessionState())
+
+        fun ofTechnicalError(sessionState: SessionState?) =
+            of("Извините, произошла техническая ошибка. Попробуйте еще раз.", sessionState ?: SessionState(), false)
+
+        fun ofTechnicalError() = ofTechnicalError(SessionState())
     }
 }
 
