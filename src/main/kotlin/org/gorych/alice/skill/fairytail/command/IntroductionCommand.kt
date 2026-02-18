@@ -17,7 +17,7 @@ class IntroductionCommand : Command {
         val responseText = "Привет! Я предлагаю проверить насколько хорошо ты знаешь сказки. Поиграем?"
 
         val state = SessionState(
-            setOf(AgreementCommand.name(), DisagreementCommand.name())
+            setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
         )
 
         return ResponseObject.of(responseText, state, false)
