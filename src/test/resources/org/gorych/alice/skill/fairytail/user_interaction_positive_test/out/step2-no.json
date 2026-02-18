@@ -1,0 +1,12 @@
+{
+  "response": {
+    "text": "Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти",
+    "end_session": true
+  },
+  "version": "1.0",
+  "buttons": [],
+  "session_state": {
+    "currentQuestion": null,
+    "transitionCommands": []
+  }
+}

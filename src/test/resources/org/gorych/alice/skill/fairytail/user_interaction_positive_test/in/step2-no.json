@@ -1,0 +1,39 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "нет",
+    "original_utterance": "нет",
+    "nlu": {
+      "tokens": [
+        "нет"
+      ],
+      "entities": [],
+      "intents": {
+        "YANDEX.REJECT": {
+          "slots": {}
+        },
+        "g911.disagreement": {
+          "slots": {}
+        }
+      }
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": null,
+      "transitionCommands": [
+        "PlayingAgreementCommand",
+        "PlayingDisagreementCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}
