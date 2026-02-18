@@ -1,8 +1,8 @@
 package org.gorych.alice.skill.core.api
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import org.gorych.alice.skill.fairytail.command.AgreementCommand
-import org.gorych.alice.skill.fairytail.command.DisagreementCommand
+import org.gorych.alice.skill.fairytail.command.PlayingAgreementCommand
+import org.gorych.alice.skill.fairytail.command.PlayingDisagreementCommand
 import org.gorych.alice.skill.fairytail.command.NextQuestionCommand
 
 data class RequestObject(
@@ -21,8 +21,8 @@ data class RequestObject(
 
     fun hasCurrentQuestion(): Boolean = state?.session?.currentQuestion != null
 
-    fun containsAgreementCommand(): Boolean = state?.containsTransitionCommand(AgreementCommand.name()) ?: false
-    fun containsDisagreementCommand(): Boolean = state?.containsTransitionCommand(DisagreementCommand.name()) ?: false
+    fun containsPlayingAgreementCommand(): Boolean = state?.containsTransitionCommand(PlayingAgreementCommand.name()) ?: false
+    fun containsPlayingDisagreementCommand(): Boolean = state?.containsTransitionCommand(PlayingDisagreementCommand.name()) ?: false
     fun containsNextQuestionCommand(): Boolean = state?.containsTransitionCommand(NextQuestionCommand.name()) ?: false
 
     companion object
