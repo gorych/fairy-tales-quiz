@@ -1,0 +1,31 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "федора",
+    "original_utterance": "федора",
+    "nlu": {
+      "tokens": [
+        "федора"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 12,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

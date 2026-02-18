@@ -1,0 +1,31 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "теремок",
+    "original_utterance": "теремок",
+    "nlu": {
+      "tokens": [
+        "теремок"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 6,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

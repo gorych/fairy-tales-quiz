@@ -1,0 +1,31 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "айболит",
+    "original_utterance": "айболит",
+    "nlu": {
+      "tokens": [
+        "айболит"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 10,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

@@ -1,0 +1,31 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "мирись мирись мирись",
+    "original_utterance": "мирись мирись мирись",
+    "nlu": {
+      "tokens": [
+        "мирись мирись мирись"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 9,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

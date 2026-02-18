@@ -5,7 +5,7 @@
   "version": "1.0",
   "buttons": [],
   "session_state": {
-    "currentQuestion": 6,
+    "currentQuestion": 7,
     "transitionCommands": [
       "NextQuestionCommand"
     ]

@@ -1,0 +1,31 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "лиса",
+    "original_utterance": "лиса",
+    "nlu": {
+      "tokens": [
+        "лиса"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 7,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}
