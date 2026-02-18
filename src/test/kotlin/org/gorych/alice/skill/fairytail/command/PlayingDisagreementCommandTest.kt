@@ -48,7 +48,7 @@ class PlayingDisagreementCommandTest {
         assertEquals(expectedValue, actual)
     }
 
-    @ParameterizedTest(name = "Should return {0} when session state {2}")
+    @ParameterizedTest(name = "Should return {2} when session state {3}")
     @CsvSource(
         value = [
             "disagreement_command&current_question;         false; Я вас не поняла, повторите, пожалуйста.; contains 'disagreement' transition command and current question is NOT NULL",

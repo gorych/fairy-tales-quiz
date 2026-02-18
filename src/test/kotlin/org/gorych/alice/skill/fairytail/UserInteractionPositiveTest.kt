@@ -14,7 +14,7 @@ class UserInteractionPositiveTest {
     }
 
     @Test
-    fun `WHEN user sends'yes' THEN first question should be returned`() {
+    fun `WHEN user sends 'yes' THEN first question should be returned`() {
         executeTest("step2-yes.json")
     }
 
