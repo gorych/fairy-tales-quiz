@@ -28,8 +28,8 @@
     "session": {
       "currentQuestion": null,
       "transitionCommands": [
-        "AgreementCommand",
-        "DisagreementCommand"
+        "PlayingAgreementCommand",
+        "PlayingDisagreementCommand"
       ]
     }
   },
