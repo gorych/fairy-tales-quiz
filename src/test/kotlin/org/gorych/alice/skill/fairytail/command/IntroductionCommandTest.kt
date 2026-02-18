@@ -66,6 +66,7 @@ class IntroductionCommandTest {
         //then
         val expectedValue = "Привет! Я предлагаю проверить насколько хорошо ты знаешь сказки. Поиграем?"
         assertEquals(expectedValue, result.response.text)
+        assertEquals(false, result.response.endSession)
     }
 
 }

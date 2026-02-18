@@ -75,6 +75,7 @@ class GreetingCommandTest {
         val result: ResponseObject = command.execute(requestObject)
 
         //then
+        assertEquals(false, result.response.endSession)
         assertEquals(expectedValue, result.response.text)
     }
 }

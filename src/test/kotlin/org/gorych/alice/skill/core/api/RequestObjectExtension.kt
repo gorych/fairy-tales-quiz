@@ -9,12 +9,19 @@ fun RequestObject.Companion.of(tokens: List<String>) = RequestObject(Request("",
 
 fun RequestObject.Companion.of(session: Session?): RequestObject = RequestObject(null, session)
 
+fun RequestObject.Companion.of(sessionState: SessionState): RequestObject =
+    RequestObject(null, null, State(sessionState))
+
 //region Request Objects with intents
 private val requestObjectWithIntentsRegistry: Map<String, RequestObject> = mapOf(
     Pair("g911.greeting", RequestObject.of("g911.greeting")),
     Pair("g911.parting", RequestObject.of("g911.parting")),
-    Pair("g911.agreement", RequestObject.of("g911.agreement")),
     Pair("g911.greeting&g911.parting", RequestObject.of("g911.greeting", "g911.parting")),
+
+    Pair("g911.agreement", RequestObject.of("g911.agreement")),
+    Pair("g911.disagreement", RequestObject.of("g911.disagreement")),
+    Pair("g911.disagreement&g911.agreement", RequestObject.of("g911.disagreement", "g911.agreement")),
+
     Pair("empty", RequestObject.ofEmpty()),
 )
 
@@ -55,4 +62,24 @@ private val requestObjectWithSessionRegistry: Map<String, RequestObject> = mapOf
 
 fun RequestObject.Companion.getBySessionKey(key: String): RequestObject = requestObjectWithSessionRegistry.getValue(key)
 
+//endregion
+
+//region Request Objects with session state
+private val requestObjectWithSessionStateRegistry: Map<String, RequestObject> = mapOf(
+    Pair(
+        "disagreement_command&current_question",
+        RequestObject.of(SessionState(currentQuestion = 1, transitionCommands = setOf("PlayingDisagreementCommand")))
+    ),
+    Pair(
+        "disagreement_command&current_question_is_null",
+        RequestObject.of(SessionState(currentQuestion = null, transitionCommands = setOf("PlayingDisagreementCommand")))
+    ),
+    Pair(
+        "agreement_command&current_question",
+        RequestObject.of(SessionState(currentQuestion = 2, transitionCommands = setOf("PlayingAgreementCommand")))
+    )
+)
+
+fun RequestObject.Companion.getBySessionStateKey(key: String): RequestObject =
+    requestObjectWithSessionStateRegistry.getValue(key)
 //endregion
