@@ -8,8 +8,8 @@
   "session_state": {
     "currentQuestion": null,
     "transitionCommands": [
-      "AgreementCommand",
-      "DisagreementCommand"
+      "PlayingAgreementCommand",
+      "PlayingDisagreementCommand"
     ]
   }
 }
