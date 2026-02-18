@@ -75,6 +75,10 @@ private val requestObjectWithSessionStateRegistry: Map<String, RequestObject> = 
         RequestObject.of(SessionState(currentQuestion = null, transitionCommands = setOf("PlayingDisagreementCommand")))
     ),
     Pair(
+        "agreement_command&current_question_is_null",
+        RequestObject.of(SessionState(currentQuestion = null, transitionCommands = setOf("PlayingAgreementCommand")))
+    ),
+    Pair(
         "agreement_command&current_question",
         RequestObject.of(SessionState(currentQuestion = 2, transitionCommands = setOf("PlayingAgreementCommand")))
     )
