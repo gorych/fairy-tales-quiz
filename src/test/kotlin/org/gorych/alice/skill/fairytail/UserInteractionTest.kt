@@ -95,7 +95,10 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #5 THEN sixth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step7-answer5.json",
-            expectedText = arrayOf("В какой сказке встречается фраза: Тук-тук-тук! Кто в теремочке живет?", "следующий вопрос"),
+            expectedText = arrayOf(
+                "В какой сказке встречается фраза: Тук-тук-тук! Кто в теремочке живет?",
+                "следующий вопрос"
+            ),
         )
     }
 
@@ -179,6 +182,17 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndMatchOneOfPhrases(
             fileName = "step15-greeting.json",
             expectedPhrases = arrayOf("И тебе, здравствуй!")
+        )
+    }
+
+    @Test
+    fun `WHEN user sends 'skip question' command and there is no more questions THEN final phrase should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step16-skip14.json",
+            expectedText = arrayOf(
+                "Кажется, у меня больше не осталось вопросов.",
+                "Если интересно, то правильный ответ - 'петух'. Спасибо за игру!"
+            )
         )
     }
 

@@ -16,7 +16,9 @@ class NextQuestionCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        val currentQuestion: Int? = requestObject.state?.session?.currentQuestion
+        val requestSessionState: SessionState? = requestObject.state?.session
+
+        val currentQuestion: Int? = requestSessionState?.currentQuestion
         currentQuestion?.let {
             when {
                 (currentQuestion > 0) -> {
@@ -24,12 +26,12 @@ class NextQuestionCommand : Command {
                 }
 
                 else -> {
-                    return ResponseObject.ofTechnicalError()
+                    return ResponseObject.ofTechnicalError(requestSessionState)
                 }
             }
         }
 
-        return ResponseObject.ofUnclearCommand()
+        return ResponseObject.ofUnclearCommand(requestSessionState)
     }
 
     private fun processUserAnswer(currentQuestion: Int, requestObject: RequestObject): ResponseObject {

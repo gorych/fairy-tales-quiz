@@ -2,6 +2,7 @@ package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
+import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.fairytail.quiz.Quiz
 
@@ -18,24 +19,26 @@ class RepeatQuestionCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        val currentQuestion: Int? = requestObject.state?.session?.currentQuestion
+        val requestSessionState: SessionState? = requestObject.state?.session
+
+        val currentQuestion: Int? = requestSessionState?.currentQuestion
         currentQuestion?.let {
             when {
                 (currentQuestion > 0) -> {
                     return ResponseObject.of(
                         text = "${BEFORE_QUESTION_PHRASES.random()} ${Quiz.question(currentQuestion)}",
-                        state = requestObject.state.session,
+                        state = requestSessionState,
                         endSession = false
                     )
                 }
 
                 else -> {
-                    return ResponseObject.ofTechnicalError()
+                    return ResponseObject.ofTechnicalError(requestSessionState)
                 }
             }
         }
 
-        return ResponseObject.ofUnclearCommand()
+        return ResponseObject.ofUnclearCommand(requestSessionState)
     }
 
     companion object {

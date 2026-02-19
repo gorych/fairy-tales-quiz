@@ -13,17 +13,16 @@ private val commandRegistry: List<Command> = listOf(
     IntroductionCommand(),
 
     GreetingCommand(),
+    PartingCommand(),
+    GratitudeCommand(),
+    StopCommand(),
 
     PlayingAgreementCommand(),
     PlayingDisagreementCommand(),
 
-    GratitudeCommand(),
-
     RepeatQuestionCommand(),
+    SkipQuestionCommand(),
     NextQuestionCommand(),
-
-    StopCommand(),
-    PartingCommand(),
 )
 
 fun handle(input: String): String {

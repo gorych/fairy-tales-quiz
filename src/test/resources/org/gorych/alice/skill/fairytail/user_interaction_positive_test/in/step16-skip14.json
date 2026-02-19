@@ -1,0 +1,39 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "следующий вопрос",
+    "original_utterance": "следующий вопрос",
+    "nlu": {
+      "tokens": [
+        "следующий",
+        "вопрос"
+      ],
+      "entities": [],
+      "intents": {
+        "YANDEX.GREETING": {
+          "slots": {}
+        },
+        "g911.skip": {
+          "slots": {}
+        }
+      }
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 14,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

@@ -1,0 +1,11 @@
+{
+  "response": {
+    "end_session": true
+  },
+  "version": "1.0",
+  "buttons": [],
+  "session_state": {
+    "currentQuestion": null,
+    "transitionCommands": []
+  }
+}
