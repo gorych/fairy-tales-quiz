@@ -21,6 +21,7 @@ private val commandRegistry: List<Command> = listOf(
 
     NextQuestionCommand(),
 
+    StopCommand(),
     PartingCommand(),
 )
 

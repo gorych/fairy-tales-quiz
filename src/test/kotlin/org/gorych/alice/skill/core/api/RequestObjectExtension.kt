@@ -27,6 +27,9 @@ private val requestObjectWithIntentsRegistry: Map<String, RequestObject> = mapOf
     Pair("g911.gratitude", RequestObject.of("g911.gratitude")),
     Pair("g911.gratitude&g911.parting", RequestObject.of("g911.gratitude", "g911.parting")),
 
+    Pair("g911.stop", RequestObject.of("g911.stop")),
+    Pair("g911.stop&g911.parting", RequestObject.of("g911.stop", "g911.parting")),
+
     Pair("empty", RequestObject.ofEmpty()),
 )
 
@@ -66,6 +69,9 @@ private val requestObjectWithNluTokenRegistry: Map<String, RequestObject> = mapO
     Pair("прОЩай", RequestObject.of(listOf("прОЩай"))),
     Pair("пока&прощай", RequestObject.of(listOf("пока", "прощай"))),
     Pair("bye", RequestObject.of(listOf("bye"))),
+
+    Pair("стоп", RequestObject.of(listOf("стоп"))),
+    Pair("хватит", RequestObject.of(listOf("хватит"))),
 
     Pair(
         "спасибо",
