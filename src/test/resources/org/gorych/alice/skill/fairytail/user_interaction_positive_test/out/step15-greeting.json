@@ -1,0 +1,13 @@
+{
+  "response": {
+    "end_session": false
+  },
+  "version": "1.0",
+  "buttons": [],
+  "session_state": {
+    "currentQuestion": 13,
+    "transitionCommands": [
+      "NextQuestionCommand"
+    ]
+  }
+}

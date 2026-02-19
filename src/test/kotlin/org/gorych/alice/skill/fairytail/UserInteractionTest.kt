@@ -111,6 +111,14 @@ class UserInteractionTest {
     }
 
     @Test
+    fun `WHEN user sends 'gratitude' command THEN one of gratitude phrases be returned`() {
+        shouldEqualSpecifiedJsonAndMatchOneOfPhrases(
+            fileName = "step10-gratitude.json",
+            expectedPhrases = arrayOf("И тебе, спасибо!", "Не за что!", "Как приятно это слышать!")
+        )
+    }
+
+    @Test
     fun `WHEN user sends right answer to question #9 THEN tenth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step11-answer9.json",
@@ -151,6 +159,14 @@ class UserInteractionTest {
     }
 
     @Test
+    fun `WHEN user sends 'greeting' command THEN one of greeting phrases should be returned`() {
+        shouldEqualSpecifiedJsonAndMatchOneOfPhrases(
+            fileName = "step15-greeting.json",
+            expectedPhrases = arrayOf("И тебе, здравствуй!")
+        )
+    }
+
+    @Test
     fun `WHEN user sends right answer to last THEN final phrase should be returned`() {
         shouldEqualJsonTest("step16-answer14.json")
     }
@@ -187,6 +203,28 @@ class UserInteractionTest {
             .map { responseText.contains(it, ignoreCase = true) }
             .any { !it }
         assertFalse(hasNotMatchingText)
+    }
+
+    private fun shouldEqualSpecifiedJsonAndMatchOneOfPhrases(fileName: String, vararg expectedPhrases: String) {
+        //given
+        val inputJson = readInputFile(fileName)
+        val expectedJson = readOutputFile(fileName)
+
+        //when
+        val actualJson = handle(inputJson)
+
+        //then
+        actualJson.shouldEqualSpecifiedJson(expectedJson)
+        actualJson.shouldContainJsonKey("$.response.text")
+
+        val responseText = jacksonObjectMapper()
+            .readTree(actualJson).get("response").get("text")
+            .toString()
+
+        val hastLeastOneMatchingText: Boolean = expectedPhrases
+            .map { responseText.contains(it, ignoreCase = true) }
+            .any { it }
+        assertTrue(hastLeastOneMatchingText)
     }
 
     private fun readInputFile(fileName: String) =

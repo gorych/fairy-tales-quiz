@@ -1,0 +1,39 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "Алиса, спасибо",
+    "original_utterance": "алиса спасибо",
+    "nlu": {
+      "tokens": [
+        "алиса",
+        "спасибо"
+      ],
+      "entities": [],
+      "intents": {
+        "YANDEX.CONFIRM": {
+          "slots": {}
+        },
+        "g911.gratitude": {
+          "slots": {}
+        }
+      }
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 8,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}
