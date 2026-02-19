@@ -22,8 +22,8 @@ data class ResponseObject(
             return ResponseObject(ResponseValue(text, endSession))
         }
 
-        fun of(text: String, state: SessionState, endSession: Boolean): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession), state)
+        fun of(text: String, state: SessionState?, endSession: Boolean): ResponseObject {
+            return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())
         }
 
         fun ofUnclearCommand(sessionState: SessionState?) =

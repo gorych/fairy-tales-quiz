@@ -1,9 +1,6 @@
 package org.gorych.alice.skill.fairytail.command
 
-import org.gorych.alice.skill.core.api.RequestObject
-import org.gorych.alice.skill.core.api.ResponseObject
-import org.gorych.alice.skill.core.api.getByIntentKey
-import org.gorych.alice.skill.core.api.getByNluTokenKey
+import org.gorych.alice.skill.core.api.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test
@@ -51,23 +48,29 @@ class GreetingCommandTest {
     @ParameterizedTest(name = "Should return {0} when NLU tokens {2}")
     @CsvSource(
         value = [
-            "И тебе, привет!;              привет;                         contain 'привет' value",
-            "И тебе, здравствуй!;          здравствуй;                     contain 'здравствуй' value",
-            "И вам, здравствуйте!;         здравствуйте;                   contain 'здравствуйте' value",
-            "И вам доброго времени суток!; здрАВСТвуйте;                   contain 'здрАВСТвуйте' value",
-            "И вам доброго времени суток!; hello;                          contain 'hello' value",
-            "И тебе, привет!;              привет&здравствуй&здравствуйте; contain 'привет, здравствуй, здравствуйте' values",
-            "И вам доброго времени суток!; special_characters;             contain special characters only",
-            "И вам доброго времени суток!; empty;                          don't contain any value",
-            "И вам доброго времени суток!; null;                           are NULL"],
+            "И тебе, привет!;              true;  привет;                           contain 'привет' value",
+            "И тебе, здравствуй!;          false; здравствуй;                       contain 'здравствуй' value",
+            "И вам, здравствуйте!;         false; здравствуйте;                     contain 'здравствуйте' value",
+            "И вам доброго времени суток!; true;  здрАВСТвуйте;                     contain 'здрАВСТвуйте' value",
+            "И вам доброго времени суток!; true;  hello;                            contain 'hello' value",
+            "И тебе, привет!;              false; привет&здравствуй&здравствуйте;   contain 'привет, здравствуй, здравствуйте' values",
+            "И вам доброго времени суток!; true;  special_characters&session_state; contain special characters only but has session state",
+            "И вам доброго времени суток!; false; empty;                            don't contain any value",
+            "И вам доброго времени суток!; false; null;                             are NULL"],
         delimiter = ';'
     )
     fun `WHEN execute call THEN should return expected text`(
         expectedValue: String,
+        hasState: Boolean,
         key: String,
         whenDescription: String
     ) {
         //given
+        val notEmptySessionState = SessionState(
+            currentQuestion = 7,
+            transitionCommands = setOf("NextQuestionCommand")
+        )
+        val expectedState = if (hasState) notEmptySessionState else SessionState()
         val command = GreetingCommand()
         val requestObject = RequestObject.Companion.getByNluTokenKey(key)
 
@@ -77,5 +80,8 @@ class GreetingCommandTest {
         //then
         assertEquals(false, result.response.endSession)
         assertEquals(expectedValue, result.response.text)
+
+        assertEquals(expectedState.currentQuestion, result.sessionState.currentQuestion)
+        assertEquals(expectedState.transitionCommands, result.sessionState.transitionCommands)
     }
 }
