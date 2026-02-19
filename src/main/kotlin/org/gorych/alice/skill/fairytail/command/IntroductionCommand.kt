@@ -14,7 +14,12 @@ class IntroductionCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        val responseText = "Привет! Я предлагаю проверить насколько хорошо ты знаешь сказки. Поиграем?"
+        val responseText = "" +
+                "Привет! " +
+                "Я предлагаю проверить насколько хорошо ты знаешь сказки. " +
+                "Я буду задавать вопросы, а тебе нужно отвечать на них. " +
+                "Если будет нужна помощь, просто скажи: Алиса, подскажи. " +
+                "Поиграем?"
 
         val state = SessionState(
             setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())

@@ -130,7 +130,7 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #12 THEN twelfth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step13-answer11.json",
-            expectedText = arrayOf("От какой бабушки убегала вся посуда, мебель и вещи?", "следующий вопрос"),
+            expectedText = arrayOf("От кого убегала вся посуда, мебель и вещи?", "следующий вопрос"),
         )
     }
 

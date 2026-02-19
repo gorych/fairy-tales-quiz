@@ -64,7 +64,12 @@ class IntroductionCommandTest {
         val result: ResponseObject = command.execute(requestObject)
 
         //then
-        val expectedValue = "Привет! Я предлагаю проверить насколько хорошо ты знаешь сказки. Поиграем?"
+        val expectedValue = "" +
+                "Привет! " +
+                "Я предлагаю проверить насколько хорошо ты знаешь сказки. " +
+                "Я буду задавать вопросы, а тебе нужно отвечать на них. " +
+                "Если будет нужна помощь, просто скажи: Алиса, подскажи. " +
+                "Поиграем?"
         assertEquals(expectedValue, result.response.text)
         assertEquals(false, result.response.endSession)
     }
