@@ -50,7 +50,7 @@ class NextQuestionCommand : Command {
     private fun nextQuestionResponse(nextQuestionNumber: Int) =
         ResponseObject.of(
             //@formatter:off
-            text = "${Quiz.rightAnswerPhrases().random()} ${Quiz.nextQuestionPhrases().random()} ${Quiz.question(nextQuestionNumber)}",
+            text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${Quiz.question(nextQuestionNumber)}",
             //@formatter:on
             state = SessionState(nextQuestionNumber, setOf(NextQuestionCommand.name())),
             endSession = false
@@ -58,17 +58,35 @@ class NextQuestionCommand : Command {
 
     private fun wrongAnswerResponse(state: State) =
         ResponseObject.of(
-            text = Quiz.wrongAnswerPhrases().random(),
+            text = WRONG_ANSWER_PHRASES.random(),
             state = state.session,
             endSession = false
         )
 
     private fun endQuizResponse() = ResponseObject.of(
-        text = Quiz.winningPhrase(),
+        text = WINNING_PHRASE,
         endSession = true
     )
 
     companion object {
+        const val WINNING_PHRASE = "" +
+                "Да, это правильный ответ! " +
+                "Поздравляю, это был последний вопрос. " +
+                "Если захочешь поиграть ещё - ты знаешь где меня искать. " +
+                "Пока!"
+
+        val RIGHT_ANSWER_PHRASES: Set<String> =
+            setOf("Верно!", "Правильно!", "Ты молодец!", "Совершенно верно! Так держать!")
+
+        val NEXT_QUESTION_PHRASES: Set<String> = setOf(
+            "Слушай следующий вопрос.",
+            "Следующий вопрос звучит так.",
+            "Приготовься, следующий вопрос будет сложнее."
+        )
+
+        val WRONG_ANSWER_PHRASES: Set<String> =
+            setOf("Неверно. Подумай ещё!", "Нет. Попытайся ещё раз!", "Неправильно. Попробуй другой вариант!")
+
         fun name(): String = NextQuestionCommand::class.java.simpleName
     }
 }

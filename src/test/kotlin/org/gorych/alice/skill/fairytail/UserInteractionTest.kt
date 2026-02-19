@@ -84,6 +84,22 @@ class UserInteractionTest {
     }
 
     @Test
+    fun `WHEN user sends 'repeat' command THEN current question should be returned`() {
+        shouldEqualSpecifiedJsonAndMatchOneOfPhrases(
+            fileName = "step7-repeat5.json",
+            expectedPhrases = arrayOf("Без проблем.", "Хорошо, только слушай внимательно.", "Повторяю.")
+        )
+    }
+
+    @Test
+    fun `WHEN user sends right answer to question #5 THEN sixth question should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step7-answer5.json",
+            expectedText = arrayOf("В какой сказке встречается фраза: Тук-тук-тук! Кто в теремочке живет?", "следующий вопрос"),
+        )
+    }
+
+    @Test
     fun `WHEN user sends right answer to question #6 THEN seventh question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step8-answer6.json",

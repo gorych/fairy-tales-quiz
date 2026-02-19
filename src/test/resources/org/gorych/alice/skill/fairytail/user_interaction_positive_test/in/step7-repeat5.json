@@ -1,0 +1,40 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "Алиса, повтори, пожалуйста",
+    "original_utterance": "алиса повтори пожалуйста",
+    "nlu": {
+      "tokens": [
+        "алиса",
+        "повтори",
+        "пожалуйста"
+      ],
+      "entities": [],
+      "intents": {
+        "YANDEX.CONFIRM": {
+          "slots": {}
+        },
+        "g911.repeat": {
+          "slots": {}
+        }
+      }
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 5,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

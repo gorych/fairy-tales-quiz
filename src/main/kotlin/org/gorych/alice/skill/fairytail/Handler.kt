@@ -19,6 +19,7 @@ private val commandRegistry: List<Command> = listOf(
 
     GratitudeCommand(),
 
+    RepeatQuestionCommand(),
     NextQuestionCommand(),
 
     StopCommand(),
