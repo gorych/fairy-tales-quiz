@@ -26,15 +26,15 @@ data class ResponseObject(
             return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())
         }
 
-        fun ofUnclearCommand(sessionState: SessionState?) =
-            of("Я вас не поняла, повторите, пожалуйста.", sessionState ?: SessionState(), false)
+        fun ofUnclearCommand(requestObject: RequestObject?): ResponseObject {
+            val sessionState = requestObject?.state?.session ?: SessionState()
+            return of("Я вас не поняла, повторите, пожалуйста.", sessionState, false)
+        }
 
-        fun ofUnclearCommand() = ofUnclearCommand(SessionState())
-
-        fun ofTechnicalError(sessionState: SessionState?) =
-            of("Извините, произошла техническая ошибка. Попробуйте еще раз.", sessionState ?: SessionState(), false)
-
-        fun ofTechnicalError() = ofTechnicalError(SessionState())
+        fun ofTechnicalError(requestObject: RequestObject?): ResponseObject {
+            val sessionState = requestObject?.state?.session ?: SessionState()
+            return of("Извините, произошла техническая ошибка. Попробуйте еще раз.", sessionState, false)
+        }
     }
 }
 

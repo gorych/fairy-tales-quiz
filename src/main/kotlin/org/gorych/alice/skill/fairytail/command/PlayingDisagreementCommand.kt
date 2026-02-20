@@ -22,7 +22,7 @@ class PlayingDisagreementCommand : Command {
             )
         }
 
-        return ResponseObject.ofUnclearCommand()
+        return ResponseObject.ofUnclearCommand(requestObject)
     }
 
     companion object {

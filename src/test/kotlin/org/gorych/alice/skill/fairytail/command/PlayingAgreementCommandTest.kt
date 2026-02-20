@@ -49,7 +49,7 @@ class PlayingAgreementCommandTest {
     @ParameterizedTest(name = "Should return {2} when session state {3}")
     @CsvSource(
         value = [
-            "agreement_command&current_question;         false; Я вас не поняла, повторите, пожалуйста.; contains 'playing agreement' transition command and current question is NOT NULL",
+            "agreement_command&current_question;         false;  Я вас не поняла, повторите, пожалуйста.; contains 'playing agreement' transition command and current question is NOT NULL",
             "agreement_command&current_question_is_null; true;  Отлично. Cлушай первый вопрос. Кто посадил репку?; contains 'playing agreement' transition command but current question is NULL",
             "disagreement_command&current_question;      false; Я вас не поняла, повторите, пожалуйста.; doesn't contain 'playing agreement' transition command but current question is NOT NULL",
         ],
@@ -57,18 +57,21 @@ class PlayingAgreementCommandTest {
     )
     fun `WHEN execute call THEN should return expected text`(
         key: String,
-        hasState: Boolean,
+        returnState: Boolean,
         expectedText: String,
         whenDescription: String
     ) {
         //given
-        val notEmptySessionState = SessionState(
-            currentQuestion = 1,
-            transitionCommands = setOf("NextQuestionCommand")
-        )
-        val expectedState = if (hasState) notEmptySessionState else SessionState()
         val command = PlayingAgreementCommand()
         val requestObject = RequestObject.getBySessionStateKey(key)
+        val expectedState = when {
+            returnState -> SessionState(
+                currentQuestion = 1,
+                transitionCommands = setOf("NextQuestionCommand")
+            )
+
+            else -> requestObject.state?.session ?: SessionState()
+        }
 
         //when
         val actual: ResponseObject = command.execute(requestObject)

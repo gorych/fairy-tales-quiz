@@ -10,7 +10,7 @@ private const val SKIP_INTENT_ID = "g911.skip"
 
 class SkipQuestionCommand : Command {
 
-    override fun name() = RepeatQuestionCommand.name()
+    override fun name() = SkipQuestionCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
         return requestObject.containsIntent(SKIP_INTENT_ID)
@@ -19,9 +19,7 @@ class SkipQuestionCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        val requestSessionState: SessionState? = requestObject.state?.session
-
-        val currentQuestionNumber: Int? = requestSessionState?.currentQuestion
+        val currentQuestionNumber: Int? = requestObject.state?.session?.currentQuestion
         currentQuestionNumber?.let {
             when {
                 (currentQuestionNumber > 0) -> {
@@ -34,12 +32,12 @@ class SkipQuestionCommand : Command {
                 }
 
                 else -> {
-                    return ResponseObject.ofTechnicalError(requestSessionState)
+                    return ResponseObject.ofTechnicalError(requestObject)
                 }
             }
         }
 
-        return ResponseObject.ofUnclearCommand(requestSessionState)
+        return ResponseObject.ofUnclearCommand(requestObject)
     }
 
     private fun nextQuestionResponse(nextQuestionNumber: Int): ResponseObject {
@@ -51,7 +49,7 @@ class SkipQuestionCommand : Command {
     }
 
     private fun noQuestionsResponse(currentQuestionNumber: Int): ResponseObject {
-        val rightAnswer = Quiz.getAnswerFor(currentQuestionNumber)[0]
+        val rightAnswer = Quiz.answerTo(currentQuestionNumber)[0]
         return ResponseObject.of(
             text = "Кажется, у меня больше не осталось вопросов. " +
                     "Если интересно, то правильный ответ - '$rightAnswer'. Спасибо за игру!",
@@ -61,7 +59,11 @@ class SkipQuestionCommand : Command {
 
     companion object {
         val BEFORE_QUESTION_PHRASES =
-            setOf("Хорошо, слушай следующий вопрос.", "Так и быть, слушай.", "Ладно, но постарайся больше не пропускать.")
+            setOf(
+                "Хорошо, слушай следующий вопрос.",
+                "Так и быть, слушай следующий вопрос.",
+                "Ладно, но постарайся больше не пропускать."
+            )
 
         fun name(): String = SkipQuestionCommand::class.java.simpleName
     }

@@ -68,7 +68,7 @@ class IntroductionCommandTest {
                 "Привет! " +
                 "Я предлагаю проверить насколько хорошо ты знаешь сказки. " +
                 "Я буду задавать вопросы, а тебе нужно отвечать на них. " +
-                "Если будет нужна помощь, просто скажи: Алиса, подскажи. " +
+                "Если будет нужна помощь, просто скажи: Алиса, помоги. " +
                 "Поиграем?"
         assertEquals(expectedValue, result.response.text)
         assertEquals(false, result.response.endSession)

@@ -33,12 +33,12 @@ class RepeatQuestionCommand : Command {
                 }
 
                 else -> {
-                    return ResponseObject.ofTechnicalError(requestSessionState)
+                    return ResponseObject.ofTechnicalError(requestObject)
                 }
             }
         }
 
-        return ResponseObject.ofUnclearCommand(requestSessionState)
+        return ResponseObject.ofUnclearCommand(requestObject)
     }
 
     companion object {

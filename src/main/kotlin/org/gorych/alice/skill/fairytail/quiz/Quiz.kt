@@ -24,7 +24,7 @@ class Quiz {
             return items[number - 1].first
         }
 
-        fun getAnswerFor(questionNumber: Int): List<String> {
+        fun answerTo(questionNumber: Int): List<String> {
             require(questionNumber > 0) { "Question number must be greater than zero" }
             return items[questionNumber - 1].second
         }
