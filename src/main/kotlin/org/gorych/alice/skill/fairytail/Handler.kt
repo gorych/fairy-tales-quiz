@@ -27,14 +27,12 @@ private val commandRegistry: List<Command> = listOf(
 )
 
 fun handle(input: String): String {
-    println("Raw input: $input")
     val mapper = jacksonObjectMapper()
 
     var requestObject = RequestObject()
     var response: String
     try {
         requestObject = mapper.readValue(input)
-        println("Request object: $requestObject")
 
         val responseObject = processRequest(requestObject)
         response = mapper.writeValueAsString(responseObject)

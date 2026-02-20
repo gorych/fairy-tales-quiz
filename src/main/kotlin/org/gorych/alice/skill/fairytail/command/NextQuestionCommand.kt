@@ -70,7 +70,7 @@ class NextQuestionCommand : Command {
 
     companion object {
         const val WINNING_PHRASE = "" +
-                "Да, это правильный ответ! " +
+                "Верно! " +
                 "Поздравляю, это был последний вопрос. " +
                 "Если захочешь поиграть ещё - ты знаешь где меня искать. " +
                 "Пока!"
