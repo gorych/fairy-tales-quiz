@@ -20,6 +20,7 @@ private val commandRegistry: List<Command> = listOf(
     PlayingAgreementCommand(),
     PlayingDisagreementCommand(),
 
+    HelpCommand(),
     RepeatQuestionCommand(),
     SkipQuestionCommand(),
     NextQuestionCommand(),
@@ -42,7 +43,7 @@ fun handle(input: String): String {
     } catch (t: Throwable) {
         err.println("Error while request processing. Exception= $t")
         response = mapper.writeValueAsString(
-            ResponseObject.ofTechnicalError(requestObject.state?.session)
+            ResponseObject.ofTechnicalError(requestObject)
         )
     }
 
@@ -59,7 +60,7 @@ private fun processRequest(requestObject: RequestObject): ResponseObject {
         }
 
         else -> {
-            ResponseObject.ofUnclearCommand(requestObject.state?.session)
+            ResponseObject.ofUnclearCommand(requestObject)
         }
     }
 }
