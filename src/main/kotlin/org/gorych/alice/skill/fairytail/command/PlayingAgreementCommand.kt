@@ -20,7 +20,7 @@ class PlayingAgreementCommand : Command {
         if (requestObject.containsPlayingAgreementCommand() && !requestObject.hasCurrentQuestion()) {
             val questionNumber = 1
             return ResponseObject.of(
-                text = "Отлично. Cлушай первый вопрос. ${Quiz.question(questionNumber)}",
+                text = "Отлично. Слушай первый вопрос. ${Quiz.question(questionNumber)}",
                 state = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
                 endSession = false
             )
