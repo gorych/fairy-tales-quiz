@@ -19,7 +19,7 @@
   },
   "state": {
     "session": {
-      "currentQuestion": 14,
+      "currentQuestion": 30,
       "transitionCommands": [
         "NextQuestionCommand"
       ]
