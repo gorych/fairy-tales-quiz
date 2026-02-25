@@ -4,6 +4,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getByIntentKey
 import org.gorych.alice.skill.core.api.getByNluTokenKey
+import org.gorych.alice.skill.core.command.StopCommand
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test

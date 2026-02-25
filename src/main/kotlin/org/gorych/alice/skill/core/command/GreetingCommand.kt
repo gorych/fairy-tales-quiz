@@ -1,8 +1,7 @@
-package org.gorych.alice.skill.fairytail.command
+package org.gorych.alice.skill.core.command
 
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
-import org.gorych.alice.skill.core.command.Command
 
 private const val GREETING_INTENT_ID = "g911.greeting"
 

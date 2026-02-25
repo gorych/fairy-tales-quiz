@@ -2,7 +2,7 @@ package org.gorych.alice.skill.fairytail
 
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
-import org.gorych.alice.skill.core.command.Command
+import org.gorych.alice.skill.core.command.*
 import org.gorych.alice.skill.fairytail.command.*
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
@@ -20,7 +20,7 @@ private val commandRegistry: List<Command> = listOf(
     PlayingAgreementCommand(),
     PlayingDisagreementCommand(),
 
-    HelpCommand(),
+    HintCommand(),
     RepeatQuestionCommand(),
     SkipQuestionCommand(),
     NextQuestionCommand(),

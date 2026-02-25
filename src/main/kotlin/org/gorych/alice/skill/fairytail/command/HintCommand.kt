@@ -9,9 +9,9 @@ import org.gorych.alice.skill.fairytail.quiz.Quiz
 private const val HELP_INTENT_ID = "g911.help"
 private const val DOUBT_INTENT_ID = "g911.doubt"
 
-class HelpCommand : Command {
+class HintCommand : Command {
 
-    override fun name() = HelpCommand.name()
+    override fun name() = HintCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
         val hasHelpOrDoubtIntent: Boolean =
@@ -30,7 +30,7 @@ class HelpCommand : Command {
                 (currentQuestion > 0) -> {
                     val firstLetterOfAnswerWord = Quiz.answerTo(currentQuestion)[0].first().uppercase()
                     return ResponseObject.of(
-                        text = "${BEFORE_ANSWER_PHRASES.random()} Это слово начинается на букву '$firstLetterOfAnswerWord'",
+                        text = "${BEFORE_HINT_PHRASES.random()} Это слово начинается на букву '$firstLetterOfAnswerWord'",
                         state = requestSessionState,
                         endSession = false
                     )
@@ -46,8 +46,8 @@ class HelpCommand : Command {
     }
 
     companion object {
-        val BEFORE_ANSWER_PHRASES = setOf("Без проблем.", "Хорошо, слушай подсказку.")
+        val BEFORE_HINT_PHRASES = setOf("Без проблем.", "Хорошо, слушай подсказку.")
 
-        fun name(): String = HelpCommand::class.java.simpleName
+        fun name(): String = HintCommand::class.java.simpleName
     }
 }
