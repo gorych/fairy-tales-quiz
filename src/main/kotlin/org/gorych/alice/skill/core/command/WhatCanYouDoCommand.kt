@@ -15,12 +15,15 @@ class WhatCanYouDoCommand : Command {
 
     override fun execute(requestObject: RequestObject): ResponseObject {
         requestObject.let {
-            val responseText = "" +
+            var responseText = "" +
                     "Я прочитала много известных сказок и могу проверить как хорошо их знаешь ты. " +
                     "Игра происходит в режиме 'вопрос-ответ'. Я спрашиваю, а ты - отвечаешь. " +
                     "Если ты не знаешь ответа на вопрос, просто скажи 'Алиса, помоги' или 'Алиса, следующий вопрос'. " +
                     "Чтобы послушать вопрос еще раз - скажи 'Алиса, повтори вопрос'. " +
                     "Для выхода - скажи 'стоп' или 'хватит'."
+            if (requestObject.containsPlayingAgreementCommand()) {
+                responseText += " Сыграем?"
+            }
             return ResponseObject.of(responseText, requestObject.state?.session, false)
         }
     }
