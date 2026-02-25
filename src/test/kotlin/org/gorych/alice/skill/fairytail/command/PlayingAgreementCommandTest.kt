@@ -50,7 +50,7 @@ class PlayingAgreementCommandTest {
     @CsvSource(
         value = [
             "agreement_command&current_question;         false;  Я вас не поняла, повторите, пожалуйста.; contains 'playing agreement' transition command and current question is NOT NULL",
-            "agreement_command&current_question_is_null; true;  Отлично. Cлушай первый вопрос. Кто посадил репку?; contains 'playing agreement' transition command but current question is NULL",
+            "agreement_command&current_question_is_null; true;  Отлично. Слушай первый вопрос. Кто посадил репку?; contains 'playing agreement' transition command but current question is NULL",
             "disagreement_command&current_question;      false; Я вас не поняла, повторите, пожалуйста.; doesn't contain 'playing agreement' transition command but current question is NOT NULL",
         ],
         delimiter = ';'
