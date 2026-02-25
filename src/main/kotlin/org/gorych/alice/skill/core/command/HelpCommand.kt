@@ -16,12 +16,15 @@ class HelpCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        val responseText = "" +
-                "Хорошо! Слушай список основных комманд." +
-                "Чтобы послушать вопрос еще раз - скажи 'Алиса, повтори вопрос'." +
-                "Если ты не знаешь ответа на вопрос, используй команду  'Алиса, помоги'." +
+        var responseText = "" +
+                "Хорошо! Слушай список основных комманд. " +
+                "Чтобы послушать вопрос еще раз - скажи 'Алиса, повтори вопрос'. " +
+                "Если ты не знаешь ответа на вопрос, используй команду  'Алиса, помоги'. " +
                 "Для перехода к следующему вопросу - скажи 'Алиса, следующий вопрос'. " +
                 "Для выхода - скажи 'стоп' или 'хватит'."
+        if (requestObject.containsPlayingAgreementCommand()) {
+            responseText += " Ну что, поиграем?"
+        }
         requestObject.let {
             return ResponseObject.of(responseText, requestObject.state?.session, false)
         }
