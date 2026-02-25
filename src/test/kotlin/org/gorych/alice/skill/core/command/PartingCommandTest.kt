@@ -1,10 +1,9 @@
-package org.gorych.alice.skill.fairytail.command
+package org.gorych.alice.skill.core.command
 
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getByIntentKey
 import org.gorych.alice.skill.core.api.getByNluTokenKey
-import org.gorych.alice.skill.core.command.PartingCommand
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test

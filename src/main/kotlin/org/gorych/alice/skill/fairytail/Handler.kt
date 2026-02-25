@@ -10,6 +10,9 @@ import java.lang.System.err
 
 //The order is important here
 private val commandRegistry: List<Command> = listOf(
+    PingCommand(),
+    WhatCanYouDoCommand(),
+
     IntroductionCommand(),
 
     GreetingCommand(),
@@ -24,6 +27,8 @@ private val commandRegistry: List<Command> = listOf(
     RepeatQuestionCommand(),
     SkipQuestionCommand(),
     NextQuestionCommand(),
+
+    HelpCommand()
 )
 
 fun handle(input: String): String {

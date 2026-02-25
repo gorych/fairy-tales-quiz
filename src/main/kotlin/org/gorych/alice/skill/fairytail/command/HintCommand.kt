@@ -6,8 +6,8 @@ import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.fairytail.quiz.Quiz
 
-private const val HELP_INTENT_ID = "g911.help"
 private const val DOUBT_INTENT_ID = "g911.doubt"
+const val HELP_INTENT_ID = "g911.help"
 
 class HintCommand : Command {
 
@@ -46,7 +46,7 @@ class HintCommand : Command {
     }
 
     companion object {
-        val BEFORE_HINT_PHRASES = setOf("Без проблем.", "Хорошо, слушай подсказку.")
+        private val BEFORE_HINT_PHRASES = setOf("Без проблем.", "Хорошо, слушай подсказку.")
 
         fun name(): String = HintCommand::class.java.simpleName
     }

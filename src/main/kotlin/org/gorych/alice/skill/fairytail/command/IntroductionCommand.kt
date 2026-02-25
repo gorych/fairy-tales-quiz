@@ -15,7 +15,7 @@ class IntroductionCommand : Command {
 
     override fun execute(requestObject: RequestObject): ResponseObject {
         val responseText = "" +
-                "Привет! " +
+                "Рада слышать тебя снова! Это навык 'В гостях у сказки'. " +
                 "Я предлагаю проверить насколько хорошо ты знаешь сказки. " +
                 "Я буду задавать вопросы, а тебе нужно отвечать на них. " +
                 "Если будет нужна помощь, просто скажи: Алиса, помоги. " +

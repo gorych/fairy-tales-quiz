@@ -3,11 +3,11 @@ package org.gorych.alice.skill.core.api
 fun RequestObject.Companion.ofEmpty() = RequestObject()
 
 fun RequestObject.Companion.of(vararg intentKeys: String) =
-    RequestObject(Request("", NLU(listOf(), intentKeys.associateWith { "{}" })))
+    RequestObject(Request("", "", NLU(listOf(), intentKeys.associateWith { "{}" })))
 
-fun RequestObject.Companion.of(tokens: List<String>) = RequestObject(Request("", NLU(tokens)))
+fun RequestObject.Companion.of(tokens: List<String>) = RequestObject(Request("", "", NLU(tokens)))
 fun RequestObject.Companion.of(tokens: List<String>, sessionState: SessionState?) =
-    RequestObject(Request("", NLU(tokens)), null, State(sessionState ?: SessionState()))
+    RequestObject(Request("", "", NLU(tokens)), null, State(sessionState ?: SessionState()))
 
 fun RequestObject.Companion.of(session: Session?): RequestObject = RequestObject(null, session)
 

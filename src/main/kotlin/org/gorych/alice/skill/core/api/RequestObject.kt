@@ -1,9 +1,9 @@
 package org.gorych.alice.skill.core.api
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.gorych.alice.skill.fairytail.command.NextQuestionCommand
 import org.gorych.alice.skill.fairytail.command.PlayingAgreementCommand
 import org.gorych.alice.skill.fairytail.command.PlayingDisagreementCommand
-import org.gorych.alice.skill.fairytail.command.NextQuestionCommand
 
 data class RequestObject(
     @JsonProperty(required = false) val request: Request? = null,
@@ -21,8 +21,12 @@ data class RequestObject(
 
     fun hasCurrentQuestion(): Boolean = state?.session?.currentQuestion != null
 
-    fun containsPlayingAgreementCommand(): Boolean = state?.containsTransitionCommand(PlayingAgreementCommand.name()) ?: false
-    fun containsPlayingDisagreementCommand(): Boolean = state?.containsTransitionCommand(PlayingDisagreementCommand.name()) ?: false
+    fun containsPlayingAgreementCommand(): Boolean =
+        state?.containsTransitionCommand(PlayingAgreementCommand.name()) ?: false
+
+    fun containsPlayingDisagreementCommand(): Boolean =
+        state?.containsTransitionCommand(PlayingDisagreementCommand.name()) ?: false
+
     fun containsNextQuestionCommand(): Boolean = state?.containsTransitionCommand(NextQuestionCommand.name()) ?: false
 
     companion object
@@ -30,6 +34,7 @@ data class RequestObject(
 
 data class Request(
     val command: String = "",
+    @JsonProperty(value = "original_utterance", required = false) val originalUtterance: String = "",
     @JsonProperty(required = false) val nlu: NLU? = null,
 )
 
