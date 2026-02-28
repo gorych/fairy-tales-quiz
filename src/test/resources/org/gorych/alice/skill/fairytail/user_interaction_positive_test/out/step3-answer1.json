@@ -5,6 +5,7 @@
   "version": "1.0",
   "buttons": [],
   "session_state": {
+    "rightAnswersCount": 1,
     "currentQuestion": 2,
     "transitionCommands": [
       "NextQuestionCommand"

@@ -24,7 +24,7 @@ class UserInteractionTest {
     }
 
     @Test
-    fun `WHEN user sends'no' THEN regret phrase should be returned and session closed`() {
+    fun `WHEN user sends 'no' THEN regret phrase should be returned and session closed`() {
         shouldEqualJsonTest("step2-no.json")
     }
 
@@ -107,6 +107,14 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step8-answer6.json",
             expectedText = arrayOf("Кто съел колобка?", "следующий вопрос"),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks hint to question #7 THEN hint should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step9-hint7.json",
+            expectedText = arrayOf("Это слово начинается на букву 'Л'."),
         )
     }
 

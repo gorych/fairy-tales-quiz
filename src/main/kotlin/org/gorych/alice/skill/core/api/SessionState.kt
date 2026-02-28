@@ -1,8 +1,19 @@
 package org.gorych.alice.skill.core.api
 
-class SessionState(val currentQuestion: Int? = null, val transitionCommands: Set<String>? = setOf()) {
+data class SessionState(
+    val currentQuestion: Int? = null,
+    val rightAnswersCount: Int = 0,
+    val hintedQuestions: Set<Int> = setOf(),
+    val transitionCommands: Set<String>? = setOf()
+) {
+    constructor(transitionCommands: Set<String>) : this(null, 0, setOf(), transitionCommands)
 
-    constructor(transitionCommands: Set<String>) : this(null, transitionCommands)
+    constructor(currentQuestion: Int?, transitionCommands: Set<String>) : this(
+        currentQuestion,
+        0,
+        setOf(),
+        transitionCommands
+    )
 
     fun containsTransitionCommand(commandName: String): Boolean = transitionCommands?.contains(commandName) ?: false
 }

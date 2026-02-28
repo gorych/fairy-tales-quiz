@@ -19,6 +19,7 @@
   },
   "state": {
     "session": {
+      "rightAnswersCount": 1,
       "currentQuestion": 2,
       "transitionCommands": [
         "NextQuestionCommand"

@@ -6,7 +6,9 @@
     "end_session": false
   },
   "session_state": {
+    "rightAnswersCount": 0,
     "currentQuestion": null,
+    "hintedQuestions": [],
     "transitionCommands": []
   }
 }

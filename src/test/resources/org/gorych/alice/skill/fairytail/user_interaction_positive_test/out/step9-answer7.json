@@ -6,6 +6,12 @@
   "buttons": [],
   "session_state": {
     "currentQuestion": 8,
+    "rightAnswersCount": 4,
+    "hintedQuestions": [
+      2,
+      4,
+      7
+    ],
     "transitionCommands": [
       "NextQuestionCommand"
     ]
