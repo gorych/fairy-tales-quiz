@@ -9,15 +9,16 @@ class PingCommand : Command {
 
     override fun canHandle(requestObject: RequestObject): Boolean {
         requestObject.request?.let {
-            return it.command.isEmpty() && it.originalUtterance == "ping"
+            val isPingCommand = it.command.isEmpty() && it.originalUtterance == "ping"
+            println("PingCommand: canHandle: $isPingCommand")
+            return isPingCommand
         }
         return false
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        requestObject.let {
-            return ResponseObject.of(text = "OK", endSession = true)
-        }
+        println("PingCommand: execute: OK")
+        return ResponseObject.of(text = "OK", endSession = true)
     }
 
     companion object {
