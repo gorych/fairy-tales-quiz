@@ -5,8 +5,13 @@
   "version": "1.0",
   "buttons": [],
   "session_state": {
-    "rightAnswersCount": 3,
-    "currentQuestion": 4,
+    "currentQuestion": 7,
+    "rightAnswersCount": 4,
+    "hintedQuestions": [
+      2,
+      4,
+      7
+    ],
     "transitionCommands": [
       "NextQuestionCommand"
     ]

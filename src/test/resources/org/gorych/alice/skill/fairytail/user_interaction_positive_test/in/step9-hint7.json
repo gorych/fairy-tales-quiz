@@ -3,14 +3,21 @@
     "new": false
   },
   "request": {
-    "command": "лиса",
-    "original_utterance": "лиса",
+    "command": "подскажи",
+    "original_utterance": "подскажи",
     "nlu": {
       "tokens": [
-        "лиса"
+        "подскажи"
       ],
       "entities": [],
-      "intents": {}
+      "intents": {
+        "g911.help": {
+          "slots": {}
+        },
+        "YANDEX.HELP": {
+          "slots": {}
+        }
+      }
     },
     "markup": {
       "dangerous_context": false
@@ -23,8 +30,7 @@
       "rightAnswersCount": 4,
       "hintedQuestions": [
         2,
-        4,
-        7
+        4
       ],
       "transitionCommands": [
         "NextQuestionCommand"

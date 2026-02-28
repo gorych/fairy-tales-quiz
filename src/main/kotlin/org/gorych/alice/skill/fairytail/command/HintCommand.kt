@@ -3,13 +3,13 @@ package org.gorych.alice.skill.fairytail.command
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
-import org.gorych.alice.skill.core.command.Command
+import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.fairytail.quiz.Quiz
 
 private const val DOUBT_INTENT_ID = "g911.doubt"
 const val HELP_INTENT_ID = "g911.help"
 
-class HintCommand : Command {
+class HintCommand : RequestSessionStatedQuestionCommand() {
 
     override fun name() = HintCommand.name()
 
@@ -21,28 +21,21 @@ class HintCommand : Command {
                 && requestObject.containsNextQuestionCommand()
     }
 
-    override fun execute(requestObject: RequestObject): ResponseObject {
-        val requestSessionState: SessionState? = requestObject.state?.session
+    override fun execute(
+        requestObject: RequestObject,
+        requestSessionState: SessionState,
+        currentQuestionNumber: Int
+    ): ResponseObject {
+        val firstLetterOfAnswerWord = Quiz.answerTo(currentQuestionNumber)[0].first().uppercase()
 
-        val currentQuestion: Int? = requestSessionState?.currentQuestion
-        currentQuestion?.let {
-            when {
-                (currentQuestion > 0) -> {
-                    val firstLetterOfAnswerWord = Quiz.answerTo(currentQuestion)[0].first().uppercase()
-                    return ResponseObject.of(
-                        text = "${BEFORE_HINT_PHRASES.random()} Это слово начинается на букву '$firstLetterOfAnswerWord'",
-                        state = requestSessionState,
-                        endSession = false
-                    )
-                }
+        val hintedQuestions: MutableSet<Int> = requestSessionState.hintedQuestions.toMutableSet()
+        hintedQuestions.add(currentQuestionNumber)
 
-                else -> {
-                    return ResponseObject.ofTechnicalError(requestObject)
-                }
-            }
-        }
-
-        return ResponseObject.ofUnclearCommand(requestObject)
+        return ResponseObject.of(
+            text = "${BEFORE_HINT_PHRASES.random()} Это слово начинается на букву '$firstLetterOfAnswerWord'.",
+            state = requestSessionState.copy(hintedQuestions = hintedQuestions),
+            endSession = false
+        )
     }
 
     companion object {

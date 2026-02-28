@@ -6,7 +6,9 @@
   "version": "1.0",
   "buttons": [],
   "session_state": {
+    "rightAnswersCount": 0,
     "currentQuestion": null,
+    "hintedQuestions": [],
     "transitionCommands": []
   }
 }
