@@ -9,9 +9,7 @@ class PingCommand : Command {
 
     override fun canHandle(requestObject: RequestObject): Boolean {
         requestObject.request?.let {
-            val isPingCommand = it.command.isEmpty() && it.originalUtterance == "ping"
-            println("PingCommand: canHandle: $isPingCommand")
-            return isPingCommand
+            return it.command.isEmpty() && it.originalUtterance == "ping"
         }
         return false
     }
