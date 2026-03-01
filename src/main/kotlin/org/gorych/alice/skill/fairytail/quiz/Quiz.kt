@@ -2,9 +2,7 @@ package org.gorych.alice.skill.fairytail.quiz
 
 class Quiz {
 
-    data class Item(val question: String, val answers: List<String>, val hints: List<String>) {
-        constructor(question: String, answers: List<String>) : this(question, answers, listOf())
-    }
+    data class Item(val question: String, val answers: List<String>, val hints: List<String>)
 
     companion object {
         private val items: List<Item> = listOf(
@@ -127,7 +125,7 @@ class Quiz {
             Item(
                 question = "Сколько козлят съел волк?",
                 answers = listOf("6", "шесть"),
-                hints = listOf("Это на одного меньше, чем было их всех.", "Это на один больше, чем 5")
+                hints = listOf("Это на одного меньше, чем было их всех.", "Это на один больше, чем 5.")
             ),
             Item(
                 question = "В какой сказке встречается фраза: 'Кто хлебал в моей чашке'?",
