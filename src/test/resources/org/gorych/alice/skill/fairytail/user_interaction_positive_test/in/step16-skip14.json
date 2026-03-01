@@ -28,6 +28,7 @@
   "state": {
     "session": {
       "currentQuestion": 30,
+      "previousHintNumber": 19,
       "transitionCommands": [
         "NextQuestionCommand"
       ]

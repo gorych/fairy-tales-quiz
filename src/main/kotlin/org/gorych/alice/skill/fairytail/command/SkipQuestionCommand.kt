@@ -35,7 +35,8 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
             text = "${BEFORE_QUESTION_PHRASES.random()} ${Quiz.question(nextQuestionNumber)}",
             state = sessionState.copy(
                 currentQuestion = nextQuestionNumber,
-                transitionCommands = setOf(NextQuestionCommand.name())
+                transitionCommands = setOf(NextQuestionCommand.name()),
+                previousHintNumber = 0
             ),
             endSession = false
         )
