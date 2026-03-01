@@ -7,6 +7,7 @@
   "session_state": {
     "currentQuestion": 8,
     "rightAnswersCount": 4,
+    "previousHintNumber": 0,
     "hintedQuestions": [
       2,
       4,

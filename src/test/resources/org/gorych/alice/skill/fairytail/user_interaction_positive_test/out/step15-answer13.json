@@ -6,6 +6,7 @@
   "buttons": [],
   "session_state": {
     "currentQuestion": 14,
+    "previousHintNumber": 0,
     "transitionCommands": [
       "NextQuestionCommand"
     ]
