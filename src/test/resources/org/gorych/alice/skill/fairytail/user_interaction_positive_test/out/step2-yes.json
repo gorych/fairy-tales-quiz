@@ -9,6 +9,7 @@
     "currentQuestion": 1,
     "rightAnswersCount": 0,
     "hintedQuestions": [],
+    "previousHintNumber": 0,
     "transitionCommands": [
       "NextQuestionCommand"
     ]

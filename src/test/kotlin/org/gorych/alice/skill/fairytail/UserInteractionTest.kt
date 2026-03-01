@@ -111,10 +111,34 @@ class UserInteractionTest {
     }
 
     @Test
-    fun `WHEN user asks hint to question #7 THEN hint should be returned`() {
+    fun `WHEN user asks first hint to question #7 THEN the first hint should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
-            fileName = "step9-hint7.json",
-            expectedText = arrayOf("Это слово начинается на букву 'Л'."),
+            fileName = "step9-hint7.1.json",
+            expectedText = arrayOf("Её кум - волк."),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks second hint to question #7 THEN the second hint should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step9-hint7.2.json",
+            expectedText = arrayOf("Она рыжая и живёт в лесу."),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks hint to question #7 many times THEN right answer should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step9-hint7.100500.json",
+            expectedText = arrayOf("Правильный ответ - лиса."),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks hint to question #7 without previous hint number THEN the first hint should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step9-hint7.no_number.json",
+            expectedText = arrayOf("Её кум - волк."),
         )
     }
 

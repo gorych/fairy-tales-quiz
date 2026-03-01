@@ -1,0 +1,44 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "подскажи",
+    "original_utterance": "подскажи",
+    "nlu": {
+      "tokens": [
+        "подскажи"
+      ],
+      "entities": [],
+      "intents": {
+        "g911.help": {
+          "slots": {}
+        },
+        "YANDEX.HELP": {
+          "slots": {}
+        }
+      }
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 7,
+      "rightAnswersCount": 4,
+      "previousHintNumber": 1,
+      "hintedQuestions": [
+        2,
+        4
+      ],
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}

@@ -1,0 +1,20 @@
+{
+  "response": {
+    "end_session": false
+  },
+  "version": "1.0",
+  "buttons": [],
+  "session_state": {
+    "currentQuestion": 7,
+    "rightAnswersCount": 4,
+    "previousHintNumber": 100501,
+    "hintedQuestions": [
+      2,
+      4,
+      7
+    ],
+    "transitionCommands": [
+      "NextQuestionCommand"
+    ]
+  }
+}

@@ -26,14 +26,14 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
         requestSessionState: SessionState,
         currentQuestionNumber: Int
     ): ResponseObject {
-        val firstLetterOfAnswerWord = Quiz.answerTo(currentQuestionNumber)[0].first().uppercase()
+        val currentHintNumber = requestSessionState.previousHintNumber + 1
 
         val hintedQuestions: MutableSet<Int> = requestSessionState.hintedQuestions.toMutableSet()
         hintedQuestions.add(currentQuestionNumber)
 
         return ResponseObject.of(
-            text = "${BEFORE_HINT_PHRASES.random()} Это слово начинается на букву '$firstLetterOfAnswerWord'.",
-            state = requestSessionState.copy(hintedQuestions = hintedQuestions),
+            text = "${BEFORE_HINT_PHRASES.random()} ${Quiz.hintTo(currentQuestionNumber, currentHintNumber)}",
+            state = requestSessionState.copy(hintedQuestions = hintedQuestions, previousHintNumber = currentHintNumber),
             endSession = false
         )
     }

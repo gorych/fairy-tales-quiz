@@ -59,6 +59,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 nextQuestionNumber,
                 rightAnswersCount,
                 sessionState.hintedQuestions,
+                sessionState.previousHintNumber,
                 setOf(NextQuestionCommand.name())
             ),
             endSession = false

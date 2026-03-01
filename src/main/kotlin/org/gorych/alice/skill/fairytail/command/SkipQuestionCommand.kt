@@ -42,6 +42,7 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     private fun noQuestionsResponse(currentQuestionNumber: Int): ResponseObject {
         val rightAnswer = Quiz.answerTo(currentQuestionNumber)[0]
+        //TODO send result score
         return ResponseObject.of(
             text = "Кажется, у меня больше не осталось вопросов. " +
                     "Если интересно, то правильный ответ - '$rightAnswer'. Спасибо за игру!",
