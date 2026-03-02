@@ -27,7 +27,7 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
         if (nextQuestionNumber <= Quiz.countOfQuestions()) {
             return nextQuestionResponse(nextQuestionNumber, requestSessionState)
         }
-        return noQuestionsResponse(currentQuestionNumber)
+        return noQuestionsResponse(requestSessionState.rightAnswersCount)
     }
 
     private fun nextQuestionResponse(nextQuestionNumber: Int, sessionState: SessionState) =
@@ -41,12 +41,12 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
             endSession = false
         )
 
-    private fun noQuestionsResponse(currentQuestionNumber: Int): ResponseObject {
-        val rightAnswer = Quiz.answerTo(currentQuestionNumber)[0]
-        //TODO send result score
+    private fun noQuestionsResponse(rightAnswersCount: Int): ResponseObject {
         return ResponseObject.of(
             text = "Кажется, у меня больше не осталось вопросов. " +
-                    "Если интересно, то правильный ответ - '$rightAnswer'. Спасибо за игру!",
+                    "А это значит, что пора подводить итоги. " +
+                    "Твой результат - ${rightAnswersCount} из ${Quiz.countOfQuestions()}. " +
+                    "Хорошо это или плохо - судить тебе. Спасибо за игру!",
             endSession = true
         )
     }

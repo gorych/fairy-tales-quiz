@@ -222,14 +222,15 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step16-skip14.json",
             expectedText = arrayOf(
-                "Кажется, у меня больше не осталось вопросов.",
-                "Если интересно, то правильный ответ - 'петух'. Спасибо за игру!"
+                "Кажется, у меня больше не осталось вопросов. А это значит, что пора подводить итоги.",
+                "Твой результат - ",
+                "Хорошо это или плохо - судить тебе. Спасибо за игру!"
             )
         )
     }
 
     @Test
-    fun `WHEN user sends right answer to last THEN final phrase should be returned`() {
+    fun `WHEN user sends right answer to last question THEN final phrase should be returned`() {
         shouldEqualJsonTest("step16-answer14.json")
     }
 

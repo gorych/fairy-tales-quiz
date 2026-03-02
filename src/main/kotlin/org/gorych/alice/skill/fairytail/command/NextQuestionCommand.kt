@@ -35,18 +35,13 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     private fun getRightAnswersCount(sessionState: SessionState, currentQuestion: Int): Int {
-        var rightAnswersCount: Int = sessionState.rightAnswersCount
+        val rightAnswersCount: Int = sessionState.rightAnswersCount
 
         val wasUsedHint = sessionState.hintedQuestions.contains(currentQuestion)
         return when {
-            wasUsedHint -> {
-                rightAnswersCount
-            }
+            wasUsedHint -> rightAnswersCount
 
-            else -> {
-                rightAnswersCount++
-                rightAnswersCount
-            }
+            else -> rightAnswersCount + 1
         }
     }
 
