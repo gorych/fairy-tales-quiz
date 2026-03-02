@@ -49,8 +49,6 @@ fun handle(input: String): String {
         )
     }
 
-    println("Response object: $response")
-
     return response
 }
 
