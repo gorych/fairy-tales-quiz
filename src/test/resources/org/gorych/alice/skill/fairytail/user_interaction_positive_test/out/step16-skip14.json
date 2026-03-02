@@ -1,6 +1,6 @@
 {
   "response": {
-    "end_session": false
+    "end_session": true
   },
   "version": "1.0",
   "buttons": [],

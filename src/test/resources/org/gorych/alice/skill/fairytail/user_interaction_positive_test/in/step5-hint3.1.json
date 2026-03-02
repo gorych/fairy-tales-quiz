@@ -3,14 +3,18 @@
     "new": false
   },
   "request": {
-    "command": "волк",
-    "original_utterance": "волк",
+    "command": "подскажи",
+    "original_utterance": "подскажи",
     "nlu": {
       "tokens": [
-        "волк"
+        "подскажи"
       ],
       "entities": [],
-      "intents": {}
+      "intents": {
+        "g911.help": {
+          "slots": {}
+        }
+      }
     },
     "markup": {
       "dangerous_context": false
@@ -19,13 +23,10 @@
   },
   "state": {
     "session": {
-      "rightAnswersCount": 1,
-      "currentQuestion": 2,
-      "previousHintNumber": 3,
-      "hintedQuestions": [
-        1,
-        2
-      ],
+      "rightAnswersCount": 2,
+      "currentQuestion": 3,
+      "previousHintNumber": 0,
+      "hintedQuestions": [],
       "transitionCommands": [
         "NextQuestionCommand"
       ]

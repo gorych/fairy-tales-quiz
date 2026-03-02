@@ -5,11 +5,11 @@
   "version": "1.0",
   "buttons": [],
   "session_state": {
-    "currentQuestion": 3,
-    "previousHintNumber": 0,
+    "currentQuestion": 1,
+    "rightAnswersCount": 0,
+    "previousHintNumber": 100501,
     "hintedQuestions": [
-      1,
-      2
+      1
     ],
     "transitionCommands": [
       "NextQuestionCommand"

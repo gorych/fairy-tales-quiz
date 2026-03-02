@@ -14,18 +14,18 @@ private const val TEST_RESOURCES_DIR = "user_interaction_positive_test"
 class UserInteractionTest {
 
     @Test
-    fun `WHEN session is new THEN introduction text should be returned`() {
+    fun `WHEN user runs the skill first time THEN introduction text should be returned`() {
         shouldEqualJsonTest("step1-introduction.json")
     }
 
     @Test
-    fun `WHEN user sends 'yes' THEN first question should be returned`() {
-        shouldEqualJsonTest("step2-yes.json")
+    fun `WHEN user doesn't agree to play THEN regret phrase should be returned and session closed`() {
+        shouldEqualJsonTest("step2-no.json")
     }
 
     @Test
-    fun `WHEN user sends 'no' THEN regret phrase should be returned and session closed`() {
-        shouldEqualJsonTest("step2-no.json")
+    fun `WHEN user agrees to play THEN first question should be returned`() {
+        shouldEqualJsonTest("step2-yes.json")
     }
 
     @Test
@@ -33,6 +33,30 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step3-answer1.json",
             expectedText = arrayOf("Кто съел бабушку красной шапочки?", "следующий вопрос"),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks first hint to question #1 THEN the first hint should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step3-hint1.1.json",
+            expectedText = arrayOf("Он живёт с бабкой."),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks second hint to question #1 THEN the second hint should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step3-hint1.2.json",
+            expectedText = arrayOf("Это слово начинается на букву 'Д'."),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks hint to question #1 many times THEN right answer should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step3-hint1.100500.json",
+            expectedText = arrayOf("Правильный ответ - дедка."),
         )
     }
 
@@ -64,6 +88,74 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step4-answer2.json",
             expectedText = arrayOf("Кто испёк колобка?", "следующий вопрос"),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks hint #1 to question #3 THEN first hint should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step5-hint3.1.json",
+            expectedText = arrayOf("Она живет с дедом."),
+        )
+    }
+
+    @Test
+    fun `WHEN user sends 'greeting' command to question #3 THEN greeting phrase should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step5-greeting.json",
+            expectedText = arrayOf("И тебе, привет!"),
+        )
+    }
+
+    @Test
+    fun `WHEN user asks hint #2 to question #3 THEN second hint should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step5-hint3.2.json",
+            expectedText = arrayOf("Это слово начинается на букву 'Б'."),
+        )
+    }
+
+    @Test
+    fun `WHEN user sends 'gratitude' command to question #3 THEN gratitude phrase should be returned`() {
+        shouldEqualSpecifiedJsonAndMatchOneOfPhrases(
+            fileName = "step5-gratitude.json",
+            expectedPhrases = arrayOf("И тебе, спасибо!", "Не за что!", "Как приятно это слышать!")
+        )
+    }
+
+    @Test
+    fun `WHEN user asks hints to question #3 too many times THEN right answer should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step5-hint3.100500.json",
+            expectedText = arrayOf("Правильный ответ - баба."),
+        )
+    }
+
+    @Test
+    fun `WHEN user sends 'help' command to question #3 THEN help phrase should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step5-help.json",
+            expectedText = arrayOf(
+                "Хорошо! Слушай список основных команд. ",
+                "Чтобы послушать вопрос еще раз - скажи 'Алиса, повтори вопрос'. ",
+                "Если ты не знаешь ответа на вопрос, используй команду  'Алиса, помоги'. ",
+                "Для перехода к следующему вопросу - скажи 'Алиса, следующий вопрос'. ",
+                "Для выхода - скажи 'стоп' или 'хватит'."
+            ),
+        )
+    }
+
+    @Test
+    fun `WHEN user sends 'what can you do' command to question #3 THEN skill description should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step5-what-can-you-do.json",
+            expectedText = arrayOf(
+                "Я прочитала много известных сказок и могу проверить как хорошо их знаешь ты. ",
+                "Игра происходит в режиме 'вопрос-ответ'. Я спрашиваю, а ты - отвечаешь. ",
+                "Если ты не знаешь ответа на вопрос, просто скажи 'Алиса, помоги' или 'Алиса, следующий вопрос'. ",
+                "Чтобы послушать вопрос еще раз - скажи 'Алиса, повтори вопрос'. ",
+                "Для выхода - скажи 'стоп' или 'хватит'."
+            ),
         )
     }
 
@@ -284,10 +376,10 @@ class UserInteractionTest {
             .readTree(actualJson).get("response").get("text")
             .toString()
 
-        val hastLeastOneMatchingText: Boolean = expectedPhrases
+        val hasAtLeastOneMatchingText: Boolean = expectedPhrases
             .map { responseText.contains(it, ignoreCase = true) }
             .any { it }
-        assertTrue(hastLeastOneMatchingText)
+        assertTrue(hasAtLeastOneMatchingText)
     }
 
     private fun readInputFile(fileName: String) =

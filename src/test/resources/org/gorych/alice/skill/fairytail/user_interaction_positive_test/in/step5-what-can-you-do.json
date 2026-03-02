@@ -3,14 +3,18 @@
     "new": false
   },
   "request": {
-    "command": "волк",
-    "original_utterance": "волк",
+    "command": "что умеешь",
+    "original_utterance": "что умеешь",
     "nlu": {
       "tokens": [
-        "волк"
+        "что умеешь"
       ],
       "entities": [],
-      "intents": {}
+      "intents": {
+        "YANDEX.WHAT_CAN_YOU_DO": {
+          "slots": {}
+        }
+      }
     },
     "markup": {
       "dangerous_context": false
@@ -19,12 +23,11 @@
   },
   "state": {
     "session": {
-      "rightAnswersCount": 1,
-      "currentQuestion": 2,
-      "previousHintNumber": 3,
+      "rightAnswersCount": 2,
+      "currentQuestion": 3,
+      "previousHintNumber": 100501,
       "hintedQuestions": [
-        1,
-        2
+        3
       ],
       "transitionCommands": [
         "NextQuestionCommand"
