@@ -1,10 +1,19 @@
 {
   "response": {
     "text": "Рада слышать тебя снова! Ты в гостях у 'Викторины по сказкам'. Я подготовила для тебя каверзные вопросы, а от тебя жду верных ответов. Если будет нужна помощь, просто скажи: Алиса, помоги. Поиграем?",
-    "end_session": false
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "✅ Да, давай",
+        "hide": true
+      },
+      {
+        "title": "❌ Нет, не хочу",
+        "hide": true
+      }
+    ]
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "currentQuestion": null,
     "rightAnswersCount": 0,

@@ -1,10 +1,10 @@
 {
   "response": {
     "text": "И вам доброго времени суток!",
-    "end_session": false
+    "end_session": false,
+    "buttons": []
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "currentQuestion": null,
     "rightAnswersCount": 0,

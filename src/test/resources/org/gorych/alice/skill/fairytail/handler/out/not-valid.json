@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "buttons": [],
   "response": {
     "text": "Извините, произошла техническая ошибка. Попробуйте еще раз.",
-    "end_session": false
+    "end_session": false,
+    "buttons": []
   },
   "session_state": {
     "rightAnswersCount": 0,

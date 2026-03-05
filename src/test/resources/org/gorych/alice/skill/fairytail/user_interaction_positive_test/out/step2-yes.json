@@ -1,10 +1,10 @@
 {
   "response": {
     "text": "Отлично. Слушай первый вопрос. Кто посадил репку?",
-    "end_session": false
+    "end_session": false,
+    "buttons": []
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "currentQuestion": 1,
     "rightAnswersCount": 0,

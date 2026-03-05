@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.core.command
 
+import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 
@@ -21,10 +22,13 @@ class WhatCanYouDoCommand : Command {
                     "Если ты не знаешь ответа на вопрос, просто скажи 'Алиса, помоги' или 'Алиса, следующий вопрос'. " +
                     "Чтобы послушать вопрос еще раз - скажи 'Алиса, повтори вопрос'. " +
                     "Для выхода - скажи 'стоп' или 'хватит'."
+
+            val buttons: MutableList<Button> = mutableListOf()
             if (requestObject.containsPlayingAgreementCommand()) {
                 responseText += " Сыграем?"
+                buttons.addAll(Button.agreement_and_disagreement())
             }
-            return ResponseObject.of(responseText, requestObject.state?.session, false)
+            return ResponseObject.of(responseText, buttons, requestObject.state?.session, false)
         }
     }
 

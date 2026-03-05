@@ -1,10 +1,10 @@
 {
   "response": {
     "text": "Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти",
-    "end_session": true
+    "end_session": true,
+    "buttons": []
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "rightAnswersCount": 0,
     "currentQuestion": null,

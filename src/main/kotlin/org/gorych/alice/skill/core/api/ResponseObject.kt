@@ -7,13 +7,11 @@ private const val HTTP_VERSION = "1.0"
 data class ResponseObject(
     val response: ResponseValue,
     val version: String = HTTP_VERSION,
-    val buttons: List<Button> = listOf(),
     @JsonProperty("session_state") val sessionState: SessionState = SessionState()
 ) {
     constructor(response: ResponseValue, sessionState: SessionState) : this(
         response,
         HTTP_VERSION,
-        listOf(),
         sessionState
     )
 
@@ -24,6 +22,10 @@ data class ResponseObject(
 
         fun of(text: String, state: SessionState?, endSession: Boolean): ResponseObject {
             return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())
+        }
+
+        fun of(text: String, buttons: List<Button>, state: SessionState?, endSession: Boolean): ResponseObject {
+            return ResponseObject(ResponseValue(text, endSession, buttons), state ?: SessionState())
         }
 
         fun ofUnclearCommand(requestObject: RequestObject?): ResponseObject {
@@ -41,6 +43,14 @@ data class ResponseObject(
 data class ResponseValue(
     val text: String,
     @JsonProperty("end_session") val endSession: Boolean,
+    val buttons: List<Button> = listOf(),
 )
 
-data class Button(val title: String, val hide: Boolean = true)
+data class Button(val title: String, val hide: Boolean = true) {
+    companion object {
+        fun agreement() = Button("✅ Да, давай")
+        fun disagreement() = Button("❌ Нет, не хочу")
+
+        fun agreement_and_disagreement() = listOf(agreement(), disagreement())
+    }
+}

@@ -1,10 +1,10 @@
 {
   "response": {
     "text": "Я вас не поняла, повторите, пожалуйста.",
-    "end_session": false
+    "end_session": false,
+    "buttons": []
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "rightAnswersCount": 0,
     "currentQuestion": null,

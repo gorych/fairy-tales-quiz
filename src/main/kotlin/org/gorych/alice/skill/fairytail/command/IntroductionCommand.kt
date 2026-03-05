@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.fairytail.command
 
+import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
@@ -24,7 +25,7 @@ class IntroductionCommand : Command {
             setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
         )
 
-        return ResponseObject.of(responseText, state, false)
+        return ResponseObject.of(responseText, Button.agreement_and_disagreement(), state, false)
     }
 
     companion object {

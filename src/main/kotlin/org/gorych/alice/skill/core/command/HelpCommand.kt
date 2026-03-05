@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.core.command
 
+import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.fairytail.command.HELP_INTENT_ID
@@ -22,11 +23,14 @@ class HelpCommand : Command {
                 "Если ты не знаешь ответа на вопрос, используй команду  'Алиса, помоги'. " +
                 "Для перехода к следующему вопросу - скажи 'Алиса, следующий вопрос'. " +
                 "Для выхода - скажи 'стоп' или 'хватит'."
+
+        val buttons: MutableList<Button> = mutableListOf()
         if (requestObject.containsPlayingAgreementCommand()) {
             responseText += " Ну что, поиграем?"
+            buttons.addAll(Button.agreement_and_disagreement())
         }
         requestObject.let {
-            return ResponseObject.of(responseText, requestObject.state?.session, false)
+            return ResponseObject.of(responseText, buttons, requestObject.state?.session, false)
         }
     }
 

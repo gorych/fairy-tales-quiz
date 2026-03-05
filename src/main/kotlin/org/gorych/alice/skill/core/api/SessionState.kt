@@ -5,7 +5,7 @@ data class SessionState(
     val rightAnswersCount: Int = 0,
     val hintedQuestions: Set<Int> = setOf(),
     val previousHintNumber: Int = 0,
-    val transitionCommands: Set<String>? = setOf()
+    val transitionCommands: Set<String>? = setOf(),
 ) {
     constructor(transitionCommands: Set<String>) : this(
         currentQuestion = null,

@@ -1,10 +1,10 @@
 {
   "response": {
     "text": "Верно! Поздравляю, это был последний вопрос. Твой результат - 1 из 30. Маловато для победы, но смелость засчитана. Если захочешь поиграть ещё - ты знаешь где меня искать. Пока!",
-    "end_session": true
+    "end_session": true,
+    "buttons": []
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "rightAnswersCount": 0,
     "currentQuestion": null,

@@ -1,9 +1,9 @@
 {
   "response": {
-    "end_session": false
+    "end_session": false,
+    "buttons": []
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "rightAnswersCount": 1,
     "previousHintNumber": 0,

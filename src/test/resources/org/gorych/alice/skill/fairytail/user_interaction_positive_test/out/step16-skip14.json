@@ -1,9 +1,9 @@
 {
   "response": {
-    "end_session": true
+    "end_session": true,
+    "buttons": []
   },
   "version": "1.0",
-  "buttons": [],
   "session_state": {
     "currentQuestion": null,
     "previousHintNumber": 0,
