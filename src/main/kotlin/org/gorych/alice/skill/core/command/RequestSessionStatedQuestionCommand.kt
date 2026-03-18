@@ -18,8 +18,6 @@ abstract class RequestSessionStatedQuestionCommand : Command {
         return execute(requestObject, requestSessionState, currentQuestionNumber)
     }
 
-    fun log(message: String) = println("${name()}: $message")
-
     abstract fun execute(
         requestObject: RequestObject,
         requestSessionState: SessionState,

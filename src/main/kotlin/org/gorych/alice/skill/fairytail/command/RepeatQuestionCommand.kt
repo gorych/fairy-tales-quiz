@@ -22,11 +22,14 @@ class RepeatQuestionCommand : RequestSessionStatedQuestionCommand() {
         requestObject: RequestObject,
         requestSessionState: SessionState,
         currentQuestionNumber: Int
-    ) = ResponseObject.of(
-        text = "${BEFORE_QUESTION_PHRASES.random()} ${Quiz.question(currentQuestionNumber)}",
-        state = requestSessionState,
-        endSession = false
-    )
+    ): ResponseObject {
+        log("execute: question number: $currentQuestionNumber")
+        return ResponseObject.of(
+            text = "${BEFORE_QUESTION_PHRASES.random()} ${Quiz.question(currentQuestionNumber)}",
+            state = requestSessionState,
+            endSession = false
+        )
+    }
 
     companion object {
         val BEFORE_QUESTION_PHRASES = setOf("Без проблем.", "Хорошо, только слушай внимательно.", "Повторяю.")

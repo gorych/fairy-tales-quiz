@@ -15,6 +15,7 @@ class PingCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
+        log("execute: start")
         return ResponseObject.of(text = "OK", endSession = true)
     }
 

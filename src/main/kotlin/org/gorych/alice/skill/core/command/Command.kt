@@ -10,4 +10,6 @@ interface Command {
     fun canHandle(requestObject: RequestObject): Boolean
 
     fun execute(requestObject: RequestObject): ResponseObject
+
+    fun log(message: String) = println("${name()}: $message")
 }

@@ -23,6 +23,8 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
         requestSessionState: SessionState,
         currentQuestionNumber: Int
     ): ResponseObject {
+        log("execute: question number: $currentQuestionNumber")
+
         val nextQuestionNumber = currentQuestionNumber + 1
         if (nextQuestionNumber <= Quiz.countOfQuestions()) {
             return nextQuestionResponse(nextQuestionNumber, requestSessionState)

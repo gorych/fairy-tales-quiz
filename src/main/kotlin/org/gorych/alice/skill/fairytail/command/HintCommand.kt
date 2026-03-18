@@ -27,6 +27,7 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
         currentQuestionNumber: Int
     ): ResponseObject {
         val currentHintNumber = requestSessionState.previousHintNumber + 1
+        log("execute: question number: $currentQuestionNumber, hint number: $currentHintNumber")
 
         val hintedQuestions: MutableSet<Int> = requestSessionState.hintedQuestions.toMutableSet()
         hintedQuestions.add(currentQuestionNumber)

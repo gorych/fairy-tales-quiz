@@ -19,7 +19,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         requestSessionState: SessionState,
         currentQuestionNumber: Int
     ): ResponseObject {
-        log("execute: question number=$currentQuestionNumber")
+        log("execute: question number: $currentQuestionNumber")
         val rightAnswers: List<String> = Quiz.answerTo(currentQuestionNumber)
 
         if (rightAnswers.any { it == requestObject.command() }) {
