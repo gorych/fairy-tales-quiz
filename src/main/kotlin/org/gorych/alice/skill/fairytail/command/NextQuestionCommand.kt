@@ -62,7 +62,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         )
 
     private fun wrongAnswerResponse(sessionState: SessionState): ResponseObject {
-        log("execute: wrong response")
+        log("execute: wrong answer")
         return ResponseObject.of(
             text = WRONG_ANSWER_PHRASES.random(),
             state = sessionState,
