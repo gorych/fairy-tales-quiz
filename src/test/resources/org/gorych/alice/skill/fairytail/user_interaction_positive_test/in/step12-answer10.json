@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "айболит",
-    "original_utterance": "айболит",
+    "command": "нуф-нуф",
+    "original_utterance": "нуф-нуф",
     "nlu": {
       "tokens": [
-        "айболит"
+        "нуф-нуф"
       ],
       "entities": [],
       "intents": {}

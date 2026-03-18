@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "нуф нуф",
-    "original_utterance": "нуф нуф",
+    "command": "6",
+    "original_utterance": "6",
     "nlu": {
       "tokens": [
-        "нуф нуф"
+        "6"
       ],
       "entities": [],
       "intents": {}

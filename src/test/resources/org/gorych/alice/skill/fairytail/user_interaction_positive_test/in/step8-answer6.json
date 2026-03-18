@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "теремок",
-    "original_utterance": "теремок",
+    "command": "7",
+    "original_utterance": "7",
     "nlu": {
       "tokens": [
-        "теремок"
+        "7"
       ],
       "entities": [],
       "intents": {}

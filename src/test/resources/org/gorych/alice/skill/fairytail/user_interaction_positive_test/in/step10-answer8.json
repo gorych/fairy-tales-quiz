@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "рапунцель",
-    "original_utterance": "рапунцель",
+    "command": "самовар",
+    "original_utterance": "самовар",
     "nlu": {
       "tokens": [
-        "рапунцель"
+        "самовар"
       ],
       "entities": [],
       "intents": {}

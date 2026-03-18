@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "федора",
-    "original_utterance": "федора",
+    "command": "слон",
+    "original_utterance": "слон",
     "nlu": {
       "tokens": [
-        "федора"
+        "слон"
       ],
       "entities": [],
       "intents": {}

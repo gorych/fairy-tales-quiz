@@ -53,7 +53,9 @@ fun handle(input: String): String {
 }
 
 private fun processRequest(requestObject: RequestObject): ResponseObject {
-    val command: Command? = commandRegistry.firstOrNull { it.canHandle(requestObject) }
+    val command: Command? = commandRegistry
+        .map { LoggedCommand(it) }
+        .firstOrNull { it.canHandle(requestObject) }
     return when {
         command != null -> {
             command.execute(requestObject)

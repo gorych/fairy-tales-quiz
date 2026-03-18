@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "мирись мирись мирись",
-    "original_utterance": "мирись мирись мирись",
+    "command": "семь",
+    "original_utterance": "семь",
     "nlu": {
       "tokens": [
-        "мирись мирись мирись"
+        "семь"
       ],
       "entities": [],
       "intents": {}

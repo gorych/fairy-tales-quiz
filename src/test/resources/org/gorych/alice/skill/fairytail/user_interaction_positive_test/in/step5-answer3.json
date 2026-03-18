@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "баба",
-    "original_utterance": "баба",
+    "command": "ряба",
+    "original_utterance": "ряба",
     "nlu": {
       "tokens": [
-        "баба"
+        "ряба"
       ],
       "entities": [],
       "intents": {}

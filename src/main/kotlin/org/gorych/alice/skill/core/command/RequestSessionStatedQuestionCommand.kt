@@ -7,8 +7,6 @@ import org.gorych.alice.skill.core.api.SessionState
 abstract class RequestSessionStatedQuestionCommand : Command {
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        log("execute: start")
-
         val requestSessionState = requestObject.state?.session
         requireNotNull(requestSessionState) { "Session state must not be NULL" }
 
