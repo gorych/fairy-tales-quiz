@@ -15,7 +15,7 @@ class PingCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        println("PingCommand: execute: OK")
+        println("${name()}: execute: OK")
         return ResponseObject.of(text = "OK", endSession = true)
     }
 
