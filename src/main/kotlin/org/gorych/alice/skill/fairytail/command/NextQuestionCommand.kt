@@ -80,7 +80,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
 
-        log("execute: end of quiz. Score=$score")
+        log("execute: end of quiz. Score: $score")
 
         return ResponseObject.of(
             text = WINNING_PHRASE_TEMPLATE.format(scorePhrase),
