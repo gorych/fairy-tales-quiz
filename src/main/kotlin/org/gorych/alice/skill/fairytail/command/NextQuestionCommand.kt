@@ -19,8 +19,6 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         requestSessionState: SessionState,
         currentQuestionNumber: Int
     ): ResponseObject {
-        println("${name()}: execute: start")
-
         val rightAnswers: List<String> = Quiz.answerTo(currentQuestionNumber)
 
         if (rightAnswers.any { it == requestObject.command() }) {
