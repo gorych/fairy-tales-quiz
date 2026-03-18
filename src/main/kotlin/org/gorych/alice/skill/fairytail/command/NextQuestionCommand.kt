@@ -19,6 +19,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         requestSessionState: SessionState,
         currentQuestionNumber: Int
     ): ResponseObject {
+        log("execute: question number=$currentQuestionNumber")
         val rightAnswers: List<String> = Quiz.answerTo(currentQuestionNumber)
 
         if (rightAnswers.any { it == requestObject.command() }) {
@@ -60,12 +61,14 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             endSession = false
         )
 
-    private fun wrongAnswerResponse(sessionState: SessionState) =
-        ResponseObject.of(
+    private fun wrongAnswerResponse(sessionState: SessionState): ResponseObject {
+        log("execute: wrong response")
+        return ResponseObject.of(
             text = WRONG_ANSWER_PHRASES.random(),
             state = sessionState,
             endSession = false
         )
+    }
 
     private fun endQuizResponse(rightAnswersCount: Int): ResponseObject {
         val countOfAllQuestions = Quiz.countOfQuestions()
@@ -76,6 +79,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
+
+        log("execute: end of quiz. Score=$score")
 
         return ResponseObject.of(
             text = WINNING_PHRASE_TEMPLATE.format(scorePhrase),
