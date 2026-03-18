@@ -5,11 +5,13 @@
     "buttons": [
       {
         "title": "✅ Да, давай",
-        "hide": true
+        "hide": true,
+        "payload": "{}"
       },
       {
         "title": "❌ Нет, не хочу",
-        "hide": true
+        "hide": true,
+        "payload": "{}"
       }
     ]
   },

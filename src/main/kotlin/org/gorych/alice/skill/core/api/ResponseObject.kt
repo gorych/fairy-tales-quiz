@@ -46,7 +46,7 @@ data class ResponseValue(
     val buttons: List<Button> = listOf(),
 )
 
-data class Button(val title: String, val hide: Boolean = true) {
+data class Button(val title: String, val hide: Boolean = true, val payload: String = "{}") {
     companion object {
         fun agreement() = Button("✅ Да, давай")
         fun disagreement() = Button("❌ Нет, не хочу")
