@@ -40,7 +40,10 @@ data class Request(
 
 data class NLU(val tokens: List<String> = listOf(), val intents: Map<String, Any> = mapOf())
 
-data class Session(val new: Boolean)
+data class Session(
+    val new: Boolean,
+    @JsonProperty(value = "user_id", required = false) val userId: String? = null
+)
 
 data class State(val session: SessionState) {
     fun containsTransitionCommand(commandName: String): Boolean = session.containsTransitionCommand(commandName)

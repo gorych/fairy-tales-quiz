@@ -5,7 +5,8 @@
     "client_id": "ru.yandex.searchplugin/7.16 (none none; android 4.4.2)"
   },
   "session": {
-    "new": true
+    "new": true,
+    "user_id": "test12345678910abc"
   },
   "request": {
     "command": "пока",

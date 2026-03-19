@@ -9,7 +9,16 @@ class LoggedCommand(private val innerCommand: Command) : Command {
     override fun canHandle(requestObject: RequestObject) = innerCommand.canHandle(requestObject)
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        log("execute: start")
+        log("execute: start. User id: ${truncatedUserId(requestObject)}")
         return innerCommand.execute(requestObject)
+    }
+
+    private fun truncatedUserId(requestObject: RequestObject): String? {
+        val userId = requestObject.session?.userId
+        return when {
+            userId == null -> null
+            userId.length < 8 -> userId
+            else -> userId.substring(0, 8)
+        }
     }
 }

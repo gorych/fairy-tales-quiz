@@ -10,7 +10,8 @@
     }
   },
   "session": {
-    "new": false
+    "new": false,
+    "user_id": "1234567"
   },
   "request": {
     "command": "пока",
