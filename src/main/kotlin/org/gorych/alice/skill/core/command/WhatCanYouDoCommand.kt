@@ -5,6 +5,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 
 private const val WHAT_CAN_YOU_DO_YANDEX_INTENT_ID = "YANDEX.WHAT_CAN_YOU_DO"
+private const val WHAT_CAN_YOU_DO_INTENT_ID = "g911.what_can_you_do"
 
 class WhatCanYouDoCommand : Command {
 
@@ -12,6 +13,7 @@ class WhatCanYouDoCommand : Command {
 
     override fun canHandle(requestObject: RequestObject): Boolean {
         return requestObject.containsIntent(WHAT_CAN_YOU_DO_YANDEX_INTENT_ID)
+                || requestObject.containsIntent(WHAT_CAN_YOU_DO_INTENT_ID)
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {

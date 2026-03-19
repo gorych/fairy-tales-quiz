@@ -59,7 +59,7 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
         fun whatCanYouDo() = Button("ℹ\uFE0F Что ты умеешь?")
 
         fun agreement_and_disagreement() = listOf(agreement(), disagreement())
-        fun agreement_disagreement_whatCanYouDo_stop() = listOf(agreement(), disagreement(), whatCanYouDo(), stop())
+        fun agreement_disagreement_whatCanYouDo() = listOf(agreement(), whatCanYouDo(), disagreement())
 
         fun skip_repeat_hint() = listOf(skipQuestion(), repeatQuestion(), hint())
         fun skip_repeat_hint_stop() = listOf(skipQuestion(), repeatQuestion(), hint(), stop())

@@ -11,7 +11,7 @@
       ],
       "entities": [],
       "intents": {
-        "YANDEX.WHAT_CAN_YOU_DO": {
+        "g911.what_can_you_do": {
           "slots": {}
         }
       }

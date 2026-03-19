@@ -9,17 +9,12 @@
         "payload": "{}"
       },
       {
-        "title": "❌ Нет, не хочу",
-        "hide": true,
-        "payload": "{}"
-      },
-      {
         "title": "ℹ️ Что ты умеешь?",
         "hide": true,
         "payload": "{}"
       },
       {
-        "title": "❌ Выйти",
+        "title": "❌ Нет, не хочу",
         "hide": true,
         "payload": "{}"
       }

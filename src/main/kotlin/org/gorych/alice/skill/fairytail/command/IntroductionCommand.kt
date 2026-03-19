@@ -25,7 +25,7 @@ class IntroductionCommand : Command {
             setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
         )
 
-        return ResponseObject.of(responseText, Button.agreement_disagreement_whatCanYouDo_stop(), state, false)
+        return ResponseObject.of(responseText, Button.agreement_disagreement_whatCanYouDo(), state, false)
     }
 
     companion object {
