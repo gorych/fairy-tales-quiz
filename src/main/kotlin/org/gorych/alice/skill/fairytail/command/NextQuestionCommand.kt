@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.fairytail.command
 
+import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
@@ -58,7 +59,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 previousHintNumber = 0,
                 setOf(NextQuestionCommand.name())
             ),
-            endSession = false
+            endSession = false,
+            buttons = Button.skip_repeat_hint()
         )
 
     private fun wrongAnswerResponse(sessionState: SessionState): ResponseObject {
@@ -66,7 +68,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         return ResponseObject.of(
             text = WRONG_ANSWER_PHRASES.random(),
             state = sessionState,
-            endSession = false
+            endSession = false,
+            buttons = Button.skip_repeat_hint()
         )
     }
 

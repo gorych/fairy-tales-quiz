@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.fairytail.command
 
+import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
@@ -35,7 +36,8 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
         return ResponseObject.of(
             text = "${BEFORE_HINT_PHRASES.random()} ${Quiz.hintTo(currentQuestionNumber, currentHintNumber)}",
             state = requestSessionState.copy(hintedQuestions = hintedQuestions, previousHintNumber = currentHintNumber),
-            endSession = false
+            endSession = false,
+            buttons = Button.skip_repeat_hint()
         )
     }
 

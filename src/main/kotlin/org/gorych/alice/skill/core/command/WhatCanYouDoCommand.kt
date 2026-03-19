@@ -27,6 +27,8 @@ class WhatCanYouDoCommand : Command {
             if (requestObject.containsPlayingAgreementCommand()) {
                 responseText += " Сыграем?"
                 buttons.addAll(Button.agreement_and_disagreement())
+            } else {
+                buttons.addAll(Button.skip_repeat_hint_stop())
             }
             return ResponseObject.of(responseText, buttons, requestObject.state?.session, false)
         }

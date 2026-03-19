@@ -51,6 +51,17 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
         fun agreement() = Button("✅ Да, давай")
         fun disagreement() = Button("❌ Нет, не хочу")
 
+        fun skipQuestion() = Button("➡\uFE0F Следующий вопрос")
+        fun repeatQuestion() = Button("\uD83D\uDD01 Повтори вопрос")
+
+        fun hint() = Button("❓Дай подсказку")
+        fun stop() = Button("❌ Выйти")
+        fun whatCanYouDo() = Button("ℹ\uFE0F Что ты умеешь?")
+
         fun agreement_and_disagreement() = listOf(agreement(), disagreement())
+        fun agreement_disagreement_whatCanYouDo_stop() = listOf(agreement(), disagreement(), whatCanYouDo(), stop())
+
+        fun skip_repeat_hint() = listOf(skipQuestion(), repeatQuestion(), hint())
+        fun skip_repeat_hint_stop() = listOf(skipQuestion(), repeatQuestion(), hint(), stop())
     }
 }

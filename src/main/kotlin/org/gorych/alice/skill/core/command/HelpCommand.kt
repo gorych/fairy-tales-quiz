@@ -28,6 +28,8 @@ class HelpCommand : Command {
         if (requestObject.containsPlayingAgreementCommand()) {
             responseText += " Ну что, поиграем?"
             buttons.addAll(Button.agreement_and_disagreement())
+        } else {
+            buttons.addAll(Button.skip_repeat_hint_stop())
         }
         requestObject.let {
             return ResponseObject.of(responseText, buttons, requestObject.state?.session, false)

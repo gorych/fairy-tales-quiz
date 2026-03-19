@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.fairytail.command
 
+import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
@@ -40,7 +41,8 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
                 transitionCommands = setOf(NextQuestionCommand.name()),
                 previousHintNumber = 0
             ),
-            endSession = false
+            endSession = false,
+            buttons = Button.skip_repeat_hint()
         )
 
     private fun noQuestionsResponse(rightAnswersCount: Int): ResponseObject {

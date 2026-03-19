@@ -2,7 +2,23 @@
   "response": {
     "text": "Отлично. Слушай первый вопрос. Кто посадил репку?",
     "end_session": false,
-    "buttons": []
+    "buttons": [
+      {
+        "title": "➡️ Следующий вопрос",
+        "hide": true,
+        "payload": "{}"
+      },
+      {
+        "title": "🔁 Повтори вопрос",
+        "hide": true,
+        "payload": "{}"
+      },
+      {
+        "title": "❓Дай подсказку",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
   },
   "version": "1.0",
   "session_state": {

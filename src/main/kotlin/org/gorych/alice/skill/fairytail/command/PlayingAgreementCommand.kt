@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.fairytail.command
 
+import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
@@ -22,7 +23,8 @@ class PlayingAgreementCommand : Command {
             return ResponseObject.of(
                 text = "Отлично. Слушай первый вопрос. ${Quiz.question(questionNumber)}",
                 state = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
-                endSession = false
+                endSession = false,
+                buttons = Button.skip_repeat_hint()
             )
         }
 
