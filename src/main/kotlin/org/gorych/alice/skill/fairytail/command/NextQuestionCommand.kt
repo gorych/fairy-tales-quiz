@@ -96,8 +96,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         private const val WINNING_PHRASE_TEMPLATE = "" +
                 "Верно! " +
                 "Поздравляю, это был последний вопрос. " +
-                "%s " +
-                "Пока!"
+                "%s"
 
         private const val WINNING_PHRASE_GOOD_RESULT_TEMPLATE = "" +
                 "Твой результат впечатляет. %d из %d возможных! " +
