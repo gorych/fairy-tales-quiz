@@ -1,7 +1,13 @@
 {
   "response": {
-    "end_session": true,
-    "buttons": []
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "👋 Пока!",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
   },
   "version": "1.0",
   "session_state": {

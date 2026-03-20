@@ -87,7 +87,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
         return ResponseObject.of(
             text = WINNING_PHRASE_TEMPLATE.format(scorePhrase),
-            endSession = true
+            endSession = false,
+            button = Button.goodbye()
         )
     }
 

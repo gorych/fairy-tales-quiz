@@ -51,7 +51,8 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
                     "А это значит, что пора подводить итоги. " +
                     "Твой результат - ${rightAnswersCount} из ${Quiz.countOfQuestions()}. " +
                     "Хорошо это или плохо - судить тебе. Спасибо за игру!",
-            endSession = true
+            endSession = false,
+            button = Button.goodbye()
         )
     }
 

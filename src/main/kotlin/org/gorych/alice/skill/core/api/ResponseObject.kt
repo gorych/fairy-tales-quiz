@@ -20,6 +20,10 @@ data class ResponseObject(
             return ResponseObject(ResponseValue(text, endSession))
         }
 
+        fun of(text: String, endSession: Boolean, button: Button): ResponseObject {
+            return ResponseObject(ResponseValue(text, endSession, listOf(button)))
+        }
+
         fun of(text: String, state: SessionState?, endSession: Boolean): ResponseObject {
             return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())
         }
@@ -63,5 +67,7 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
 
         fun skip_repeat_hint() = listOf(skipQuestion(), repeatQuestion(), hint())
         fun skip_repeat_hint_stop() = listOf(skipQuestion(), repeatQuestion(), hint(), stop())
+
+        fun goodbye() = Button("\uD83D\uDC4B Пока!")
     }
 }
