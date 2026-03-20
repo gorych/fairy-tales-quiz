@@ -54,7 +54,7 @@ fun handle(input: String): String {
 
 private fun processRequest(requestObject: RequestObject): ResponseObject {
     val command: Command? = commandRegistry
-        .map { LoggedCommand(it) }
+        .map { wrapIfLoggingNotDisabled(it) }
         .firstOrNull { it.canHandle(requestObject) }
     return when {
         command != null -> {
@@ -64,5 +64,13 @@ private fun processRequest(requestObject: RequestObject): ResponseObject {
         else -> {
             ResponseObject.ofUnclearCommand(requestObject)
         }
+    }
+}
+
+private fun wrapIfLoggingNotDisabled(command: Command): Command {
+    val loggingDisabled: Boolean = System.getenv("loggingDisabled").toBoolean()
+    return when {
+        loggingDisabled -> command
+        else -> LoggedCommand(command)
     }
 }

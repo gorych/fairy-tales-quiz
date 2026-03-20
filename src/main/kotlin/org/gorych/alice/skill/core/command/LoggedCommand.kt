@@ -3,6 +3,8 @@ package org.gorych.alice.skill.core.command
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 
+private const val TRUNCATED_USER_ID_LENGTH = 8
+
 class LoggedCommand(private val innerCommand: Command) : Command {
     override fun name() = innerCommand.name()
 
@@ -17,8 +19,8 @@ class LoggedCommand(private val innerCommand: Command) : Command {
         val userId = requestObject.session?.userId
         return when {
             userId == null -> null
-            userId.length < 8 -> userId
-            else -> userId.substring(0, 8)
+            userId.length < TRUNCATED_USER_ID_LENGTH -> userId
+            else -> userId.substring(0, TRUNCATED_USER_ID_LENGTH)
         }
     }
 }
