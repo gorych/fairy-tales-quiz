@@ -20,9 +20,11 @@ data class ResponseObject(
             return ResponseObject(ResponseValue(text, endSession))
         }
 
-        fun of(text: String, endSession: Boolean, button: Button): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession, listOf(button)))
-        }
+        fun of(text: String, endSession: Boolean, button: Button) =
+            ResponseObject(ResponseValue(text, endSession, listOf(button)))
+
+        fun of(text: String, endSession: Boolean, buttons: List<Button>) =
+            ResponseObject(ResponseValue(text, endSession, buttons))
 
         fun of(text: String, state: SessionState?, endSession: Boolean): ResponseObject {
             return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())
@@ -61,6 +63,8 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
         fun hint() = Button("❓Дай подсказку")
         fun stop() = Button("❌ Выйти")
         fun whatCanYouDo() = Button("ℹ\uFE0F Что ты умеешь?")
+
+        fun proceed() = Button("▶\uFE0F Продолжить игру")
 
         fun agreement_and_disagreement() = listOf(agreement(), disagreement())
         fun agreement_disagreement_whatCanYouDo() = listOf(agreement(), whatCanYouDo(), disagreement())

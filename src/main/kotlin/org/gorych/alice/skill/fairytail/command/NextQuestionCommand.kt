@@ -28,6 +28,12 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
             val nextQuestionNumber = currentQuestionNumber + 1
             if (nextQuestionNumber <= Quiz.countOfQuestions()) {
+                val achievementResponse: ResponseObject? =
+                    processAchievements(rightAnswersCount, currentQuestionNumber, requestSessionState)
+                if (achievementResponse != null) {
+                    return achievementResponse
+                }
+
                 return nextQuestionResponse(nextQuestionNumber, rightAnswersCount, requestSessionState)
             }
             return endQuizResponse(rightAnswersCount)
@@ -36,13 +42,34 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         return wrongAnswerResponse(requestSessionState)
     }
 
+    private fun processAchievements(
+        rightAnswersCount: Int, currentQuestionNumber: Int, requestSessionState: SessionState
+    ): ResponseObject? {
+        return Achievement.entries
+            .filter { it.rightAnswersCount == rightAnswersCount }
+            .map {
+                ResponseObject.of(
+                    text = it.responseText,
+                    state = SessionState(
+                        currentQuestionNumber,
+                        rightAnswersCount,
+                        requestSessionState.hintedQuestions,
+                        previousHintNumber = 0,
+                        setOf(PlayingAgreementCommand.name())
+                    ),
+                    endSession = false,
+                    buttons = listOf(Button.proceed(), Button.stop())
+                )
+            }
+            .firstOrNull()
+    }
+
     private fun getRightAnswersCount(sessionState: SessionState, currentQuestion: Int): Int {
         val rightAnswersCount: Int = sessionState.rightAnswersCount
 
         val wasUsedHint = sessionState.hintedQuestions.contains(currentQuestion)
         return when {
             wasUsedHint -> rightAnswersCount
-
             else -> rightAnswersCount + 1
         }
     }
@@ -78,17 +105,38 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
 
         val scorePhrase = when {
+            score == 100.0 -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
             score >= 85 -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
             score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
+
+        val buttons: MutableList<Button> = mutableListOf(Button.goodbye())
+        if (score == 100.0) {
+            buttons.addFirst(Button.proceed())
+        }
 
         log("execute: end of quiz. Score: $score")
 
         return ResponseObject.of(
             text = WINNING_PHRASE_TEMPLATE.format(scorePhrase),
             endSession = false,
-            button = Button.goodbye()
+            buttons = buttons
+        )
+    }
+
+    enum class Achievement(val rightAnswersCount: Int, val responseText: String) {
+        FIVE_RIGHT_ANSWERS(
+            rightAnswersCount = 5,
+            responseText = "5\uFE0F⃣ Отличное начало! Первая пятерка правильных ответов за тобой. Идём дальше?"
+        ),
+        TEN_RIGHT_ANSWERS(
+            rightAnswersCount = 10,
+            responseText = "\uD83D\uDD1F правильных ответов - это серьезная заявка на победу. Перейдём к вопросам посложнее?"
+        ),
+        TWENTY_RIGHT_ANSWERS(
+            rightAnswersCount = 20,
+            responseText = "2\uFE0F⃣0\uFE0F⃣ Твои успехи впечатляют — уже 20 правильных ответов. Продолжим? Впереди самое интересное."
         )
     }
 
@@ -97,6 +145,11 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 "Верно! " +
                 "Поздравляю, это был последний вопрос. " +
                 "%s"
+
+        private const val WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE = "" +
+                "Твой результат выше всяких похвал. %d из %d! " +
+                "Для таких как ты у меня есть вопросы со 'звёздочкой'. " +
+                "Рискнешь попробовать?"
 
         private const val WINNING_PHRASE_GOOD_RESULT_TEMPLATE = "" +
                 "Твой результат впечатляет. %d из %d возможных! " +

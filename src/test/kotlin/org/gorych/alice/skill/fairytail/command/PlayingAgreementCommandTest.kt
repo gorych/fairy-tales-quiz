@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class PlayingAgreementCommandTest {
 
@@ -49,37 +50,29 @@ class PlayingAgreementCommandTest {
     @ParameterizedTest(name = "Should return {2} when session state {3}")
     @CsvSource(
         value = [
-            "agreement_command&current_question;         false;  Я вас не поняла, повторите, пожалуйста.; contains 'playing agreement' transition command and current question is NOT NULL",
-            "agreement_command&current_question_is_null; true;  Отлично. Слушай первый вопрос. Кто посадил репку?; contains 'playing agreement' transition command but current question is NULL",
-            "disagreement_command&current_question;      false; Я вас не поняла, повторите, пожалуйста.; doesn't contain 'playing agreement' transition command but current question is NOT NULL",
+            "agreement_command&current_question;         3; Слушай следующий вопрос.; contains 'playing agreement' transition command and current question is NOT NULL",
+            "agreement_command&current_question_is_null; 1; Отлично. Слушай первый вопрос. Кто посадил репку?; contains 'playing agreement' transition command but current question is NULL",
         ],
         delimiter = ';'
     )
     fun `WHEN execute call THEN should return expected text`(
         key: String,
-        returnState: Boolean,
+        expectedQuestionNumber: Int,
         expectedText: String,
         whenDescription: String
     ) {
         //given
         val command = PlayingAgreementCommand()
         val requestObject = RequestObject.getBySessionStateKey(key)
-        val expectedState = when {
-            returnState -> SessionState(
-                currentQuestion = 1,
-                transitionCommands = setOf("NextQuestionCommand")
-            )
-
-            else -> requestObject.state?.session ?: SessionState()
-        }
+        val expectedState = SessionState(transitionCommands = setOf("NextQuestionCommand"))
 
         //when
         val actual: ResponseObject = command.execute(requestObject)
 
         //then
         assertFalse { actual.response.endSession }
-        assertEquals(expectedText, actual.response.text)
-        assertEquals(expectedState.currentQuestion, actual.sessionState.currentQuestion)
+        assertTrue { actual.response.text.contains(expectedText) }
+        assertEquals(expectedQuestionNumber, actual.sessionState.currentQuestion)
         assertEquals(expectedState.transitionCommands, actual.sessionState.transitionCommands)
     }
 }

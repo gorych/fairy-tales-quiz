@@ -18,20 +18,56 @@ class PlayingAgreementCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        if (requestObject.containsPlayingAgreementCommand() && !requestObject.hasCurrentQuestion()) {
-            val questionNumber = 1
-            return ResponseObject.of(
-                text = "Отлично. Слушай первый вопрос. ${Quiz.question(questionNumber)}",
-                state = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
-                endSession = false,
-                buttons = Button.skip_repeat_hint()
-            )
+        if (!requestObject.containsPlayingAgreementCommand()) {
+            return ResponseObject.ofUnclearCommand(requestObject)
         }
 
-        return ResponseObject.ofUnclearCommand(requestObject)
+        return when {
+            !requestObject.hasCurrentQuestion() -> firstQuestionResponse()
+            else -> nextQuestionResponse(requestObject)
+        }
+    }
+
+    private fun firstQuestionResponse(): ResponseObject {
+        val questionNumber = 1
+        return ResponseObject.of(
+            text = "Отлично. Слушай первый вопрос. ${Quiz.question(questionNumber)}",
+            state = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
+            endSession = false,
+            buttons = Button.skip_repeat_hint()
+        )
+    }
+
+    private fun nextQuestionResponse(requestObject: RequestObject): ResponseObject {
+        val requestSessionState = requestObject.state?.session
+        requireNotNull(requestSessionState) { "Session state must not be NULL" }
+
+        val currentQuestionNumber = requestSessionState.currentQuestion
+        requireNotNull(currentQuestionNumber) { "Current question number must not be NULL" }
+
+        val nextQuestionNumber = currentQuestionNumber + 1
+        return ResponseObject.of(
+            //@formatter:off
+            text = "${CONTINUE_PLAYING_OPENING_PHRASES.random()} Слушай следующий вопрос. ${Quiz.question(nextQuestionNumber)}",
+            //@formatter:on
+            state = requestSessionState.copy(
+                currentQuestion = nextQuestionNumber,
+                transitionCommands = setOf(NextQuestionCommand.name())
+            ),
+            endSession = false,
+            buttons = Button.skip_repeat_hint()
+        )
     }
 
     companion object {
         fun name(): String = PlayingAgreementCommand::class.java.simpleName
+
+        private val CONTINUE_PLAYING_OPENING_PHRASES: Set<String> =
+            setOf(
+                "Отличный выбор. Играем дальше!",
+                "Одобряю твой выбор!",
+                "Хороший выбор. Продолжаем!",
+                "Приятно слышать. Продолжаем!"
+            )
     }
 }
