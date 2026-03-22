@@ -45,10 +45,14 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
             val nextQuestionNumber = currentQuestionNumber + 1
             if (nextQuestionNumber <= Quiz.countOfQuestions()) {
-                val achievementResponse: ResponseObject? =
-                    processAchievements(rightAnswersCount, currentQuestionNumber, requestSessionState)
-                if (achievementResponse != null) {
-                    return achievementResponse
+                // When rightAnswersCount was not increased
+                // then achievements shouldn't be processed to avoid duplication
+                if (requestSessionState.rightAnswersCount == rightAnswersCount) {
+                    val achievementResponse: ResponseObject? =
+                        processAchievements(rightAnswersCount, currentQuestionNumber, requestSessionState)
+                    if (achievementResponse != null) {
+                        return achievementResponse
+                    }
                 }
 
                 return nextQuestionResponse(nextQuestionNumber, rightAnswersCount, requestSessionState)
