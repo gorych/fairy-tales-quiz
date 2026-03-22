@@ -1,6 +1,7 @@
 {
   "response": {
     "text": "Пока. Заходи еще!",
+    "tts": "Пока. Заходи еще!",
     "end_session": true,
     "buttons": []
   },

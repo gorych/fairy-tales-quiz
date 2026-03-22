@@ -7,6 +7,23 @@ import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.fairytail.quiz.Quiz
 
+private const val VICTORY_FANFARE = "<speaker audio=\"alice-sounds-game-win-1.opus\">"
+
+private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
+    "5\uFE0F⃣ Отличное начало! Первая пятерка правильных ответов за тобой. Идём дальше?"
+private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS =
+    VICTORY_FANFARE + FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
+
+private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
+    "\uD83D\uDD1F правильных ответов - это серьезная заявка на победу. Перейдём к вопросам посложнее?"
+private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS =
+    VICTORY_FANFARE + TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
+
+private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
+    "2\uFE0F⃣0\uFE0F⃣ Твои успехи впечатляют — уже 20 правильных ответов. Продолжим? Впереди самое интересное."
+private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS =
+    VICTORY_FANFARE + TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
+
 class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     override fun name() = NextQuestionCommand.name()
@@ -50,6 +67,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             .map {
                 ResponseObject.of(
                     text = it.responseText,
+                    tts = it.responseTts,
                     state = SessionState(
                         currentQuestionNumber,
                         rightAnswersCount,
@@ -125,18 +143,21 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         )
     }
 
-    enum class Achievement(val rightAnswersCount: Int, val responseText: String) {
+    enum class Achievement(val rightAnswersCount: Int, val responseText: String, val responseTts: String) {
         FIVE_RIGHT_ANSWERS(
             rightAnswersCount = 5,
-            responseText = "5\uFE0F⃣ Отличное начало! Первая пятерка правильных ответов за тобой. Идём дальше?"
+            responseText = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT,
+            responseTts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS
         ),
         TEN_RIGHT_ANSWERS(
             rightAnswersCount = 10,
-            responseText = "\uD83D\uDD1F правильных ответов - это серьезная заявка на победу. Перейдём к вопросам посложнее?"
+            responseText = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT,
+            responseTts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS
         ),
         TWENTY_RIGHT_ANSWERS(
             rightAnswersCount = 20,
-            responseText = "2\uFE0F⃣0\uFE0F⃣ Твои успехи впечатляют — уже 20 правильных ответов. Продолжим? Впереди самое интересное."
+            responseText = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT,
+            responseTts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS
         )
     }
 

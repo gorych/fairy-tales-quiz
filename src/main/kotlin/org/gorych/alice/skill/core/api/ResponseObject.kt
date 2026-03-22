@@ -34,6 +34,16 @@ data class ResponseObject(
             return ResponseObject(ResponseValue(text, endSession, buttons), state ?: SessionState())
         }
 
+        fun of(
+            text: String,
+            tts: String,
+            buttons: List<Button>,
+            state: SessionState?,
+            endSession: Boolean
+        ): ResponseObject {
+            return ResponseObject(ResponseValue(text, endSession, buttons, tts), state ?: SessionState())
+        }
+
         fun ofUnclearCommand(requestObject: RequestObject?): ResponseObject {
             val sessionState = requestObject?.state?.session ?: SessionState()
             return of("Я вас не поняла, повторите, пожалуйста.", sessionState, false)
@@ -50,6 +60,7 @@ data class ResponseValue(
     val text: String,
     @JsonProperty("end_session") val endSession: Boolean,
     val buttons: List<Button> = listOf(),
+    val tts: String? = text,
 )
 
 data class Button(val title: String, val hide: Boolean = true, val payload: String = "{}") {

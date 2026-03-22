@@ -1,7 +1,6 @@
 package org.gorych.alice.skill.fairytail
 
 import io.kotest.assertions.json.shouldContainJsonKey
-import io.kotest.assertions.json.shouldEqualJson
 import io.kotest.assertions.json.shouldEqualSpecifiedJson
 import org.gorych.alice.skill.util.readJsonResourceFile
 import org.junit.jupiter.params.ParameterizedTest
@@ -345,7 +344,7 @@ class UserInteractionTest {
         val actualJson = handle(inputJson)
 
         //then
-        actualJson.shouldEqualJson(expectedJson)
+        actualJson.shouldEqualSpecifiedJson(expectedJson)
     }
 
     private fun shouldEqualSpecifiedJsonAndContainText(fileName: String, vararg expectedText: String) {
