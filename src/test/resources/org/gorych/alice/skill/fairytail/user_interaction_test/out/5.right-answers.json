@@ -22,7 +22,8 @@
     "hintedQuestions": [],
     "previousHintNumber": 0,
     "transitionCommands": [
-      "PlayingAgreementCommand"
+      "PlayingAgreementCommand",
+      "PlayingDisagreementCommand"
     ]
   }
 }

@@ -15,9 +15,9 @@ class PlayingDisagreementCommand : Command {
     }
 
     override fun execute(requestObject: RequestObject): ResponseObject {
-        if (requestObject.containsPlayingDisagreementCommand() && !requestObject.hasCurrentQuestion()) {
+        if (requestObject.containsPlayingDisagreementCommand()) {
             return ResponseObject.of(
-                text = "Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти",
+                text = "Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти.",
                 endSession = true
             )
         }

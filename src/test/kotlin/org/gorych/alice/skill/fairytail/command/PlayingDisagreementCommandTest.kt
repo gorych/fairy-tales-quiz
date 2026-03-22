@@ -51,8 +51,8 @@ class PlayingDisagreementCommandTest {
     @ParameterizedTest(name = "Should return {2} when session state {3}")
     @CsvSource(
         value = [
-            "disagreement_command&current_question;         false; Я вас не поняла, повторите, пожалуйста.; contains 'disagreement' transition command and current question is NOT NULL",
-            "disagreement_command&current_question_is_null; true;  Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти; contains 'disagreement' transition command but current question is NULL",
+            "disagreement_command&current_question;         true;  Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти.; contains 'disagreement' transition command and current question is NOT NULL",
+            "disagreement_command&current_question_is_null; true;  Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти.; contains 'disagreement' transition command but current question is NULL",
             "agreement_command&current_question;            false; Я вас не поняла, повторите, пожалуйста.; doesn't contain 'disagreement' transition command but current question is NOT NULL",
         ],
         delimiter = ';'

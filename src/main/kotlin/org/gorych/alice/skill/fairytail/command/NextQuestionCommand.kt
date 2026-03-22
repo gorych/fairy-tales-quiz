@@ -55,7 +55,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                         rightAnswersCount,
                         requestSessionState.hintedQuestions,
                         previousHintNumber = 0,
-                        setOf(PlayingAgreementCommand.name())
+                        setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
                     ),
                     endSession = false,
                     buttons = listOf(Button.proceed(), Button.stop())
