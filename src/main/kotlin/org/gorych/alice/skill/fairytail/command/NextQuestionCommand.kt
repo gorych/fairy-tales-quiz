@@ -10,7 +10,7 @@ import org.gorych.alice.skill.fairytail.quiz.Quiz
 private const val VICTORY_FANFARE = "<speaker audio=\"alice-sounds-game-win-1.opus\">"
 
 private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
-    "5\uFE0F⃣ Отличное начало! Первая пятерка правильных ответов за тобой. Идём дальше?"
+    "5\uFE0F⃣ Поздравляю! Первое достижение из пяти правильных ответов у тебя в кармане. Идём дальше?"
 private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS =
     VICTORY_FANFARE + FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
 
@@ -76,7 +76,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                         setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
                     ),
                     endSession = false,
-                    buttons = listOf(Button.proceed(), Button.stop())
+                    buttons = Button.agreement_and_disagreement()
                 )
             }
             .firstOrNull()
@@ -123,16 +123,16 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
 
         val scorePhrase = when {
-            score == 100.0 -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            //score == 100.0 -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
             score >= 85 -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
             score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
 
         val buttons: MutableList<Button> = mutableListOf(Button.goodbye())
-        if (score == 100.0) {
-            buttons.addFirst(Button.proceed())
-        }
+        /*if (score == 100.0) {
+            buttons.addFirst(Button.agreement())
+        }*/
 
         log("execute: end of quiz. Score: $score")
 

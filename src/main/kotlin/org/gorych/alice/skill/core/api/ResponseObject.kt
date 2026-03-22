@@ -75,8 +75,6 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
         fun stop() = Button("❌ Выйти")
         fun whatCanYouDo() = Button("ℹ\uFE0F Что ты умеешь?")
 
-        fun proceed() = Button("▶\uFE0F Продолжить игру")
-
         fun agreement_and_disagreement() = listOf(agreement(), disagreement())
         fun agreement_disagreement_whatCanYouDo() = listOf(agreement(), whatCanYouDo(), disagreement())
 

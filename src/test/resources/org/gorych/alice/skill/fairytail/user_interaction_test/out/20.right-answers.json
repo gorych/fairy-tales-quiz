@@ -5,12 +5,12 @@
     "end_session": false,
     "buttons": [
       {
-        "title": "▶️ Продолжить игру",
+        "title": "✅ Да, давай",
         "hide": true,
         "payload": "{}"
       },
       {
-        "title": "❌ Выйти",
+        "title": "❌ Нет, не хочу",
         "hide": true,
         "payload": "{}"
       }
