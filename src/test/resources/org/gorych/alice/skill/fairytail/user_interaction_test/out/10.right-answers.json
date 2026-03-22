@@ -1,0 +1,28 @@
+{
+  "response": {
+    "text": "\uD83D\uDD1F правильных ответов - это серьезная заявка на победу. Перейдём к вопросам посложнее?",
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "▶️ Продолжить игру",
+        "hide": true,
+        "payload": "{}"
+      },
+      {
+        "title": "❌ Выйти",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
+  },
+  "version": "1.0",
+  "session_state": {
+    "currentQuestion": 16,
+    "rightAnswersCount": 10,
+    "hintedQuestions": [],
+    "previousHintNumber": 0,
+    "transitionCommands": [
+      "PlayingAgreementCommand"
+    ]
+  }
+}

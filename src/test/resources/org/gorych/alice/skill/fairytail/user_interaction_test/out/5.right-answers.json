@@ -1,0 +1,28 @@
+{
+  "response": {
+    "text": "5️⃣ Отличное начало! Первая пятерка правильных ответов за тобой. Идём дальше?",
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "▶️ Продолжить игру",
+        "hide": true,
+        "payload": "{}"
+      },
+      {
+        "title": "❌ Выйти",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
+  },
+  "version": "1.0",
+  "session_state": {
+    "currentQuestion": 15,
+    "rightAnswersCount": 5,
+    "hintedQuestions": [],
+    "previousHintNumber": 0,
+    "transitionCommands": [
+      "PlayingAgreementCommand"
+    ]
+  }
+}

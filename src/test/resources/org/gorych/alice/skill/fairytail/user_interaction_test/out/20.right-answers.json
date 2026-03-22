@@ -1,0 +1,28 @@
+{
+  "response": {
+    "text": "2\uFE0F⃣0\uFE0F⃣ Твои успехи впечатляют — уже 20 правильных ответов. Продолжим? Впереди самое интересное.",
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "▶️ Продолжить игру",
+        "hide": true,
+        "payload": "{}"
+      },
+      {
+        "title": "❌ Выйти",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
+  },
+  "version": "1.0",
+  "session_state": {
+    "currentQuestion": 17,
+    "rightAnswersCount": 20,
+    "hintedQuestions": [],
+    "previousHintNumber": 0,
+    "transitionCommands": [
+      "PlayingAgreementCommand"
+    ]
+  }
+}

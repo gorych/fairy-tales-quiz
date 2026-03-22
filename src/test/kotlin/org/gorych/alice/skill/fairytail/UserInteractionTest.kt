@@ -4,12 +4,14 @@ import io.kotest.assertions.json.shouldContainJsonKey
 import io.kotest.assertions.json.shouldEqualJson
 import io.kotest.assertions.json.shouldEqualSpecifiedJson
 import org.gorych.alice.skill.util.readJsonResourceFile
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-private const val TEST_RESOURCES_DIR = "user_interaction_positive_test"
+private const val TEST_RESOURCES_DIR = "user_interaction_test"
 
 class UserInteractionTest {
 
@@ -73,13 +75,10 @@ class UserInteractionTest {
         actualJson.shouldEqualSpecifiedJson(expectedJson)
         actualJson.shouldContainJsonKey("$.response.text")
 
-        val responseText = jacksonObjectMapper()
-            .readTree(actualJson).get("response").get("text")
-            .toString()
+        val responseText = jacksonObjectMapper().readTree(actualJson).get("response").get("text").toString()
 
-        val hastLeastOneMatchingText: Boolean = arrayOf("подумай", "попытайся", "попробуй")
-            .map { responseText.contains(it, ignoreCase = true) }
-            .any { it }
+        val hastLeastOneMatchingText: Boolean =
+            arrayOf("подумай", "попытайся", "попробуй").map { responseText.contains(it, ignoreCase = true) }.any { it }
         assertTrue(hastLeastOneMatchingText)
     }
 
@@ -171,7 +170,10 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #4 THEN fifth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step6-answer4.json",
-            expectedText = arrayOf("В какой сказке встречается фраза: Тук-тук-тук! Кто в теремочке живет?", "следующий вопрос"),
+            expectedText = arrayOf(
+                "В какой сказке встречается фраза: Тук-тук-тук! Кто в теремочке живет?",
+                "следующий вопрос"
+            ),
         )
     }
 
@@ -188,8 +190,7 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step7-answer5.json",
             expectedText = arrayOf(
-                "Сколько козлят было в сказке о сером волке?",
-                "следующий вопрос"
+                "Сколько козлят было в сказке о сером волке?", "следующий вопрос"
             ),
         )
     }
@@ -239,8 +240,7 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step9-answer7.json",
             expectedText = arrayOf(
-                "Что купила муха на базаре?",
-                "следующий вопрос"
+                "Что купила муха на базаре?", "следующий вопрос"
             ),
         )
     }
@@ -304,16 +304,14 @@ class UserInteractionTest {
     @Test
     fun `WHEN user sends 'greeting' command THEN one of greeting phrases should be returned`() {
         shouldEqualSpecifiedJsonAndMatchOneOfPhrases(
-            fileName = "step15-greeting.json",
-            expectedPhrases = arrayOf("И тебе, здравствуй!")
+            fileName = "step15-greeting.json", expectedPhrases = arrayOf("И тебе, здравствуй!")
         )
     }
 
     @Test
     fun `WHEN user sends 'skip question' command and there is no more questions THEN final phrase should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
-            fileName = "step16-skip14.json",
-            expectedText = arrayOf(
+            fileName = "step16-skip14.json", expectedText = arrayOf(
                 "Кажется, у меня больше не осталось вопросов. А это значит, что пора подводить итоги.",
                 "Твой результат - ",
                 "Хорошо это или плохо - судить тебе. Спасибо за игру!"
@@ -326,6 +324,18 @@ class UserInteractionTest {
         shouldEqualJsonTest("step16-answer14.json")
     }
 
+    @ParameterizedTest(name = "Should return right achievement phrase when count of right answers is {0}")
+    @CsvSource(
+        "5,  5.right-answers.json",
+        "10, 10.right-answers.json",
+        "20, 20.right-answers.json",
+    )
+    fun `WHEN user collects 5, 10 or 20 right answers THEN achievement phrase should be returned`(
+        rightAnswersCount: Int, fileName: String
+    ) {
+        shouldEqualJsonTest(fileName)
+    }
+
     private fun shouldEqualJsonTest(fileName: String) {
         //given
         val inputJson = readInputFile(fileName)
@@ -335,7 +345,7 @@ class UserInteractionTest {
         val actualJson = handle(inputJson)
 
         //then
-        expectedJson.shouldEqualJson(actualJson)
+        actualJson.shouldEqualJson(expectedJson)
     }
 
     private fun shouldEqualSpecifiedJsonAndContainText(fileName: String, vararg expectedText: String) {
@@ -350,13 +360,9 @@ class UserInteractionTest {
         actualJson.shouldEqualSpecifiedJson(expectedJson)
         actualJson.shouldContainJsonKey("$.response.text")
 
-        val responseText = jacksonObjectMapper()
-            .readTree(actualJson).get("response").get("text")
-            .toString()
+        val responseText = jacksonObjectMapper().readTree(actualJson).get("response").get("text").toString()
 
-        val hasNotMatchingText: Boolean = expectedText
-            .map { responseText.contains(it, ignoreCase = true) }
-            .any { !it }
+        val hasNotMatchingText: Boolean = expectedText.map { responseText.contains(it, ignoreCase = true) }.any { !it }
         assertFalse(hasNotMatchingText)
     }
 
@@ -372,13 +378,10 @@ class UserInteractionTest {
         actualJson.shouldEqualSpecifiedJson(expectedJson)
         actualJson.shouldContainJsonKey("$.response.text")
 
-        val responseText = jacksonObjectMapper()
-            .readTree(actualJson).get("response").get("text")
-            .toString()
+        val responseText = jacksonObjectMapper().readTree(actualJson).get("response").get("text").toString()
 
-        val hasAtLeastOneMatchingText: Boolean = expectedPhrases
-            .map { responseText.contains(it, ignoreCase = true) }
-            .any { it }
+        val hasAtLeastOneMatchingText: Boolean =
+            expectedPhrases.map { responseText.contains(it, ignoreCase = true) }.any { it }
         assertTrue(hasAtLeastOneMatchingText)
     }
 

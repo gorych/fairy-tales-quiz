@@ -1,0 +1,32 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "емеля",
+    "original_utterance": "емеля",
+    "nlu": {
+      "tokens": [
+        "емеля"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 16,
+      "rightAnswersCount": 9,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}
