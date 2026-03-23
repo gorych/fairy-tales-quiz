@@ -1,28 +1,12 @@
 package org.gorych.alice.skill.fairytail.command
 
+import org.gorych.alice.skill.core.VICTORY_FANFARE
 import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.fairytail.quiz.Quiz
-
-private const val VICTORY_FANFARE = "<speaker audio=\"alice-sounds-game-win-1.opus\">"
-
-private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
-    "5\uFE0F⃣ Поздравляю! Первое достижение из пяти правильных ответов у тебя в кармане. Идём дальше?"
-private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS =
-    VICTORY_FANFARE + FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
-
-private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
-    "\uD83D\uDD1F правильных ответов - это серьезная заявка на победу. Перейдём к вопросам посложнее?"
-private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS =
-    VICTORY_FANFARE + TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
-
-private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
-    "2\uFE0F⃣0\uFE0F⃣ Твои успехи впечатляют — уже 20 правильных ответов. Продолжим? Впереди самое интересное."
-private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS =
-    VICTORY_FANFARE + TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
 
 class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
@@ -47,7 +31,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             if (nextQuestionNumber <= Quiz.countOfQuestions()) {
                 // When rightAnswersCount was not increased
                 // then achievements shouldn't be processed to avoid duplication
-                if (requestSessionState.rightAnswersCount == rightAnswersCount) {
+                if (rightAnswersCount > requestSessionState.rightAnswersCount) {
                     val achievementResponse: ResponseObject? =
                         processAchievements(rightAnswersCount, currentQuestionNumber, requestSessionState)
                     if (achievementResponse != null) {
@@ -150,19 +134,19 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     enum class Achievement(val rightAnswersCount: Int, val responseText: String, val responseTts: String) {
         FIVE_RIGHT_ANSWERS(
             rightAnswersCount = 5,
-            responseText = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT,
+            responseText = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
             responseTts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS
         ),
         TEN_RIGHT_ANSWERS(
             rightAnswersCount = 10,
-            responseText = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT,
+            responseText = TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
             responseTts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS
         ),
         TWENTY_RIGHT_ANSWERS(
             rightAnswersCount = 20,
-            responseText = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT,
+            responseText = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
             responseTts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS
-        )
+        ),
     }
 
     companion object {
@@ -200,6 +184,22 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
         private val WRONG_ANSWER_PHRASES: Set<String> =
             setOf("Неверно. Подумай ещё!", "Нет. Попытайся ещё раз!", "Неправильно. Попробуй другой вариант!")
+
+        private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
+            "Поздравляю! Первое достижение из пяти правильных ответов у тебя в кармане. Идём дальше?"
+        private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE = "5\uFE0F⃣ $FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT"
+        private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS = VICTORY_FANFARE + FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
+
+        private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
+            "Десять правильных ответов - это серьезная заявка на победу. Перейдём к вопросам посложнее?"
+        private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE = "\uD83D\uDD1F $TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT"
+        private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS = VICTORY_FANFARE + TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
+
+        private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
+            "Твои успехи впечатляют — уже 20 правильных ответов. Продолжим? Впереди самое интересное."
+        private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE =
+            "2\uFE0F⃣0\uFE0F⃣ $TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT"
+        private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS = VICTORY_FANFARE + TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
 
         fun name(): String = NextQuestionCommand::class.java.simpleName
     }
