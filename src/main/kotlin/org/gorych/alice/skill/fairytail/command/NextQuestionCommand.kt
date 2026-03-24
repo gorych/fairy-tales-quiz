@@ -29,8 +29,6 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
             val nextQuestionNumber = currentQuestionNumber + 1
             if (nextQuestionNumber <= Quiz.countOfQuestions()) {
-                // When rightAnswersCount was not increased
-                // then achievements shouldn't be processed to avoid duplication
                 if (rightAnswersCount > requestSessionState.rightAnswersCount) {
                     val achievementResponse: ResponseObject? =
                         processAchievements(rightAnswersCount, currentQuestionNumber, requestSessionState)
@@ -125,7 +123,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         log("execute: end of quiz. Score: $score")
 
         return ResponseObject.of(
-            text = WINNING_PHRASE_TEMPLATE.format(scorePhrase),
+            text = WINNING_PHRASE_TEXT_TEMPLATE.format(scorePhrase),
+            tts = WINNING_PHRASE_TTS_TEMPLATE.format(VICTORY_FANFARE, scorePhrase),
             endSession = false,
             buttons = buttons
         )
@@ -150,10 +149,15 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     companion object {
-        private const val WINNING_PHRASE_TEMPLATE = "" +
-                "Верно! " +
+        private const val WINNING_PHRASE_CONGRATULATION_AND_SCORE_TEMPLATE = "" +
                 "Поздравляю, это был последний вопрос. " +
                 "%s"
+
+        private const val WINNING_PHRASE_TEXT_TEMPLATE = "" +
+                "Верно! " + WINNING_PHRASE_CONGRATULATION_AND_SCORE_TEMPLATE
+
+        private const val WINNING_PHRASE_TTS_TEMPLATE = "" +
+                "Верно! %s " + WINNING_PHRASE_CONGRATULATION_AND_SCORE_TEMPLATE
 
         private const val WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE = "" +
                 "Твой результат выше всяких похвал. %d из %d! " +

@@ -26,6 +26,9 @@ data class ResponseObject(
         fun of(text: String, endSession: Boolean, buttons: List<Button>) =
             ResponseObject(ResponseValue(text, endSession, buttons))
 
+        fun of(text: String, tts: String, endSession: Boolean, buttons: List<Button>) =
+            ResponseObject(ResponseValue(text, endSession, buttons, tts))
+
         fun of(text: String, state: SessionState?, endSession: Boolean): ResponseObject {
             return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())
         }
