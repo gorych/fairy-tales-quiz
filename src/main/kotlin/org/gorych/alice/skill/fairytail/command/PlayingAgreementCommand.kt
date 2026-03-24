@@ -5,7 +5,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.Command
-import org.gorych.alice.skill.fairytail.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.Quiz
 
 private const val AGREEMENT_INTENT_ID = "g911.agreement"
 
@@ -17,28 +17,28 @@ class PlayingAgreementCommand : Command {
         return requestObject.containsIntent(AGREEMENT_INTENT_ID)
     }
 
-    override fun execute(requestObject: RequestObject): ResponseObject {
+    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         if (!requestObject.containsPlayingAgreementCommand()) {
             return ResponseObject.ofUnclearCommand(requestObject)
         }
 
         return when {
-            !requestObject.hasCurrentQuestion() -> firstQuestionResponse()
-            else -> nextQuestionResponse(requestObject)
+            !requestObject.hasCurrentQuestion() -> firstQuestionResponse(quiz)
+            else -> nextQuestionResponse(requestObject, quiz)
         }
     }
 
-    private fun firstQuestionResponse(): ResponseObject {
+    private fun firstQuestionResponse(quiz: Quiz): ResponseObject {
         val questionNumber = 1
         return ResponseObject.of(
-            text = "Отлично. Слушай первый вопрос. ${Quiz.question(questionNumber)}",
+            text = "Отлично. Слушай первый вопрос. ${quiz.question(questionNumber)}",
             state = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
             endSession = false,
             buttons = Button.skip_repeat_hint()
         )
     }
 
-    private fun nextQuestionResponse(requestObject: RequestObject): ResponseObject {
+    private fun nextQuestionResponse(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         val requestSessionState = requestObject.state?.session
         requireNotNull(requestSessionState) { "Session state must not be NULL" }
 
@@ -48,7 +48,7 @@ class PlayingAgreementCommand : Command {
         val nextQuestionNumber = currentQuestionNumber + 1
         return ResponseObject.of(
             //@formatter:off
-            text = "${CONTINUE_PLAYING_OPENING_PHRASES.random()} Слушай следующий вопрос. ${Quiz.question(nextQuestionNumber)}",
+            text = "${CONTINUE_PLAYING_OPENING_PHRASES.random()} Слушай следующий вопрос. ${quiz.question(nextQuestionNumber)}",
             //@formatter:on
             state = requestSessionState.copy(
                 currentQuestion = nextQuestionNumber,

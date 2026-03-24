@@ -2,6 +2,7 @@ package org.gorych.alice.skill.core.command
 
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
+import org.gorych.alice.skill.core.quiz.Quiz
 
 class PingCommand : Command {
 
@@ -14,7 +15,7 @@ class PingCommand : Command {
         return false
     }
 
-    override fun execute(requestObject: RequestObject): ResponseObject {
+    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         log("execute: start")
         return ResponseObject.of(text = "OK", endSession = true)
     }

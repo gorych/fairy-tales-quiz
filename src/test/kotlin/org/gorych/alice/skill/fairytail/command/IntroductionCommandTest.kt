@@ -3,6 +3,7 @@ package org.gorych.alice.skill.fairytail.command
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getBySessionKey
+import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test
@@ -59,9 +60,10 @@ class IntroductionCommandTest {
         //given
         val command = IntroductionCommand()
         val requestObject = RequestObject.Companion.getBySessionKey(key)
+        val quiz = Quiz1()
 
         //when
-        val result: ResponseObject = command.execute(requestObject)
+        val result: ResponseObject = command.execute(requestObject, quiz)
 
         //then
         val expectedValue = "" +

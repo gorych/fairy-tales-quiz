@@ -5,7 +5,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
-import org.gorych.alice.skill.fairytail.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.Quiz
 
 private const val DOUBT_INTENT_ID = "g911.doubt"
 const val HELP_INTENT_ID = "g911.help"
@@ -25,7 +25,8 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
     override fun execute(
         requestObject: RequestObject,
         requestSessionState: SessionState,
-        currentQuestionNumber: Int
+        currentQuestionNumber: Int,
+        quiz: Quiz
     ): ResponseObject {
         val currentHintNumber = requestSessionState.previousHintNumber + 1
         log("execute: question number: $currentQuestionNumber, hint number: $currentHintNumber")
@@ -34,7 +35,7 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
         hintedQuestions.add(currentQuestionNumber)
 
         return ResponseObject.of(
-            text = "${BEFORE_HINT_PHRASES.random()} ${Quiz.hintTo(currentQuestionNumber, currentHintNumber)}",
+            text = "${BEFORE_HINT_PHRASES.random()} ${quiz.hintTo(currentQuestionNumber, currentHintNumber)}",
             state = requestSessionState.copy(hintedQuestions = hintedQuestions, previousHintNumber = currentHintNumber),
             endSession = false,
             buttons = Button.skip_repeat_hint()

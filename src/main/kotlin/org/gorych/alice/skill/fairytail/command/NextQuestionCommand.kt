@@ -6,7 +6,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
-import org.gorych.alice.skill.fairytail.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.Quiz
 
 class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
@@ -19,16 +19,17 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     override fun execute(
         requestObject: RequestObject,
         requestSessionState: SessionState,
-        currentQuestionNumber: Int
+        currentQuestionNumber: Int,
+        quiz: Quiz
     ): ResponseObject {
         log("execute: question number: $currentQuestionNumber")
-        val rightAnswers: List<String> = Quiz.answerTo(currentQuestionNumber)
+        val rightAnswers: List<String> = quiz.answerTo(currentQuestionNumber)
 
         if (rightAnswers.any { it == requestObject.command() }) {
             val rightAnswersCount: Int = getRightAnswersCount(requestSessionState, currentQuestionNumber)
 
             val nextQuestionNumber = currentQuestionNumber + 1
-            if (nextQuestionNumber <= Quiz.countOfQuestions()) {
+            if (nextQuestionNumber <= quiz.countOfQuestions()) {
                 if (rightAnswersCount > requestSessionState.rightAnswersCount) {
                     val achievementResponse: ResponseObject? =
                         processAchievements(rightAnswersCount, currentQuestionNumber, requestSessionState)
@@ -37,9 +38,9 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                     }
                 }
 
-                return nextQuestionResponse(nextQuestionNumber, rightAnswersCount, requestSessionState)
+                return nextQuestionResponse(nextQuestionNumber, rightAnswersCount, requestSessionState, quiz)
             }
-            return endQuizResponse(rightAnswersCount)
+            return endQuizResponse(rightAnswersCount, quiz)
         }
 
         return wrongAnswerResponse(requestSessionState)
@@ -78,10 +79,15 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         }
     }
 
-    private fun nextQuestionResponse(nextQuestionNumber: Int, rightAnswersCount: Int, sessionState: SessionState) =
+    private fun nextQuestionResponse(
+        nextQuestionNumber: Int,
+        rightAnswersCount: Int,
+        sessionState: SessionState,
+        quiz: Quiz
+    ) =
         ResponseObject.of(
             //@formatter:off
-            text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${Quiz.question(nextQuestionNumber)}",
+            text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${quiz.question(nextQuestionNumber)}",
             //@formatter:on
             state = SessionState(
                 nextQuestionNumber,
@@ -104,8 +110,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         )
     }
 
-    private fun endQuizResponse(rightAnswersCount: Int): ResponseObject {
-        val countOfAllQuestions = Quiz.countOfQuestions()
+    private fun endQuizResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
+        val countOfAllQuestions = quiz.countOfQuestions()
         val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
 
         val scorePhrase = when {

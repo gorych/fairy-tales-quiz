@@ -5,7 +5,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
-import org.gorych.alice.skill.fairytail.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.Quiz
 
 private const val REPEAT_INTENT_ID = "g911.repeat"
 
@@ -22,11 +22,12 @@ class RepeatQuestionCommand : RequestSessionStatedQuestionCommand() {
     override fun execute(
         requestObject: RequestObject,
         requestSessionState: SessionState,
-        currentQuestionNumber: Int
+        currentQuestionNumber: Int,
+        quiz: Quiz
     ): ResponseObject {
         log("execute: question number: $currentQuestionNumber")
         return ResponseObject.of(
-            text = "${BEFORE_QUESTION_PHRASES.random()} ${Quiz.question(currentQuestionNumber)}",
+            text = "${BEFORE_QUESTION_PHRASES.random()} ${quiz.question(currentQuestionNumber)}",
             state = requestSessionState,
             endSession = false,
             buttons = Button.skip_repeat_hint()

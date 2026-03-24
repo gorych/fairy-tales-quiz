@@ -4,6 +4,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.command.*
 import org.gorych.alice.skill.fairytail.command.*
+import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
@@ -58,7 +59,7 @@ private fun processRequest(requestObject: RequestObject): ResponseObject {
         .firstOrNull { it.canHandle(requestObject) }
     return when {
         command != null -> {
-            command.execute(requestObject)
+            command.execute(requestObject, Quiz1())
         }
 
         else -> {

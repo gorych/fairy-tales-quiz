@@ -1,6 +1,7 @@
 package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.*
+import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test
@@ -65,9 +66,10 @@ class PlayingAgreementCommandTest {
         val command = PlayingAgreementCommand()
         val requestObject = RequestObject.getBySessionStateKey(key)
         val expectedState = SessionState(transitionCommands = setOf("NextQuestionCommand"))
+        val quiz = Quiz1()
 
         //when
-        val actual: ResponseObject = command.execute(requestObject)
+        val actual: ResponseObject = command.execute(requestObject, quiz)
 
         //then
         assertFalse { actual.response.endSession }

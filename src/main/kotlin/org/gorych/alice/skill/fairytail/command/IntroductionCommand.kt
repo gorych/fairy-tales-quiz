@@ -6,6 +6,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.Command
+import org.gorych.alice.skill.core.quiz.Quiz
 
 class IntroductionCommand : Command {
 
@@ -15,7 +16,7 @@ class IntroductionCommand : Command {
         return requestObject.isNewSession()
     }
 
-    override fun execute(requestObject: RequestObject): ResponseObject {
+    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         val responseText = "" +
                 "Рада слышать тебя снова! Ты в гостях у 'Викторины по сказкам'. " +
                 "Я подготовила для тебя каверзные вопросы, а от тебя жду верных ответов. " +

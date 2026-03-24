@@ -4,6 +4,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getByIntentKey
 import org.gorych.alice.skill.core.api.getBySessionStateKey
+import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test
@@ -66,9 +67,10 @@ class PlayingDisagreementCommandTest {
         //given
         val command = PlayingDisagreementCommand()
         val requestObject = RequestObject.getBySessionStateKey(key)
+        val quiz = Quiz1()
 
         //when
-        val actual: ResponseObject = command.execute(requestObject)
+        val actual: ResponseObject = command.execute(requestObject, quiz)
 
         //then
         assertEquals(expectedText, actual.response.text)
