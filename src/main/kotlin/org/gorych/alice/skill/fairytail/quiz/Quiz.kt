@@ -4,7 +4,13 @@ import org.gorych.alice.skill.fairytail.quiz.Quiz.Item.Level.*
 
 class Quiz {
 
-    data class Item(val level: Level, val question: String, val answers: List<String>, val hints: List<String>) {
+    data class Item(
+        val number: Int,
+        val level: Level,
+        val question: String,
+        val answers: List<String>,
+        val hints: List<String>
+    ) {
         enum class Level {
             EASY,
             MEDIUM,
@@ -15,18 +21,21 @@ class Quiz {
     companion object {
         private val items: List<Item> = listOf(
             Item(
+                number = 1,
                 level = EASY,
                 question = "Кто посадил репку?",
                 answers = listOf("дедка", "деда", "дед", "детка"),
                 hints = listOf("Он живёт с бабкой.", "Это слово начинается на букву 'Д'.")
             ),
             Item(
+                number = 2,
                 level = EASY,
                 question = "Кто съел бабушку красной шапочки?",
                 answers = listOf("волк"),
                 hints = listOf("Он живёт в лесу.", "Его кума - лиса.", "Он серого цвета.")
             ),
             Item(
+                number = 3,
                 level = EASY,
                 question = "Как звали курочку, которая снесла золотое яичко?",
                 answers = listOf("курочка ряба", "ряба"),
@@ -37,6 +46,7 @@ class Quiz {
                 )
             ),
             Item(
+                number = 4,
                 level = EASY,
                 question = "Как звали собаку в сказке репка?",
                 answers = listOf("жучка"),
@@ -47,6 +57,7 @@ class Quiz {
                 )
             ),
             Item(
+                number = 5,
                 level = EASY,
                 question = "В какой сказке встречается фраза: Тук-тук-тук! Кто в теремочке живет?",
                 answers = listOf("теремок"),
@@ -57,18 +68,21 @@ class Quiz {
                 )
             ),
             Item(
+                number = 6,
                 level = EASY,
                 question = "Сколько козлят было в сказке о сером волке?",
                 answers = listOf("7", "семеро", "семь"),
                 hints = listOf("Их было столько же, сколько гномов у белоснежки.", "Это на один больше, чем шесть.")
             ),
             Item(
+                number = 7,
                 level = EASY,
                 question = "Кто съел колобка?",
                 answers = listOf("лиса"),
                 hints = listOf("Её кум - волк.", "Она рыжая и живёт в лесу.")
             ),
             Item(
+                number = 8,
                 level = EASY,
                 question = "Что купила муха на базаре?",
                 answers = listOf("самовар"),
@@ -80,6 +94,7 @@ class Quiz {
                 )
             ),
             Item(
+                number = 9,
                 level = EASY,
                 question = "Сколько гномов было у белоснежки?",
                 answers = listOf("7", "семь"),
@@ -89,6 +104,7 @@ class Quiz {
                 )
             ),
             Item(
+                number = 10,
                 level = EASY,
                 question = "Ниф-ниф, наф-наф, а кто третий?",
                 answers = listOf("Нуф-нуф", "нуф-нуф", "нуф нуф", "нуфнуф"),
@@ -99,6 +115,7 @@ class Quiz {
             ),
             //region Level 2
             Item(
+                number = 11,
                 level = MEDIUM,
                 question = "Как звали доктора, который лечил всех зверей?",
                 answers = listOf("Айболит", "айболит", "доктор айболит", "ай-болит"),
@@ -109,24 +126,28 @@ class Quiz {
                 )
             ),
             Item(
+                number = 12,
                 level = MEDIUM,
                 question = "Продолжи фразу: У меня зазвонил телефон, кто говорит?..",
                 answers = listOf("слон"),
                 hints = listOf("У него есть хобот.", "Это самое крупное животное на земле.")
             ),
             Item(
+                number = 13,
                 level = MEDIUM,
                 question = "Сколько козлят съел волк?",
                 answers = listOf("6", "шесть"),
                 hints = listOf("Это на одного меньше, чем было их всех.", "Это на один больше, чем 5.")
             ),
             Item(
+                number = 14,
                 level = MEDIUM,
                 question = "В какой сказке встречается фраза: 'Кто хлебал в моей чашке'?",
                 answers = listOf("три медведя", "3 медведя"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'три'.", "Второе слово 'медведя'.")
             ),
             Item(
+                number = 15,
                 level = MEDIUM,
                 question = "Как звали девочку, которая произносила фразу: 'Не садись на пенёк, не ешь пирожок!'?",
                 answers = listOf("Маша", "маша", "машенька"),
@@ -136,6 +157,7 @@ class Quiz {
                 )
             ),
             Item(
+                number = 16,
                 level = MEDIUM,
                 question = "Как звали главного героя сказки 'По щучьему веленью'?",
                 answers = listOf("Емеля", "емеля", "емеля-дурак", "емеля дурак", "емеля-дурачок", "емеля дурачок"),
@@ -146,18 +168,21 @@ class Quiz {
                 )
             ),
             Item(
+                number = 17,
                 level = MEDIUM,
                 question = "Как называется сказка, в которой гуси украли братика у девочки?",
                 answers = listOf("гуси-лебеди", "гуси лебеди"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'гуси'.", "Второе слово 'лебеди'.")
             ),
             Item(
+                number = 18,
                 level = MEDIUM,
                 question = "Продолжи фразу Алёнушки: Не пей, братец, ...",
                 answers = listOf("козлёночком станешь", "козленочком станешь"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'козлёночком'.", "Второе слово 'станешь'.")
             ),
             Item(
+                number = 19,
                 level = MEDIUM,
                 question = "Из чего солдат варил кашу?",
                 answers = listOf("топор", "из топора", "топора"),
@@ -167,6 +192,7 @@ class Quiz {
 
             //region Level 3
             Item(
+                number = 20,
                 level = HARD,
                 question = "Как звали самую крошечную девочку в сказках?",
                 answers = listOf("Дюймовочка", "дюймовочка"),
@@ -178,6 +204,7 @@ class Quiz {
                 )
             ),
             Item(
+                number = 21,
                 level = HARD,
                 question = "Как называется сказка о мальчике грязнуле?",
                 answers = listOf("мойдодыр"),
@@ -187,30 +214,35 @@ class Quiz {
                 )
             ),
             Item(
+                number = 22,
                 level = HARD,
                 question = "От кого убегала вся посуда, мебель и вещи?",
                 answers = listOf("Федора", "федора", "федоры", "от федоры"),
                 hints = listOf("Это бабушка.", "Если бы это был мужчина, то его звали бы Фёдор.")
             ),
             Item(
+                number = 23,
                 level = HARD,
                 question = "Продолжи фразу: Ясни ясни на небе звёзды, мёрзни мёрзни...",
                 answers = listOf("волчий хвост"),
                 hints = listOf("В этой фразе два слова.", "Первое слово 'волчий'.", "Второе слово 'хвост'.")
             ),
             Item(
+                number = 24,
                 level = HARD,
                 question = "Кто был хозяином кота в сапогах?",
                 answers = listOf("маркиз Карабас", "маркиз карабас"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'маркиз'.", "Второе слово 'карабас'.")
             ),
             Item(
+                number = 25,
                 level = HARD,
                 question = "Кого удалось спасти Дюймовочке?",
                 answers = listOf("ласточка", "ласточку"),
                 hints = listOf("Это птица.", "Начальный слог этого слова 'ЛАС'", "Последний слог этого слова 'КА'")
             ),
             Item(
+                number = 26,
                 level = HARD,
                 question = "Как звали девочку с длинными волосами, которая была заперта в башне?",
                 answers = listOf("Рапунцель", "рапунцель"),
@@ -221,18 +253,28 @@ class Quiz {
                 )
             ),
             Item(
+                number = 27,
                 level = HARD,
                 question = "В кого превратился гадкий утенок?",
                 answers = listOf("лебедь", "лебедя", "в лебедя"),
                 hints = listOf("Это птица белого цвета.", "У этой птицы длинная шея.")
             ),
             Item(
+                number = 28,
                 level = HARD,
                 question = "Где живет Карлсон?",
                 answers = listOf("на крыше", "крыша"),
                 hints = listOf("Это самая верхняя часть дома.", "Она защищает дом от дождя.")
             ),
             Item(
+                number = 29,
+                level = HARD,
+                question = "Как звали деревянного мальчика, которому папа Карло купил азбуку?",
+                answers = listOf("буратино"),
+                hints = listOf("У него очень длинный нос.", "Он сделан из полена.")
+            ),
+            Item(
+                number = 30,
                 level = HARD,
                 question = "Кто помог зайцу выгнать лису в сказке заюшкина избушка?",
                 answers = listOf("петух"),
