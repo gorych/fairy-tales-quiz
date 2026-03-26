@@ -1,8 +1,10 @@
 package org.gorych.alice.skill.core.quiz
 
-open class Quiz {
+abstract class Quiz {
 
     open val items: List<QuizItem> = listOf()
+
+    fun name(): String = javaClass.simpleName
 
     fun question(number: Int): String {
         require(number > 0) { "Question number must be greater than zero" }
