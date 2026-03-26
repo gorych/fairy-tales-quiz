@@ -12,7 +12,7 @@ class LoggedCommand(private val innerCommand: Command) : Command {
     override fun canHandle(requestObject: RequestObject) = innerCommand.canHandle(requestObject)
 
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
-        log("execute: start. User id: ${truncatedUserId(requestObject)}")
+        log("execute: start. Quiz name: ${quiz.name()}, user id: ${truncatedUserId(requestObject)}")
         return innerCommand.execute(requestObject, quiz)
     }
 
