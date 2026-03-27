@@ -176,12 +176,9 @@ class Quiz1 : Quiz() {
                 answers = listOf("топор", "из топора", "топора"),
                 hints = listOf("Им можно рубить дрова.")
             ),
-            //endregion
-
-            //region Level 3
             QuizItem(
                 number = 20,
-                level = HARD,
+                level = MEDIUM,
                 question = "Как звали самую крошечную девочку в сказках?",
                 answers = listOf("Дюймовочка", "дюймовочка"),
                 hints = listOf(
@@ -191,6 +188,9 @@ class Quiz1 : Quiz() {
                     "Последний слог этого слова - 'КА'."
                 )
             ),
+            //endregion
+
+            //region Level 3
             QuizItem(
                 number = 21,
                 level = HARD,

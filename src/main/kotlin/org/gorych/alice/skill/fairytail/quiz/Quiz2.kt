@@ -274,7 +274,7 @@ class Quiz2 : Quiz() {
                 number = 26,
                 level = HARD,
                 question = "Как звали черепаху из сказки Буратино?",
-                answers = listOf("Тортила"),
+                answers = listOf("Тортила", "тортила"),
                 hints = listOf(
                     "Начальный слог этого слова - 'ТОР'.",
                     "Средний слог этого слова - 'ТИ'.",

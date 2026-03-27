@@ -7,6 +7,7 @@ import org.gorych.alice.skill.core.quiz.QuizHolder
 import org.gorych.alice.skill.fairytail.command.*
 import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import org.gorych.alice.skill.fairytail.quiz.Quiz2
+import org.gorych.alice.skill.fairytail.quiz.Quiz3
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
@@ -36,7 +37,8 @@ private val commandRegistry: List<Command> = listOf(
 private val quizHolder = QuizHolder(
     listOf(
         Quiz1(),
-        Quiz2()
+        Quiz2(),
+        Quiz3(),
     )
 )
 
