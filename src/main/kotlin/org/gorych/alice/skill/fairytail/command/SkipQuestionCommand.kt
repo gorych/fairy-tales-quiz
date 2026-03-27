@@ -51,7 +51,7 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
             text = "Кажется, у меня больше не осталось вопросов. " +
                     "А это значит, что пора подводить итоги. " +
                     "Твой результат - ${rightAnswersCount} из ${quiz.countOfQuestions()}. " +
-                    "Хорошо это или плохо - судить тебе. Спасибо за игру!",
+                    "Хорошо это или плохо - судить тебе. Спасибо за игру. Пока!",
             endSession = false,
             button = Button.goodbye()
         )
