@@ -3,8 +3,10 @@ package org.gorych.alice.skill.fairytail
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.command.*
+import org.gorych.alice.skill.core.quiz.QuizHolder
 import org.gorych.alice.skill.fairytail.command.*
 import org.gorych.alice.skill.fairytail.quiz.Quiz1
+import org.gorych.alice.skill.fairytail.quiz.Quiz2
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
@@ -29,6 +31,13 @@ private val commandRegistry: List<Command> = listOf(
     RepeatQuestionCommand(),
     SkipQuestionCommand(),
     NextQuestionCommand(),
+)
+
+private val quizHolder = QuizHolder(
+    listOf(
+        Quiz1(),
+        Quiz2()
+    )
 )
 
 fun handle(input: String): String {
@@ -59,7 +68,8 @@ private fun processRequest(requestObject: RequestObject): ResponseObject {
         .firstOrNull { it.canHandle(requestObject) }
     return when {
         command != null -> {
-            command.execute(requestObject, Quiz1())
+            val quiz = quizHolder.getQuiz(requestObject)
+            return command.execute(requestObject, quiz)
         }
 
         else -> {

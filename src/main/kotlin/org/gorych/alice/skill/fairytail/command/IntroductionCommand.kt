@@ -1,10 +1,7 @@
 package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.COIN
-import org.gorych.alice.skill.core.api.Button
-import org.gorych.alice.skill.core.api.RequestObject
-import org.gorych.alice.skill.core.api.ResponseObject
-import org.gorych.alice.skill.core.api.SessionState
+import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.core.quiz.Quiz
 
@@ -23,16 +20,15 @@ class IntroductionCommand : Command {
                 "Если будет нужна помощь, просто скажи: Алиса, помоги. " +
                 "Поиграем?"
 
-        val state = SessionState(
-            setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
-        )
-
         return ResponseObject.of(
             text = responseText,
             tts = COIN + responseText,
             buttons = Button.agreement_disagreement_whatCanYouDo(),
-            state = state,
-            endSession = false
+            sessionState = SessionState(
+                setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
+            ),
+            appState = ApplicationState(quiz),
+            endSession = false,
         )
     }
 

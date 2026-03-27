@@ -7,12 +7,14 @@ private const val HTTP_VERSION = "1.0"
 data class ResponseObject(
     val response: ResponseValue,
     val version: String = HTTP_VERSION,
-    @JsonProperty("session_state") val sessionState: SessionState = SessionState()
+    @JsonProperty("session_state") val sessionState: SessionState = SessionState(),
+    @JsonProperty("application_state") val applicationState: ApplicationState? = null
 ) {
     constructor(response: ResponseValue, sessionState: SessionState) : this(
         response,
         HTTP_VERSION,
-        sessionState
+        sessionState,
+        null
     )
 
     companion object {
@@ -45,6 +47,22 @@ data class ResponseObject(
             endSession: Boolean
         ): ResponseObject {
             return ResponseObject(ResponseValue(text, endSession, buttons, tts), state ?: SessionState())
+        }
+
+        fun of(
+            text: String,
+            tts: String,
+            buttons: List<Button>,
+            sessionState: SessionState?,
+            appState: ApplicationState,
+            endSession: Boolean
+        ): ResponseObject {
+            return ResponseObject(
+                response = ResponseValue(text, endSession, buttons, tts),
+                version = HTTP_VERSION,
+                sessionState = sessionState ?: SessionState(),
+                applicationState = appState
+            )
         }
 
         fun ofUnclearCommand(requestObject: RequestObject?): ResponseObject {

@@ -45,6 +45,6 @@ data class Session(
     @JsonProperty(value = "user_id", required = false) val userId: String? = null
 )
 
-data class State(val session: SessionState) {
+data class State(val session: SessionState, val application: ApplicationState?) {
     fun containsTransitionCommand(commandName: String): Boolean = session.containsTransitionCommand(commandName)
 }
