@@ -38,7 +38,9 @@
       "value": 10
     },
     "user": {},
-    "application": {}
+    "application": {
+      "quizName": "QuizTest"
+    }
   },
   "version": "1.0"
 }

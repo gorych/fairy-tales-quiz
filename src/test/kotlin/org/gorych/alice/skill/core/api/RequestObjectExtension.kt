@@ -7,12 +7,12 @@ fun RequestObject.Companion.of(vararg intentKeys: String) =
 
 fun RequestObject.Companion.of(tokens: List<String>) = RequestObject(Request("", "", NLU(tokens)))
 fun RequestObject.Companion.of(tokens: List<String>, sessionState: SessionState?) =
-    RequestObject(Request("", "", NLU(tokens)), null, State(sessionState ?: SessionState()))
+    RequestObject(Request("", "", NLU(tokens)), null, State(sessionState ?: SessionState(), ApplicationState("Quiz1")))
 
 fun RequestObject.Companion.of(session: Session?): RequestObject = RequestObject(null, session)
 
 fun RequestObject.Companion.of(sessionState: SessionState): RequestObject =
-    RequestObject(null, null, State(sessionState))
+    RequestObject(null, null, State(sessionState, ApplicationState("Quiz1")))
 
 //region Request Objects with intents
 private val requestObjectWithIntentsRegistry: Map<String, RequestObject> = mapOf(

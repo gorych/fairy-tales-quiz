@@ -33,7 +33,9 @@
       "value": 10
     },
     "user": {},
-    "application": {}
+    "application": {
+      "quizName": "Quiz2"
+    }
   },
   "version": "1.0"
 }

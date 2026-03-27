@@ -12,5 +12,6 @@
     "hintedQuestions": [],
     "previousHintNumber": 0,
     "transitionCommands": []
-  }
+  },
+  "application_state": null
 }
