@@ -126,7 +126,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             buttons.addFirst(Button.agreement())
         }*/
 
-        log("execute: end of quiz. Score: $score")
+        log("execute: end of quiz. ${quiz.name()}, score: $score")
 
         return ResponseObject.of(
             text = WINNING_PHRASE_TEXT_TEMPLATE.format(scorePhrase),
