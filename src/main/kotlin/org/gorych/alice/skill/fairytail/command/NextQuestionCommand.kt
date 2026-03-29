@@ -111,18 +111,19 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     private fun endQuizResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
+        val excellentScoreValue = 95
         val countOfAllQuestions = quiz.countOfQuestions()
         val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
 
         val scorePhrase = when {
-            //score == 100.0 -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            //score >= excellentScoreValue -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
             score >= 85 -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
             score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
 
-        val buttons: MutableList<Button> = mutableListOf(Button.goodbye())
-        /*if (score == 100.0) {
+        val buttons: MutableList<Button> = mutableListOf(Button.rate(), Button.goodbye())
+        /*if (score >= excellentScoreValue) {
             buttons.addFirst(Button.agreement())
         }*/
 
@@ -170,10 +171,15 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 "Для таких как ты у меня есть вопросы со 'звёздочкой'. " +
                 "Рискнешь попробовать?"
 
+        private const val ASK_TO_RATE_PHRASE = "" +
+                "Кстати, если тебе понравилось наше приключение, то твоя оценка в каталоге будет для меня лучшей наградой и поможет сделать викторину ещё лучше."
+
         private const val WINNING_PHRASE_GOOD_RESULT_TEMPLATE = "" +
                 "Твой результат впечатляет. %d из %d возможных! " +
                 "Ты настоящий мастер сказок, но не расслабляйся. " +
-                "К следующей встрече я приготовлю что-нибудь посложнее. Пока!"
+                "К следующей встрече я приготовлю что-нибудь посложнее. " +
+                "$ASK_TO_RATE_PHRASE " +
+                "Пока!"
 
         private const val WINNING_PHRASE_BAD_RESULT_TEMPLATE = "" +
                 "Твой результат - %d из %d. Маловато для победы, но смелость засчитана. " +

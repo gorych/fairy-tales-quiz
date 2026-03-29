@@ -84,7 +84,7 @@ data class ResponseValue(
     val tts: String? = text,
 )
 
-data class Button(val title: String, val hide: Boolean = true, val payload: String = "{}") {
+data class Button(val title: String, val hide: Boolean = true, val payload: String = "{}", val url: String? = null) {
     companion object {
         fun agreement() = Button("✅ Да, давай")
         fun disagreement() = Button("❌ Нет, не хочу")
@@ -103,5 +103,6 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
         fun skip_repeat_hint_stop() = listOf(skipQuestion(), repeatQuestion(), hint(), stop())
 
         fun goodbye() = Button("\uD83D\uDC4B Пока!")
+        fun rate() = Button(title = "⭐ Оценить", url = "https://alice.ya.ru/s/8070abca-f39f-40ec-bc59-377070bed8b8")
     }
 }
