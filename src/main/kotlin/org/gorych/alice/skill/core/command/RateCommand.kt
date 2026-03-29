@@ -12,7 +12,7 @@ class RateCommand : Command {
     override fun name(): String = RateCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.containsIntent(RATE_INTENT_ID)
+        return requestObject.containsIntent(RATE_INTENT_ID) && requestObject.containsRateCommand()
     }
 
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {

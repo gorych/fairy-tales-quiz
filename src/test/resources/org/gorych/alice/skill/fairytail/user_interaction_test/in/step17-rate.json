@@ -25,7 +25,10 @@
     "session": {
       "currentQuestion": null,
       "previousHintNumber": 0,
-      "transitionCommands": []
+      "transitionCommands": [
+        "RateCommand",
+        "PartingCommand"
+      ]
     },
     "user": {},
     "application": {}

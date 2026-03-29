@@ -1,6 +1,7 @@
 package org.gorych.alice.skill.core.api
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.gorych.alice.skill.core.command.RateCommand
 import org.gorych.alice.skill.fairytail.command.NextQuestionCommand
 import org.gorych.alice.skill.fairytail.command.PlayingAgreementCommand
 import org.gorych.alice.skill.fairytail.command.PlayingDisagreementCommand
@@ -28,6 +29,8 @@ data class RequestObject(
         state?.containsTransitionCommand(PlayingDisagreementCommand.name()) ?: false
 
     fun containsNextQuestionCommand(): Boolean = state?.containsTransitionCommand(NextQuestionCommand.name()) ?: false
+
+    fun containsRateCommand(): Boolean = state?.containsTransitionCommand(RateCommand.name()) ?: false
 
     companion object
 }

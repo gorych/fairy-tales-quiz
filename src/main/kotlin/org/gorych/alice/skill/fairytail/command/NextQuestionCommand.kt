@@ -5,6 +5,8 @@ import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
+import org.gorych.alice.skill.core.command.PartingCommand
+import org.gorych.alice.skill.core.command.RateCommand
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Quiz
 
@@ -133,6 +135,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             text = WINNING_PHRASE_TEXT_TEMPLATE.format(scorePhrase),
             tts = WINNING_PHRASE_TTS_TEMPLATE.format(VICTORY_FANFARE, scorePhrase),
             endSession = false,
+            state = SessionState(setOf(RateCommand.name(), PartingCommand.name())),
             buttons = buttons
         )
     }

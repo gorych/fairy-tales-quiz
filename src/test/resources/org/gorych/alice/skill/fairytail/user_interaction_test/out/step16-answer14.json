@@ -23,6 +23,9 @@
     "currentQuestion": null,
     "hintedQuestions": [],
     "previousHintNumber": 0,
-    "transitionCommands": []
+    "transitionCommands": [
+      "RateCommand",
+      "PartingCommand"
+    ]
   }
 }
