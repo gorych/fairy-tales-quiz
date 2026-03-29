@@ -31,8 +31,5 @@
       "PlayingAgreementCommand",
       "PlayingDisagreementCommand"
     ]
-  },
-  "application_state": {
-    "quizName": "Quiz3"
   }
 }

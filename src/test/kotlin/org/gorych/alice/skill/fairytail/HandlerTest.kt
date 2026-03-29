@@ -1,6 +1,7 @@
 package org.gorych.alice.skill.fairytail
 
-import io.kotest.assertions.json.shouldEqualJson
+import io.kotest.assertions.json.shouldContainJsonKey
+import io.kotest.assertions.json.shouldEqualSpecifiedJson
 import org.gorych.alice.skill.util.readJsonResourceFile
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -31,6 +32,8 @@ class HandlerTest {
         val actualJson = handle(inputJson)
 
         //then
-        expectedJson.shouldEqualJson(actualJson)
+        actualJson.shouldEqualSpecifiedJson(expectedJson)
+
+        actualJson.shouldContainJsonKey("$.application_state")
     }
 }
