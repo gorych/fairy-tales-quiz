@@ -323,6 +323,11 @@ class UserInteractionTest {
         shouldEqualJsonTest("step16-answer14.json")
     }
 
+    @Test
+    fun `WHEN user sends 'rate' command THEN 'thank you' phrase should be returned`() {
+        shouldEqualJsonTest("step17-rate.json")
+    }
+
     @ParameterizedTest(name = "Should return right achievement phrase when count of right answers is {0}")
     @CsvSource(
         "5,  5.right-answers.json",

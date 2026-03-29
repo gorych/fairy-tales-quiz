@@ -1,0 +1,19 @@
+{
+  "response": {
+    "text": "\uD83D\uDE4F Спасибо! С твоей помощью викторина будет только интереснее!",
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "👋 Пока!",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
+  },
+  "version": "1.0",
+  "session_state": {
+    "currentQuestion": null,
+    "previousHintNumber": 0,
+    "transitionCommands": []
+  }
+}

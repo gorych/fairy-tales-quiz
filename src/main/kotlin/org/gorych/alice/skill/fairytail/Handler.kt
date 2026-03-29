@@ -24,6 +24,7 @@ private val commandRegistry: List<Command> = listOf(
     PartingCommand(),
     GratitudeCommand(),
     StopCommand(),
+    RateCommand(),
 
     PlayingAgreementCommand(),
     PlayingDisagreementCommand(),

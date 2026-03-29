@@ -1,0 +1,34 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "оценить",
+    "original_utterance": "оценить",
+    "nlu": {
+      "tokens": [
+        "оценить"
+      ],
+      "entities": [],
+      "intents": {
+        "g911.rate": {
+          "slots": {}
+        }
+      }
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": null,
+      "previousHintNumber": 0,
+      "transitionCommands": []
+    },
+    "user": {},
+    "application": {}
+  },
+  "version": "1.0"
+}
