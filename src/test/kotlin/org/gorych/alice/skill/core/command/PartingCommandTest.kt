@@ -53,14 +53,14 @@ class PartingCommandTest {
     @ParameterizedTest(name = "Should return {0} when NLU tokens {2}")
     @CsvSource(
         value = [
-            "Пока. Заходи еще!;                    пока;               contain 'пока' value",
-            "Прощай. Надеюсь, тебе понравилось!;   прощай;             contain 'прощай' value",
-            "До новых встреч!;                     прОЩай;             contain 'прОЩай' value",
-            "До новых встреч!;                     bye;                contain 'bye' value",
-            "Пока. Заходи еще!;                    пока&прощай;        contain 'пока, прощай' values",
-            "До новых встреч!;                     special_characters; contain special characters only",
-            "До новых встреч!;                     empty;              don't contain any value",
-            "До новых встреч!;                     null;               are NULL",
+            "Заходи еще!;                  пока;               contain 'пока' value",
+            "Надеюсь, тебе понравилось!;   прощай;             contain 'прощай' value",
+            "До новых встреч!;             прОЩай;             contain 'прОЩай' value",
+            "До новых встреч!;             bye;                contain 'bye' value",
+            "Заходи еще!;                  пока&прощай;        contain 'пока, прощай' values",
+            "До новых встреч!;             special_characters; contain special characters only",
+            "До новых встреч!;             empty;              don't contain any value",
+            "До новых встреч!;             null;               are NULL",
         ],
         delimiter = ';'
     )

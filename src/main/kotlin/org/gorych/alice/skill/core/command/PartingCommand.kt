@@ -17,8 +17,8 @@ class PartingCommand : Command {
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         requestObject.let {
             val responseText = when {
-                it.containsToken("пока") -> "Пока. Заходи еще!"
-                it.containsToken("прощай") -> "Прощай. Надеюсь, тебе понравилось!"
+                it.containsToken("пока") -> "Заходи еще!"
+                it.containsToken("прощай") -> "Надеюсь, тебе понравилось!"
                 else -> "До новых встреч!"
             }
             return ResponseObject.of(responseText, true)
