@@ -175,7 +175,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 "Рискнешь попробовать?"
 
         private const val ASK_TO_RATE_PHRASE = "" +
-                "Кстати, буду рада, если найдешь минутку, чтобы оставить оценку в каталоге."
+                "Кстати, буду рада если найдешь минутку, чтобы оставить оценку в каталоге."
 
         private const val WINNING_PHRASE_GOOD_RESULT_TEMPLATE = "" +
                 "Твой результат впечатляет. %d из %d возможных! " +
