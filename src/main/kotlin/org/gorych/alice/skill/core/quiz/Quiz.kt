@@ -1,6 +1,6 @@
 package org.gorych.alice.skill.core.quiz
 
-abstract class Quiz {
+abstract class Quiz(val bonusQuiz: Boolean = false) {
 
     open val items: List<QuizItem> = listOf()
 

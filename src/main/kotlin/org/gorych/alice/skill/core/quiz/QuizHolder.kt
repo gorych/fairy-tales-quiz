@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.core.quiz
 
+import org.gorych.alice.skill.core.api.ApplicationState
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.fairytail.quiz.Quiz1
 
@@ -8,12 +9,18 @@ class QuizHolder(quizzes: List<Quiz>) {
     private val quizzesMap: Map<String, Quiz> = quizzes.associateBy { it.name() }
 
     fun getQuiz(requestObject: RequestObject): Quiz {
-        val quizName = requestObject.state?.application?.quizName
+        val applicationState: ApplicationState? = requestObject.state?.application
+
+        val quizName = applicationState?.quizName
+        val bonusQuiz = applicationState?.bonusQuiz
+
         if (requestObject.isNewSession()) {
-            val quizList = quizzesMap.values
+            val filteredQuizList: List<Quiz> = quizzesMap.values
+                .filter { it.bonusQuiz == bonusQuiz }
+                .toList()
             return when (quizName) {
-                null -> quizList.random()
-                else -> quizList
+                null -> filteredQuizList.random()
+                else -> filteredQuizList
                     .filterNot { it.name() == quizName }
                     .random()
             }

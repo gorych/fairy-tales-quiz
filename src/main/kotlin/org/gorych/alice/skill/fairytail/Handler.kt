@@ -5,9 +5,7 @@ import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.command.*
 import org.gorych.alice.skill.core.quiz.QuizHolder
 import org.gorych.alice.skill.fairytail.command.*
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
-import org.gorych.alice.skill.fairytail.quiz.Quiz2
-import org.gorych.alice.skill.fairytail.quiz.Quiz3
+import org.gorych.alice.skill.fairytail.quiz.*
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
@@ -40,6 +38,9 @@ private val quizHolder = QuizHolder(
         Quiz1(),
         Quiz2(),
         Quiz3(),
+
+        BonusQuiz1(),
+        BonusQuiz2(),
     )
 )
 
