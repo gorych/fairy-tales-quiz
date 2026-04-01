@@ -6,7 +6,6 @@ import org.gorych.alice.skill.core.command.PartingCommand
 import org.gorych.alice.skill.core.command.RateCommand
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Quiz
-import org.gorych.alice.skill.core.quiz.QuizHolder
 
 class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
@@ -146,15 +145,10 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             )
         }
 
-        var appState: ApplicationState? = null
-        if (quiz.bonusQuiz) {
-            appState = ApplicationState(quizName = QuizHolder.DEFAULT_QUIZ.name(), bonusQuiz = false)
-        }
-
         return ResponseParams(
             buttons = listOf(Button.rate(), Button.goodbye()),
             transitionCommands = setOf(RateCommand.name(), PartingCommand.name()),
-            appState = appState
+            appState = ApplicationState.KEEP_AS_IS
         )
     }
 
@@ -201,7 +195,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 "Рискнешь попробовать?"
 
         private const val BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE = "" +
-                "%d из %d! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. " +
+                "%d из %d возможных! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. " +
                 "Буду вдвойне потрясена, если оставишь свой отзыв в каталоге навыков. " +
                 "Знаешь как это сделать?"
 

@@ -27,8 +27,5 @@
       "PartingCommand"
     ]
   },
-  "application_state": {
-    "quizName": "Quiz1",
-    "bonusQuiz": false
-  }
+  "application_state": null
 }

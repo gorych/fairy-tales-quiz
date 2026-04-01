@@ -8,4 +8,8 @@ data class ApplicationState(
 ) {
 
     constructor(quiz: Quiz) : this(quiz.name(), bonusQuiz = quiz.bonusQuiz)
+
+    companion object {
+        val KEEP_AS_IS: ApplicationState? = null
+    }
 }

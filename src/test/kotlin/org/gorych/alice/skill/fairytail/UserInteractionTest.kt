@@ -378,7 +378,7 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step18-bonusQuiz-answerLast.excellent_score.json",
             expectedText = arrayOf(
-                "5 из 5! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. ",
+                "5 из 5 возможных! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. ",
                 "Буду вдвойне потрясена, если оставишь свой отзыв в каталоге навыков. ",
                 "Знаешь как это сделать?"
             ),
