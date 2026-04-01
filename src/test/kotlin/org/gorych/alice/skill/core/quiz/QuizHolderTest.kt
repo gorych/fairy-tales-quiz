@@ -37,13 +37,23 @@ class QuizHolderTest {
     }
 
     @Test
-    fun `getQuiz should return ONLY bonus quiz when bonus mode is active`() {
-        val request = mockRequest(isNewSession = true, quizName = null, isBonus = true)
+    fun `getQuiz should return ONLY bonus quiz when bonus mode is active and session IS NOT NEW`() {
+        val request = mockRequest(isNewSession = false, quizName = null, isBonus = true)
 
         val result = quizHolder.getQuiz(request)
 
         assertTrue(result.bonusQuiz)
         assertEquals("Bonus1", result.name())
+    }
+
+    @Test
+    fun `getQuiz should return regular quiz when bonus mode is active and session IS NEW`() {
+        val request = mockRequest(isNewSession = true, quizName = null, isBonus = true)
+
+        val result = quizHolder.getQuiz(request)
+
+        assertFalse(result.bonusQuiz)
+        assertFalse(result.name().contains("Bonus"))
     }
 
     @Test

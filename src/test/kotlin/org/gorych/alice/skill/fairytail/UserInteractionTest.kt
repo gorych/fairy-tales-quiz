@@ -319,13 +319,75 @@ class UserInteractionTest {
     }
 
     @Test
-    fun `WHEN user sends right answer to last question THEN final phrase should be returned`() {
-        shouldEqualJsonTest("step16-answer14.json")
+    fun `WHEN user sends right answer to last question and SCORE is BAD THEN final phrase should be returned`() {
+        shouldEqualJsonTest("step16-answerLast.bad_score.json")
+    }
+
+    @Test
+    fun `WHEN user sends right answer to last question and SCORE is GOOD THEN final phrase should be returned`() {
+        shouldEqualJsonTest("step16-answerLast.good_score.json")
+    }
+
+    @Test
+    fun `WHEN user sends right answer to last question and SCORE is EXCELLENT THEN suggestion to bonus quiz should be returned`() {
+        shouldEqualJsonTest("step16-answerLast.excellent_score.json")
+    }
+
+    @Test
+    fun `WHEN user does not agree to play bonus quiz THEN final phrase should be returned`() {
+        shouldEqualJsonTest("step17-no.json")
+    }
+
+    @Test
+    fun `WHEN user agrees to play bonus quiz THEN first question should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step18-bonusQuiz-answer1.json",
+            expectedText = arrayOf(
+                "Сколько раз забрасывал невод в море старик из сказки 'О рыбаке и рыбке'?",
+                "следующий вопрос"
+            ),
+        )
+    }
+
+    @Test
+    fun `WHEN user sends answer to question #3 THEN next question should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step18-bonusQuiz-answer3.json",
+            expectedText = arrayOf(
+                "Как называется скатерть, которая сама кормит?",
+                "следующий вопрос"
+            ),
+        )
+    }
+
+    @Test
+    fun `WHEN user sends answer to question #5 of bonus quiz THEN final phrase should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step18-bonusQuiz-answerLast.json",
+            expectedText = arrayOf(
+                "Твой результат 2 из 5 возможных! ",
+                "Это достойно уважения, но кажется, я ещё смогу тебя удивить в следующий раз. ",
+                "Кстати, буду благодарна, если оставишь свой отзыв в каталоге навыков. ",
+                "Знаешь как это сделать?"
+            ),
+        )
+    }
+
+    @Test
+    fun `WHEN user sends answer to question #5 of bonus quiz and score is excellent THEN final phrase should be returned`() {
+        shouldEqualSpecifiedJsonAndContainText(
+            fileName = "step18-bonusQuiz-answerLast.excellent_score.json",
+            expectedText = arrayOf(
+                "5 из 5! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. ",
+                "Буду вдвойне потрясена, если оставишь свой отзыв в каталоге навыков. ",
+                "Знаешь как это сделать?"
+            ),
+        )
     }
 
     @Test
     fun `WHEN user sends 'rate' command THEN 'thank you' phrase should be returned`() {
-        shouldEqualJsonTest("step17-rate.json")
+        shouldEqualJsonTest("step19-rate.json")
     }
 
     @ParameterizedTest(name = "Should return right achievement phrase when count of right answers is {0}")

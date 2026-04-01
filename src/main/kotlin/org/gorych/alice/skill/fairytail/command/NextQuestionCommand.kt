@@ -1,14 +1,12 @@
 package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.VICTORY_FANFARE
-import org.gorych.alice.skill.core.api.Button
-import org.gorych.alice.skill.core.api.RequestObject
-import org.gorych.alice.skill.core.api.ResponseObject
-import org.gorych.alice.skill.core.api.SessionState
+import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.PartingCommand
 import org.gorych.alice.skill.core.command.RateCommand
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuizHolder
 
 class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
@@ -57,7 +55,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 ResponseObject.of(
                     text = it.responseText,
                     tts = it.responseTts,
-                    state = SessionState(
+                    sessionState = SessionState(
                         currentQuestionNumber,
                         rightAnswersCount,
                         requestSessionState.hintedQuestions,
@@ -113,21 +111,19 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     private fun endQuizResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
-        val excellentScoreValue = 95
         val countOfAllQuestions = quiz.countOfQuestions()
+
         val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
+        val responseParams: ResponseParams = getEndQuizResponseParams(quiz, score)
 
         val scorePhrase = when {
-            //score >= excellentScoreValue -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            quiz.bonusQuiz && (score >= EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            quiz.bonusQuiz && (score < EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
+            score >= EXCELLENT_SCORE_VALUE -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
             score >= 85 -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
             score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
-
-        val buttons: MutableList<Button> = mutableListOf(Button.rate(), Button.goodbye())
-        /*if (score >= excellentScoreValue) {
-            buttons.addFirst(Button.agreement())
-        }*/
 
         log("execute: end of quiz. ${quiz.name()}, score: $score")
 
@@ -135,10 +131,38 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             text = WINNING_PHRASE_TEXT_TEMPLATE.format(scorePhrase),
             tts = WINNING_PHRASE_TTS_TEMPLATE.format(VICTORY_FANFARE, scorePhrase),
             endSession = false,
-            state = SessionState(setOf(RateCommand.name(), PartingCommand.name())),
-            buttons = buttons
+            sessionState = SessionState(responseParams.transitionCommands),
+            buttons = responseParams.buttons,
+            appState = responseParams.appState
         )
     }
+
+    private fun getEndQuizResponseParams(quiz: Quiz, score: Double): ResponseParams {
+        if (score >= EXCELLENT_SCORE_VALUE && !quiz.bonusQuiz) {
+            return ResponseParams(
+                buttons = listOf(Button.agreement(), Button.disagreement()),
+                transitionCommands = setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()),
+                appState = ApplicationState(quizName = null, bonusQuiz = true)
+            )
+        }
+
+        var appState: ApplicationState? = null
+        if (quiz.bonusQuiz) {
+            appState = ApplicationState(quizName = QuizHolder.DEFAULT_QUIZ.name(), bonusQuiz = false)
+        }
+
+        return ResponseParams(
+            buttons = listOf(Button.rate(), Button.goodbye()),
+            transitionCommands = setOf(RateCommand.name(), PartingCommand.name()),
+            appState = appState
+        )
+    }
+
+    data class ResponseParams(
+        val buttons: List<Button>,
+        val transitionCommands: Set<String>,
+        val appState: ApplicationState?
+    )
 
     enum class Achievement(val rightAnswersCount: Int, val responseText: String, val responseTts: String) {
         FIVE_RIGHT_ANSWERS(
@@ -159,6 +183,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     companion object {
+        private const val EXCELLENT_SCORE_VALUE = 95
+
         private const val WINNING_PHRASE_CONGRATULATION_AND_SCORE_TEMPLATE = "" +
                 "Поздравляю, это был последний вопрос. " +
                 "%s"
@@ -174,15 +200,25 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 "Для таких как ты у меня есть вопросы со 'звёздочкой'. " +
                 "Рискнешь попробовать?"
 
+        private const val BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE = "" +
+                "%d из %d! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. " +
+                "Буду вдвойне потрясена, если оставишь свой отзыв в каталоге навыков. " +
+                "Знаешь как это сделать?"
+
+        private const val BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE = "" +
+                "Твой результат %d из %d возможных! " +
+                "Это достойно уважения, но кажется, я ещё смогу тебя удивить в следующий раз. " +
+                "Кстати, буду благодарна, если оставишь свой отзыв в каталоге навыков. " +
+                "Знаешь как это сделать?"
+
         private const val ASK_TO_RATE_PHRASE = "" +
-                "Кстати, буду рада если найдешь минутку, чтобы оставить оценку в каталоге."
+                "Кстати, буду рада если найдешь минутку, чтобы оставить оценку в каталоге навыков. Знаешь как это сделать?"
 
         private const val WINNING_PHRASE_GOOD_RESULT_TEMPLATE = "" +
                 "Твой результат впечатляет. %d из %d возможных! " +
                 "Ты настоящий мастер сказок, но не расслабляйся. " +
                 "К следующей встрече я приготовлю что-нибудь посложнее. " +
-                "$ASK_TO_RATE_PHRASE " +
-                "Пока!"
+                ASK_TO_RATE_PHRASE
 
         private const val WINNING_PHRASE_BAD_RESULT_TEMPLATE = "" +
                 "Твой результат - %d из %d. Маловато для победы, но смелость засчитана. " +

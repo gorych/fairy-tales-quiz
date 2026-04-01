@@ -1,0 +1,35 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "12",
+    "original_utterance": "12",
+    "nlu": {
+      "tokens": [
+        "12"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 3,
+      "rightAnswersCount": 2,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {
+      "quizName": "BonusQuiz1",
+      "bonusQuiz": true
+    }
+  },
+  "version": "1.0"
+}

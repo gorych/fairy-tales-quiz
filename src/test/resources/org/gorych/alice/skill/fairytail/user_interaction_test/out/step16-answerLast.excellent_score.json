@@ -1,0 +1,35 @@
+{
+  "response": {
+    "text": "Верно! Поздравляю, это был последний вопрос. Твой результат выше всяких похвал. 30 из 30! Для таких как ты у меня есть вопросы со 'звёздочкой'. Рискнешь попробовать?",
+    "tts": "Верно! <speaker audio=\"alice-sounds-game-win-1.opus\"> Поздравляю, это был последний вопрос. Твой результат выше всяких похвал. 30 из 30! Для таких как ты у меня есть вопросы со 'звёздочкой'. Рискнешь попробовать?",
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "✅ Да, давай",
+        "hide": true,
+        "payload": "{}",
+        "url": null
+      },
+      {
+        "title": "❌ Нет, не хочу",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
+  },
+  "version": "1.0",
+  "session_state": {
+    "rightAnswersCount": 0,
+    "currentQuestion": null,
+    "hintedQuestions": [],
+    "previousHintNumber": 0,
+    "transitionCommands": [
+      "PlayingAgreementCommand",
+      "PlayingDisagreementCommand"
+    ]
+  },
+  "application_state": {
+    "quizName": null,
+    "bonusQuiz": true
+  }
+}

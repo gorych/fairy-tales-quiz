@@ -1,0 +1,32 @@
+{
+  "response": {
+    "end_session": false,
+    "buttons": [
+      {
+        "title": "➡️ Следующий вопрос",
+        "hide": true,
+        "payload": "{}"
+      },
+      {
+        "title": "🔁 Повтори вопрос",
+        "hide": true,
+        "payload": "{}"
+      },
+      {
+        "title": "❓Дай подсказку",
+        "hide": true,
+        "payload": "{}"
+      }
+    ]
+  },
+  "version": "1.0",
+  "session_state": {
+    "currentQuestion": 4,
+    "rightAnswersCount": 3,
+    "previousHintNumber": 0,
+    "transitionCommands": [
+      "NextQuestionCommand"
+    ]
+  },
+  "application_state": null
+}

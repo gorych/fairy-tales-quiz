@@ -3,18 +3,18 @@
     "new": false
   },
   "request": {
-    "command": "да",
-    "original_utterance": "да",
+    "command": "нет",
+    "original_utterance": "нет",
     "nlu": {
       "tokens": [
-        "да"
+        "нет"
       ],
       "entities": [],
       "intents": {
-        "YANDEX.CONFIRM": {
+        "YANDEX.REJECT": {
           "slots": {}
         },
-        "g911.agreement": {
+        "g911.disagreement": {
           "slots": {}
         }
       }
@@ -32,8 +32,10 @@
         "PlayingDisagreementCommand"
       ]
     },
+    "user": {},
     "application": {
-      "bonusQuiz": false
+      "quizName": null,
+      "bonus": true
     }
   },
   "version": "1.0"

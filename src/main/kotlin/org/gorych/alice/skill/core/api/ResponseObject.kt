@@ -22,6 +22,10 @@ data class ResponseObject(
             return ResponseObject(ResponseValue(text, endSession))
         }
 
+        fun of(text: String, tts: String, endSession: Boolean): ResponseObject {
+            return ResponseObject(ResponseValue(text, endSession, listOf(), tts))
+        }
+
         fun of(text: String, endSession: Boolean, button: Button) =
             ResponseObject(ResponseValue(text, endSession, listOf(button)))
 
@@ -43,10 +47,10 @@ data class ResponseObject(
             text: String,
             tts: String,
             buttons: List<Button>,
-            state: SessionState?,
+            sessionState: SessionState?,
             endSession: Boolean
         ): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession, buttons, tts), state ?: SessionState())
+            return ResponseObject(ResponseValue(text, endSession, buttons, tts), sessionState ?: SessionState())
         }
 
         fun of(
@@ -54,11 +58,26 @@ data class ResponseObject(
             tts: String,
             buttons: List<Button>,
             sessionState: SessionState?,
-            appState: ApplicationState,
+            appState: ApplicationState?,
             endSession: Boolean
         ): ResponseObject {
             return ResponseObject(
                 response = ResponseValue(text, endSession, buttons, tts),
+                version = HTTP_VERSION,
+                sessionState = sessionState ?: SessionState(),
+                applicationState = appState
+            )
+        }
+
+        fun of(
+            text: String,
+            buttons: List<Button>,
+            sessionState: SessionState?,
+            appState: ApplicationState?,
+            endSession: Boolean
+        ): ResponseObject {
+            return ResponseObject(
+                response = ResponseValue(text, endSession, buttons),
                 version = HTTP_VERSION,
                 sessionState = sessionState ?: SessionState(),
                 applicationState = appState

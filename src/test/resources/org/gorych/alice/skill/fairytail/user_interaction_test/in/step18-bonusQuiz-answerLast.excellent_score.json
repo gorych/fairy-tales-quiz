@@ -1,0 +1,35 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "цветик семицветик",
+    "original_utterance": "цветик семицветик",
+    "nlu": {
+      "tokens": [
+        "цветик семицветик"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 5,
+      "rightAnswersCount": 4,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {
+      "quizName": "BonusQuiz1",
+      "bonusQuiz": true
+    }
+  },
+  "version": "1.0"
+}

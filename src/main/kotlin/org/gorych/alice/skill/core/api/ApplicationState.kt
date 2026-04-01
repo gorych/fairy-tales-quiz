@@ -7,5 +7,5 @@ data class ApplicationState(
     val bonusQuiz: Boolean = false,
 ) {
 
-    constructor(quiz: Quiz) : this(quiz.name())
+    constructor(quiz: Quiz) : this(quiz.name(), bonusQuiz = quiz.bonusQuiz)
 }

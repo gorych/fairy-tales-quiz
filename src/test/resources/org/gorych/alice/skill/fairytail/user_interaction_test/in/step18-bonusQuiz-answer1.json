@@ -1,0 +1,35 @@
+{
+  "session": {
+    "new": false
+  },
+  "request": {
+    "command": "зеркальце",
+    "original_utterance": "зеркальце",
+    "nlu": {
+      "tokens": [
+        "зеркальце"
+      ],
+      "entities": [],
+      "intents": {}
+    },
+    "markup": {
+      "dangerous_context": false
+    },
+    "type": "SimpleUtterance"
+  },
+  "state": {
+    "session": {
+      "currentQuestion": 1,
+      "rightAnswersCount": 0,
+      "transitionCommands": [
+        "NextQuestionCommand"
+      ]
+    },
+    "user": {},
+    "application": {
+      "quizName": "BonusQuiz1",
+      "bonusQuiz": true
+    }
+  },
+  "version": "1.0"
+}

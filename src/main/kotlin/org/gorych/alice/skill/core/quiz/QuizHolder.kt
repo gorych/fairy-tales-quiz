@@ -12,18 +12,16 @@ class QuizHolder(quizzes: List<Quiz>) {
         val applicationState: ApplicationState? = requestObject.state?.application
 
         val quizName = applicationState?.quizName
-        val bonusQuiz = applicationState?.bonusQuiz
 
         if (requestObject.isNewSession()) {
-            val filteredQuizList: List<Quiz> = quizzesMap.values
-                .filter { it.bonusQuiz == bonusQuiz }
-                .toList()
-            return when (quizName) {
-                null -> filteredQuizList.random()
-                else -> filteredQuizList
-                    .filterNot { it.name() == quizName }
-                    .random()
-            }
+            val usualQuizList: List<Quiz> = quizzesMap.values.filterNot { it.bonusQuiz }
+            return selectQuiz(usualQuizList, quizName)
+        }
+
+        val bonusQuiz = applicationState?.bonusQuiz ?: false
+        if (bonusQuiz && quizName == null) {
+            val bonusQuizList: List<Quiz> = quizzesMap.values.filter { it.bonusQuiz }
+            return selectQuiz(bonusQuizList, quizName)
         }
 
         val quiz = quizzesMap[quizName]
@@ -32,6 +30,15 @@ class QuizHolder(quizzes: List<Quiz>) {
         }
 
         return DEFAULT_QUIZ
+    }
+
+    private fun selectQuiz(quizList: List<Quiz>, quizName: String?): Quiz {
+        return when (quizName) {
+            null -> quizList.random()
+            else -> quizList
+                .filterNot { it.name() == quizName }
+                .random()
+        }
     }
 
     companion object {

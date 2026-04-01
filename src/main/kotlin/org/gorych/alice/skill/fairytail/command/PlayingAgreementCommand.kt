@@ -1,9 +1,6 @@
 package org.gorych.alice.skill.fairytail.command
 
-import org.gorych.alice.skill.core.api.Button
-import org.gorych.alice.skill.core.api.RequestObject
-import org.gorych.alice.skill.core.api.ResponseObject
-import org.gorych.alice.skill.core.api.SessionState
+import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.core.quiz.Quiz
 
@@ -32,9 +29,10 @@ class PlayingAgreementCommand : Command {
         val questionNumber = 1
         return ResponseObject.of(
             text = "Отлично. Слушай первый вопрос. ${quiz.question(questionNumber)}",
-            state = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
+            buttons = Button.skip_repeat_hint(),
+            sessionState = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
             endSession = false,
-            buttons = Button.skip_repeat_hint()
+            appState = ApplicationState(quiz),
         )
     }
 
