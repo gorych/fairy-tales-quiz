@@ -2,6 +2,8 @@ package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.Command
+import org.gorych.alice.skill.core.command.PartingCommand
+import org.gorych.alice.skill.core.command.RateCommand
 import org.gorych.alice.skill.core.quiz.Quiz
 
 private const val AGREEMENT_INTENT_ID = "g911.agreement"
@@ -22,9 +24,10 @@ class PlayingAgreementCommand : Command {
         return when {
             !requestObject.hasCurrentQuestion() -> firstQuestionResponse(quiz)
             quiz.bonusQuiz -> ResponseObject.of(
-                text = "Отлично! С удовольствием ознакомлюсь с твоим мнением о себе. Пока!",
+                text = "Отлично! С удовольствием ознакомлюсь с твоим мнением. Пока!",
                 endSession = false,
-                button = Button.goodbye()
+                buttons = listOf(Button.rate(), Button.goodbye()),
+                transitionCommands = setOf(RateCommand.name(), PartingCommand.name())
             )
 
             else -> nextQuestionResponse(requestObject, quiz)

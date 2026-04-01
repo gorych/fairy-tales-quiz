@@ -3,13 +3,13 @@
     "end_session": false,
     "buttons": [
       {
-        "title": "⭐ Оценить",
+        "title": "🟢 Да, знаю",
         "hide": true,
         "payload": "{}",
-        "url": "https://alice.ya.ru/s/8070abca-f39f-40ec-bc59-377070bed8b8"
+        "url": null
       },
       {
-        "title": "👋 Пока!",
+        "title": "🔴 Нет, не знаю",
         "hide": true,
         "payload": "{}",
         "url": null
@@ -23,8 +23,8 @@
     "hintedQuestions": [],
     "previousHintNumber": 0,
     "transitionCommands": [
-      "RateCommand",
-      "PartingCommand"
+      "PlayingAgreementCommand",
+      "PlayingDisagreementCommand"
     ]
   },
   "application_state": null

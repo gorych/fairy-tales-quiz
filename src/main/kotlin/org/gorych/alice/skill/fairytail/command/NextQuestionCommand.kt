@@ -139,9 +139,17 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     private fun getEndQuizResponseParams(quiz: Quiz, score: Double): ResponseParams {
         if (score >= EXCELLENT_SCORE_VALUE && !quiz.bonusQuiz) {
             return ResponseParams(
-                buttons = listOf(Button.iKnow(), Button.iDontKnow()),
+                buttons = listOf(Button.agreement(), Button.disagreement()),
                 transitionCommands = setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()),
                 appState = ApplicationState(quizName = null, bonusQuiz = true)
+            )
+        }
+
+        if (quiz.bonusQuiz) {
+            return ResponseParams(
+                buttons = listOf(Button.iKnow(), Button.iDontKnow()),
+                transitionCommands = setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()),
+                appState = ApplicationState.KEEP_AS_IS
             )
         }
 
