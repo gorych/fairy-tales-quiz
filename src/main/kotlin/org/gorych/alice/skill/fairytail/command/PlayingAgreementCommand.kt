@@ -21,6 +21,12 @@ class PlayingAgreementCommand : Command {
 
         return when {
             !requestObject.hasCurrentQuestion() -> firstQuestionResponse(quiz)
+            quiz.bonusQuiz -> ResponseObject.of(
+                text = "Отлично! С удовольствием ознакомлюсь с твоим мнением о себе. Пока!",
+                endSession = false,
+                button = Button.goodbye()
+            )
+
             else -> nextQuestionResponse(requestObject, quiz)
         }
     }

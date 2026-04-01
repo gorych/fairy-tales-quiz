@@ -5,15 +5,16 @@
     "end_session": false,
     "buttons": [
       {
-        "title": "✅ Да, давай",
+        "title": "🟢 Да, знаю",
         "hide": true,
         "payload": "{}",
         "url": null
       },
       {
-        "title": "❌ Нет, не хочу",
+        "title": "🔴 Нет, не знаю",
         "hide": true,
-        "payload": "{}"
+        "payload": "{}",
+        "url": null
       }
     ]
   },
