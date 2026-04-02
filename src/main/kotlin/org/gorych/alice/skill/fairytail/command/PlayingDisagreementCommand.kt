@@ -21,27 +21,30 @@ class PlayingDisagreementCommand : Command {
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         if (requestObject.containsPlayingDisagreementCommand()) {
             return when {
-                quiz.bonusQuiz -> ResponseObject.of(
-                    text = "Поняла. Вот список основных дествий: \n" +
-                            "1 - Зайди в каталог навыков в Яндекс Диалогах с любого устройства. \n" +
-                            "2 - В поисковой строке введи 'Викторина по сказкам'. \n" +
-                            "3 - Оставь свою оценку в секции 'Отзывы'. \n" +
-                            "Пока!",
-                    endSession = false,
-                    buttons = listOf(Button.rate(), Button.goodbye()),
-                    transitionCommands = setOf(RateCommand.name(), PartingCommand.name())
-                )
-
-                else -> ResponseObject.of(
-                    text = "Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти.",
-                    endSession = true
-                )
+                quiz.bonusQuiz -> rateActionsResponse()
+                else -> regretResponse()
             }
 
         }
 
         return ResponseObject.ofUnclearCommand(requestObject)
     }
+
+    private fun rateActionsResponse() = ResponseObject.of(
+        text = "Поняла. Вот список основных дествий: \n" +
+                "1 - Зайди в каталог навыков в Яндекс Диалогах с любого устройства. \n" +
+                "2 - В поисковой строке введи 'Викторина по сказкам'. \n" +
+                "3 - Оставь свою оценку в секции 'Отзывы'. \n" +
+                "Пока!",
+        endSession = false,
+        buttons = listOf(Button.rate(), Button.goodbye()),
+        transitionCommands = setOf(RateCommand.name(), PartingCommand.name())
+    )
+
+    private fun regretResponse() = ResponseObject.of(
+        text = "Жаль! А так хотелось поиграть. Если станет скучно, ты знаешь как меня найти.",
+        endSession = true
+    )
 
     companion object {
         fun name(): String = PlayingDisagreementCommand::class.java.simpleName

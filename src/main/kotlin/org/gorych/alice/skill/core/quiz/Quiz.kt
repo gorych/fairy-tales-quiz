@@ -2,6 +2,7 @@ package org.gorych.alice.skill.core.quiz
 
 abstract class Quiz(val bonusQuiz: Boolean = false) {
 
+    val usualQuiz = !bonusQuiz
     open val items: List<QuizItem> = listOf()
 
     fun name(): String = javaClass.simpleName
