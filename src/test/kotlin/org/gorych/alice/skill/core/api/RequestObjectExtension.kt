@@ -1,9 +1,15 @@
 package org.gorych.alice.skill.core.api
 
+import org.gorych.alice.skill.fairytail.command.PlayingAgreementCommand
+import org.gorych.alice.skill.fairytail.command.PlayingDisagreementCommand
+
 fun RequestObject.Companion.ofEmpty() = RequestObject()
 
 fun RequestObject.Companion.of(vararg intentKeys: String) =
     RequestObject(Request("", "", NLU(listOf(), intentKeys.associateWith { "{}" })))
+
+fun RequestObject.Companion.of(vararg intentKeys: String, sessionState: SessionState) =
+    RequestObject(Request("", "", NLU(listOf(), intentKeys.associateWith { "{}" })), null, State(sessionState, null))
 
 fun RequestObject.Companion.of(tokens: List<String>) = RequestObject(Request("", "", NLU(tokens)))
 fun RequestObject.Companion.of(tokens: List<String>, sessionState: SessionState?) =
@@ -20,9 +26,22 @@ private val requestObjectWithIntentsRegistry: Map<String, RequestObject> = mapOf
     Pair("g911.parting", RequestObject.of("g911.parting")),
     Pair("g911.greeting&g911.parting", RequestObject.of("g911.greeting", "g911.parting")),
 
-    Pair("g911.agreement", RequestObject.of("g911.agreement")),
-    Pair("g911.disagreement", RequestObject.of("g911.disagreement")),
-    Pair("g911.disagreement&g911.agreement", RequestObject.of("g911.disagreement", "g911.agreement")),
+    Pair(
+        "g911.agreement",
+        RequestObject.of("g911.agreement", sessionState = SessionState(setOf(PlayingAgreementCommand.name())))
+    ),
+    Pair(
+        "g911.disagreement",
+        RequestObject.of("g911.disagreement", sessionState = SessionState(setOf(PlayingDisagreementCommand.name())))
+    ),
+    Pair(
+        "g911.disagreement&g911.agreement",
+        RequestObject.of(
+            "g911.disagreement",
+            "g911.agreement",
+            sessionState = SessionState(setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()))
+        )
+    ),
 
     Pair("g911.gratitude", RequestObject.of("g911.gratitude")),
     Pair("g911.gratitude&g911.parting", RequestObject.of("g911.gratitude", "g911.parting")),

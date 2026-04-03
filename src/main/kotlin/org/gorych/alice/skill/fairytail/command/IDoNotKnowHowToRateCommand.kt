@@ -12,14 +12,10 @@ class IDoNotKnowHowToRateCommand : Command {
     override fun name(): String = IDoNotKnowHowToRateCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.containsIntent(I_DO_NOT_KNOW_HOW_TO_RATE_INTENT_ID)
+        return requestObject.containsIntent(I_DO_NOT_KNOW_HOW_TO_RATE_INTENT_ID) && requestObject.containsCommand(name())
     }
 
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
-        if (!requestObject.containsCommand(name())) {
-            return ResponseObject.ofUnclearCommand(requestObject)
-        }
-
         return ResponseObject.of(
             text = "Поняла. Вот список основных дествий: \n" +
                     "1 - Зайди в каталог навыков в Яндекс Диалогах с любого устройства. \n" +

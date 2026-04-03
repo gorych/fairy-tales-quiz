@@ -12,14 +12,10 @@ class IKnowHowToRateCommand : Command {
     override fun name(): String = IKnowHowToRateCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.containsIntent(I_KNOW_HOW_TO_RATE_INTENT_ID)
+        return requestObject.containsIntent(I_KNOW_HOW_TO_RATE_INTENT_ID) && requestObject.containsCommand(name())
     }
 
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
-        if (!requestObject.containsCommand(name())) {
-            return ResponseObject.ofUnclearCommand(requestObject)
-        }
-
         return ResponseObject.of(
             text = "Отлично! С удовольствием ознакомлюсь с твоим мнением. Пока!",
             endSession = false,

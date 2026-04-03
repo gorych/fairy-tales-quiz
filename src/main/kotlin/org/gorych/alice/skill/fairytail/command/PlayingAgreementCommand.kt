@@ -10,14 +10,10 @@ class PlayingAgreementCommand : Command {
     override fun name(): String = PlayingAgreementCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.containsIntent(AGREEMENT_INTENT_ID)
+        return requestObject.containsIntent(AGREEMENT_INTENT_ID) && requestObject.containsCommand(name())
     }
 
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
-        if (!requestObject.containsPlayingAgreementCommand()) {
-            return ResponseObject.ofUnclearCommand(requestObject)
-        }
-
         return when {
             !requestObject.hasCurrentQuestion() -> firstQuestionResponse(quiz)
             else -> nextQuestionResponse(requestObject, quiz)
