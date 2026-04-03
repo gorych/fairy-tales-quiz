@@ -22,7 +22,7 @@ class IntroductionCommand : Command {
 
         return ResponseObject.of(
             text = responseText,
-            tts = "sil <[1000]> $COIN sil <[500]> $responseText",
+            tts = "sil <[500]> $COIN sil <[500]> $responseText",
             buttons = Button.agreement_disagreement_whatCanYouDo(),
             sessionState = SessionState(
                 setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())

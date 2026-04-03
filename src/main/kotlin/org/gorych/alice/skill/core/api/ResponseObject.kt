@@ -35,6 +35,9 @@ data class ResponseObject(
         fun of(text: String, endSession: Boolean, buttons: List<Button>, transitionCommands: Set<String>) =
             ResponseObject(ResponseValue(text, endSession, buttons), SessionState(transitionCommands))
 
+        fun of(text: String, tts: String, endSession: Boolean, buttons: List<Button>, transitionCommands: Set<String>) =
+            ResponseObject(ResponseValue(text, endSession, buttons, tts), SessionState(transitionCommands))
+
         fun of(text: String, tts: String, endSession: Boolean, buttons: List<Button>) =
             ResponseObject(ResponseValue(text, endSession, buttons, tts))
 

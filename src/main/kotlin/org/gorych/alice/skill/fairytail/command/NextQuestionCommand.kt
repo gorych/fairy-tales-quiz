@@ -211,7 +211,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 "Кстати, буду рада если найдешь минутку, чтобы оставить оценку в каталоге навыков. Знаешь как это сделать?"
 
         private const val BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE = "" +
-                "%d из %d возможных! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. " +
+                "%d из %d возможных! А это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. " +
                 ASK_TO_RATE_PHRASE
 
         private const val BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE = "" +
