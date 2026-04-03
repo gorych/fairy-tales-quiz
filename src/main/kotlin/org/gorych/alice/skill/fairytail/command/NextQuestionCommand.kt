@@ -95,7 +95,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
         val responseParams: ResponseParams = when {
             quiz.usualQuiz && score >= EXCELLENT_SCORE_VALUE -> bonusQuizProposalParams()
-            quiz.bonusQuiz -> askToRateParams()
+            quiz.bonusQuiz || (quiz.usualQuiz && score >= GOOD_SCORE_VALUE) -> askToRateParams()
             else -> endOfQuizParams()
         }
 
@@ -114,7 +114,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             quiz.bonusQuiz && (score >= EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
             quiz.bonusQuiz && (score < EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
             score >= EXCELLENT_SCORE_VALUE -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
-            score >= 85 -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
+            score >= GOOD_SCORE_VALUE -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
             score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
@@ -189,7 +189,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     //endregion Achievements logic
 
     companion object {
-        private const val EXCELLENT_SCORE_VALUE = 95
+        private const val EXCELLENT_SCORE_VALUE = 90
+        private const val GOOD_SCORE_VALUE = 80
 
         private const val WINNING_PHRASE_CONGRATULATION_AND_SCORE_TEMPLATE = "" +
                 "Поздравляю, это был последний вопрос. " +
@@ -206,19 +207,17 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 "Для таких как ты у меня есть вопросы со 'звёздочкой'. " +
                 "Рискнешь попробовать?"
 
+        private const val ASK_TO_RATE_PHRASE = "" +
+                "Кстати, буду рада если найдешь минутку, чтобы оставить оценку в каталоге навыков. Знаешь как это сделать?"
+
         private const val BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE = "" +
                 "%d из %d возможных! А, это значит, что Титул 'Магистра Сказочных Наук' теперь официально твой. " +
-                "Буду вдвойне потрясена, если оставишь свой отзыв в каталоге навыков. " +
-                "Знаешь как это сделать?"
+                ASK_TO_RATE_PHRASE
 
         private const val BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE = "" +
                 "Твой результат %d из %d возможных! " +
                 "Это достойно уважения, но кажется, я ещё смогу тебя удивить в следующий раз. " +
-                "Кстати, буду благодарна, если оставишь свой отзыв в каталоге навыков. " +
-                "Знаешь как это сделать?"
-
-        private const val ASK_TO_RATE_PHRASE = "" +
-                "Кстати, буду рада если найдешь минутку, чтобы оставить оценку в каталоге навыков. Знаешь как это сделать?"
+                ASK_TO_RATE_PHRASE
 
         private const val WINNING_PHRASE_GOOD_RESULT_TEMPLATE = "" +
                 "Твой результат впечатляет. %d из %d возможных! " +
