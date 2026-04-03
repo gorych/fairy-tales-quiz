@@ -25,16 +25,6 @@ class Quiz2 : Quiz() {
             QuizItem(
                 number = 3,
                 level = EASY,
-                question = "Кто разбил золотое яичко?",
-                answers = listOf("мышка", "мышь"),
-                hints = listOf(
-                    "Она серая с длинным хвостиком.",
-                    "Она любит сыр.",
-                )
-            ),
-            QuizItem(
-                number = 4,
-                level = EASY,
                 question = "Кто нёс Машу в коробе с пирожками?",
                 answers = listOf("медведь", "мишка", "миша"),
                 hints = listOf(
@@ -43,7 +33,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 5,
+                number = 4,
                 level = EASY,
                 question = "Кто первым позвонил и попросил шоколада?",
                 answers = listOf("слон"),
@@ -54,7 +44,7 @@ class Quiz2 : Quiz() {
             ),
 
             QuizItem(
-                number = 6,
+                number = 5,
                 level = EASY,
                 question = "На чем Емеля ехал к царю во дворец?",
                 answers = listOf("печь", "печи", "на печи", "печка", "на печке"),
@@ -64,17 +54,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 7,
-                level = EASY,
-                question = "Что положил солдат в котёл, чтобы сварить кашу у старухи?",
-                answers = listOf("топор"),
-                hints = listOf(
-                    "Им рубят дрова.",
-                    "У него деревянная ручка и лезвие."
-                )
-            ),
-            QuizItem(
-                number = 8,
+                number = 6,
                 level = EASY,
                 question = "Что первым убежало от грязнули в сказке Мойдодыр?",
                 answers = listOf("одеяло"),
@@ -84,7 +64,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 9,
+                number = 7,
                 level = MEDIUM,
                 question = "Что убежало от бабушки Федоры?",
                 answers = listOf("посуда"),
@@ -95,7 +75,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 10,
+                number = 8,
                 level = MEDIUM,
                 question = "Что нашла Муха-Цокотуха, когда по полю пошла?",
                 answers = listOf("денежка", "денежку", "деньги"),
@@ -106,7 +86,7 @@ class Quiz2 : Quiz() {
             ),
             //region Level 2
             QuizItem(
-                number = 11,
+                number = 9,
                 level = MEDIUM,
                 question = "Из чего построил свой самый прочный дом поросёнок Наф-Наф?",
                 answers = listOf("кирпич", "кирпичи", "из кирпича", "из кирпичей", "с кирпича"),
@@ -116,27 +96,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 12,
-                level = MEDIUM,
-                question = "Что положили под тюфяки, чтобы проверить принцессу?",
-                answers = listOf("горошина", "горошину", "горох"),
-                hints = listOf(
-                    "Это маленькая зелёная крупинка.",
-                    "Она растет в стручке.",
-                )
-            ),
-            QuizItem(
-                number = 13,
-                level = MEDIUM,
-                question = "Что лиса посоветовала волку опустить в прорубь?",
-                answers = listOf("хвост"),
-                hints = listOf(
-                    "Он есть у волка сзади.",
-                    "Мёрзни, мёрзни волчий...",
-                )
-            ),
-            QuizItem(
-                number = 14,
+                number = 10,
                 level = MEDIUM,
                 question = "Какая избушка была у лисы в сказке: ледяная или лубяная?",
                 answers = listOf("ледяная"),
@@ -146,7 +106,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 15,
+                number = 11,
                 level = MEDIUM,
                 question = "Что потеряла Золушка на балу, когда убегала?",
                 answers = listOf("туфелька", "туфельку", "башмачок"),
@@ -156,7 +116,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 16,
+                number = 12,
                 level = MEDIUM,
                 question = "В какую страну отправился Айболит, чтобы лечить зверей?",
                 answers = listOf("Африка", "африка", "африку", "в африку"),
@@ -167,7 +127,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 17,
+                number = 13,
                 level = MEDIUM,
                 question = "Сколько гномов приютили Белоснежку?",
                 answers = listOf("7", "семь"),
@@ -177,7 +137,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 18,
+                number = 14,
                 level = HARD,
                 question = "В какого зверя превратился Иванушка, когда попил из копытца?",
                 answers = listOf(
@@ -196,7 +156,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 19,
+                number = 15,
                 level = HARD,
                 question = "Что больше всего на свете любил есть Карлсон?",
                 answers = listOf("варенье"),
@@ -206,7 +166,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 20,
+                number = 16,
                 level = HARD,
                 question = "Что было очень длинным у принцессы Рапунцель?",
                 answers = listOf("волосы", "коса"),
@@ -219,7 +179,7 @@ class Quiz2 : Quiz() {
 
             //region Level 3
             QuizItem(
-                number = 21,
+                number = 17,
                 level = EASY,
                 question = "В кого превратилась Василиса Прекрасная в сказке Царевна-лягушка?",
                 answers = listOf("лягушка", "в лягушку", "лягушку"),
@@ -229,7 +189,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 22,
+                number = 18,
                 level = EASY,
                 question = "В какого зверя превратился Людоед, перед тем как Кот его съел?",
                 answers = listOf("лев", "льва", "во льва", "в льва"),
@@ -240,7 +200,7 @@ class Quiz2 : Quiz() {
             ),
 
             QuizItem(
-                number = 23,
+                number = 19,
                 level = HARD,
                 question = "Кто хотел жениться на Дюймовочке и заставить её считать зерна?",
                 answers = listOf("крот"),
@@ -250,17 +210,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 24,
-                level = HARD,
-                question = "Где спрятался седьмой козлёнок, которого волк не нашёл?",
-                answers = listOf("печь", "печка", "в печи", "в печке"),
-                hints = listOf(
-                    "В ней пекут хлеб.",
-                    "Это самое тёплое место в доме."
-                )
-            ),
-            QuizItem(
-                number = 25,
+                number = 20,
                 level = HARD,
                 question = "Во что превратилась карета Золушки после полуночи?",
                 answers = listOf("тыква", "в тыкву", "тыкву"),
@@ -271,7 +221,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 26,
+                number = 21,
                 level = HARD,
                 question = "Как звали черепаху из сказки Буратино?",
                 answers = listOf(
@@ -294,14 +244,14 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 27,
+                number = 22,
                 level = HARD,
                 question = "В кого превратился гадкий утёнок?",
                 answers = listOf("лебедь", "лебедя", "в лебедя"),
                 hints = listOf("Это птица белого цвета.", "У этой птицы длинная шея.")
             ),
             QuizItem(
-                number = 28,
+                number = 23,
                 level = HARD,
                 question = "Как зовут бабушку, которая живёт в избушке на курьих ножках?",
                 answers = listOf("баба-яга", "баба яга", "яга"),
@@ -311,7 +261,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 29,
+                number = 24,
                 level = HARD,
                 question = "Какое слово пытался сложить из льдинок Кай в замке Снежной королевы?",
                 answers = listOf("вечность"),
@@ -321,7 +271,7 @@ class Quiz2 : Quiz() {
                 )
             ),
             QuizItem(
-                number = 30,
+                number = 25,
                 level = HARD,
                 question = "В какой сказке мачеха заставляла девочку перебирать мешки с крупой и шить платья для сестёр?",
                 answers = listOf("золушка"),

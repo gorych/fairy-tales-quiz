@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "теремок",
-    "original_utterance": "теремок",
+    "command": "самовар",
+    "original_utterance": "самовар",
     "nlu": {
       "tokens": [
-        "теремок"
+        "самовар"
       ],
       "entities": [],
       "intents": {}

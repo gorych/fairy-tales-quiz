@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "самовар",
-    "original_utterance": "самовар",
+    "command": "ай-болит",
+    "original_utterance": "ай-болит",
     "nlu": {
       "tokens": [
-        "самовар"
+        "ай-болит"
       ],
       "entities": [],
       "intents": {}

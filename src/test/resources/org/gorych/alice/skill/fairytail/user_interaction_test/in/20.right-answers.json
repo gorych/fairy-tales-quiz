@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "гуси-лебеди",
-    "original_utterance": "гуси-лебеди",
+    "command": "федора",
+    "original_utterance": "федора",
     "nlu": {
       "tokens": [
-        "гуси-лебеди"
+        "федора"
       ],
       "entities": [],
       "intents": {}

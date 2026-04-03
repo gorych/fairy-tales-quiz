@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "емеля",
-    "original_utterance": "емеля",
+    "command": "мойдодыр",
+    "original_utterance": "мойдодыр",
     "nlu": {
       "tokens": [
-        "емеля"
+        "мойдодыр"
       ],
       "entities": [],
       "intents": {}

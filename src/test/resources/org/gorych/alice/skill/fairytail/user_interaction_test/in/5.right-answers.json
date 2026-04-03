@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "маша",
-    "original_utterance": "маша",
+    "command": "топор",
+    "original_utterance": "топор",
     "nlu": {
       "tokens": [
-        "маша"
+        "топор"
       ],
       "entities": [],
       "intents": {}

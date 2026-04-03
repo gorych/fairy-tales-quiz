@@ -3,11 +3,11 @@
     "new": false
   },
   "request": {
-    "command": "айболит",
-    "original_utterance": "айболит",
+    "command": "машенька",
+    "original_utterance": "машенька",
     "nlu": {
       "tokens": [
-        "айболит"
+        "машенька"
       ],
       "entities": [],
       "intents": {}

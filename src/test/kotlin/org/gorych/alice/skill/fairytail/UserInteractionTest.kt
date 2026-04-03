@@ -161,7 +161,7 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #3 THEN fourth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step5-answer3.json",
-            expectedText = arrayOf("Как звали собаку в сказке репка?", "следующий вопрос"),
+            expectedText = arrayOf("Кто съел колобка?", "следующий вопрос"),
         )
     }
 
@@ -170,7 +170,7 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step6-answer4.json",
             expectedText = arrayOf(
-                "В какой сказке встречается фраза: Тук-тук-тук! Кто в теремочке живет?",
+                "Что купила муха на базаре?",
                 "следующий вопрос"
             ),
         )
@@ -189,7 +189,7 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step7-answer5.json",
             expectedText = arrayOf(
-                "Сколько козлят было в сказке о сером волке?", "следующий вопрос"
+                "Сколько гномов было у белоснежки?", "следующий вопрос"
             ),
         )
     }
@@ -198,7 +198,7 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #6 THEN seventh question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step8-answer6.json",
-            expectedText = arrayOf("Кто съел колобка?", "следующий вопрос"),
+            expectedText = arrayOf("Ниф-ниф, наф-наф, а кто третий?", "следующий вопрос"),
         )
     }
 
@@ -206,7 +206,7 @@ class UserInteractionTest {
     fun `WHEN user asks first hint to question #7 THEN the first hint should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step9-hint7.1.json",
-            expectedText = arrayOf("Её кум - волк."),
+            expectedText = arrayOf("Первая часть ответа содержит слово 'НУФ'."),
         )
     }
 
@@ -214,7 +214,7 @@ class UserInteractionTest {
     fun `WHEN user asks second hint to question #7 THEN the second hint should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step9-hint7.2.json",
-            expectedText = arrayOf("Она рыжая и живёт в лесу."),
+            expectedText = arrayOf("Вторая часть полностью совпадает с первой."),
         )
     }
 
@@ -222,7 +222,7 @@ class UserInteractionTest {
     fun `WHEN user asks hint to question #7 many times THEN right answer should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step9-hint7.100500.json",
-            expectedText = arrayOf("Правильный ответ - лиса."),
+            expectedText = arrayOf("Правильный ответ - Нуф-нуф."),
         )
     }
 
@@ -230,7 +230,7 @@ class UserInteractionTest {
     fun `WHEN user asks hint to question #7 without previous hint number THEN the first hint should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step9-hint7.no_number.json",
-            expectedText = arrayOf("Её кум - волк."),
+            expectedText = arrayOf("Первая часть ответа содержит слово 'НУФ'."),
         )
     }
 
@@ -239,7 +239,7 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step9-answer7.json",
             expectedText = arrayOf(
-                "Что купила муха на базаре?", "следующий вопрос"
+                "Как звали доктора, который лечил всех зверей?", "следующий вопрос"
             ),
         )
     }
@@ -248,7 +248,7 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #8 THEN ninth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step10-answer8.json",
-            expectedText = arrayOf("Сколько гномов было у белоснежки?", "следующий вопрос"),
+            expectedText = arrayOf("Продолжи фразу: У меня зазвонил телефон, кто говорит?..", "следующий вопрос"),
         )
     }
 
@@ -264,7 +264,7 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #9 THEN tenth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step11-answer9.json",
-            expectedText = arrayOf("Ниф-ниф, наф-наф, а кто третий?", "следующий вопрос"),
+            expectedText = arrayOf("В какой сказке встречается фраза: 'Кто хлебал в моей чашке'?", "следующий вопрос"),
         )
     }
 
@@ -272,31 +272,31 @@ class UserInteractionTest {
     fun `WHEN user sends right answer to question #10 THEN eleventh question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step12-answer10.json",
-            expectedText = arrayOf("Как звали доктора, который лечил всех зверей?", "следующий вопрос"),
+            expectedText = arrayOf("Как звали девочку, которая произносила фразу: 'Не садись на пенёк, не ешь пирожок!'?", "следующий вопрос"),
         )
     }
 
     @Test
-    fun `WHEN user sends right answer to question #12 THEN twelfth question should be returned`() {
+    fun `WHEN user sends right answer to question #11 THEN twelfth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step13-answer11.json",
-            expectedText = arrayOf("Продолжи фразу: У меня зазвонил телефон, кто говорит?..", "следующий вопрос"),
+            expectedText = arrayOf("Как звали главного героя сказки 'По щучьему веленью'?", "следующий вопрос"),
         )
     }
 
     @Test
-    fun `WHEN user sends right answer to question #13 THEN thirteenth question should be returned`() {
+    fun `WHEN user sends right answer to question #12 THEN thirteenth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step14-answer12.json",
-            expectedText = arrayOf("Сколько козлят съел волк?", "следующий вопрос"),
+            expectedText = arrayOf("Как называется сказка, в которой гуси украли братика у девочки?", "следующий вопрос"),
         )
     }
 
     @Test
-    fun `WHEN user sends right answer to question #14 THEN fourteenth question should be returned`() {
+    fun `WHEN user sends right answer to question #13 THEN fourteenth question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step15-answer13.json",
-            expectedText = arrayOf("В какой сказке встречается фраза: 'Кто хлебал в моей чашке'?", "следующий вопрос"),
+            expectedText = arrayOf("Продолжи фразу Алёнушки: Не пей, братец, ...", "следующий вопрос"),
         )
     }
 

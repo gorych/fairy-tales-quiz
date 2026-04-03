@@ -19,8 +19,8 @@
   },
   "state": {
     "session": {
-      "currentQuestion": 30,
-      "rightAnswersCount": 29,
+      "currentQuestion": 25,
+      "rightAnswersCount": 24,
       "transitionCommands": [
         "NextQuestionCommand"
       ]
