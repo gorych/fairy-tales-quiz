@@ -24,6 +24,9 @@ private val commandRegistry: List<Command> = listOf(
     StopCommand(),
     RateCommand(),
 
+    IKnowHowToRateCommand(),
+    IDoNotKnowHowToRateCommand(),
+
     PlayingAgreementCommand(),
     PlayingDisagreementCommand(),
 
