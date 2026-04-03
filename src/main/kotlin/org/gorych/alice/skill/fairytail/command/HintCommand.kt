@@ -7,16 +7,13 @@ import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Quiz
 
-private const val DOUBT_INTENT_ID = "g911.doubt"
-const val HELP_INTENT_ID = "g911.help"
-
 class HintCommand : RequestSessionStatedQuestionCommand() {
 
     override fun name() = HintCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
         val hasHelpOrDoubtIntent: Boolean =
-            requestObject.containsIntent(HELP_INTENT_ID) || requestObject.containsIntent(DOUBT_INTENT_ID)
+            requestObject.containsIntent(HELP_INTENT_ID)
         return hasHelpOrDoubtIntent
                 && requestObject.hasCurrentQuestion()
                 && requestObject.containsNextQuestionCommand()
@@ -43,6 +40,8 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
     }
 
     companion object {
+        const val HELP_INTENT_ID = "g911.help"
+
         private val BEFORE_HINT_PHRASES = setOf("Без проблем.", "Хорошо, слушай подсказку.")
 
         fun name(): String = HintCommand::class.java.simpleName

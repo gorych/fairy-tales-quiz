@@ -7,8 +7,6 @@ import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Quiz
 
-private const val SKIP_INTENT_ID = "g911.skip"
-
 class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     override fun name() = SkipQuestionCommand.name()
@@ -58,6 +56,8 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     companion object {
+        private const val SKIP_INTENT_ID = "g911.skip"
+
         private val BEFORE_QUESTION_PHRASES =
             setOf(
                 "Хорошо, слушай следующий вопрос.",

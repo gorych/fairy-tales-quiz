@@ -1,5 +1,6 @@
 package org.gorych.alice.skill.core.command
 
+import org.gorych.alice.skill.fairytail.command.RateCommand
 import kotlin.test.Test
 
 class RateCommandTest {

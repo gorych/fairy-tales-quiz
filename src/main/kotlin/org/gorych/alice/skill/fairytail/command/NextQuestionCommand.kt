@@ -3,7 +3,6 @@ package org.gorych.alice.skill.fairytail.command
 import org.gorych.alice.skill.core.VICTORY_FANFARE
 import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.PartingCommand
-import org.gorych.alice.skill.core.command.RateCommand
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Quiz
 
@@ -45,6 +44,108 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         return wrongAnswerResponse(requestSessionState)
     }
 
+    private fun getRightAnswersCount(sessionState: SessionState, currentQuestion: Int): Int {
+        val rightAnswersCount: Int = sessionState.rightAnswersCount
+
+        val wasUsedHint = sessionState.hintedQuestions.contains(currentQuestion)
+        return when {
+            wasUsedHint -> rightAnswersCount
+            else -> rightAnswersCount + 1
+        }
+    }
+
+    private fun nextQuestionResponse(
+        nextQuestionNumber: Int,
+        rightAnswersCount: Int,
+        sessionState: SessionState,
+        quiz: Quiz
+    ) = ResponseObject.of(
+        //@formatter:off
+            text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${quiz.question(nextQuestionNumber)}",
+            //@formatter:on
+        state = SessionState(
+            nextQuestionNumber,
+            rightAnswersCount,
+            sessionState.hintedQuestions,
+            previousHintNumber = 0,
+            setOf(NextQuestionCommand.name())
+        ),
+        endSession = false,
+        buttons = Button.skip_repeat_hint()
+    )
+
+    private fun wrongAnswerResponse(sessionState: SessionState): ResponseObject {
+        log("execute: wrong answer")
+        return ResponseObject.of(
+            text = WRONG_ANSWER_PHRASES.random(),
+            state = sessionState,
+            endSession = false,
+            buttons = Button.skip_repeat_hint()
+        )
+    }
+
+    //region End of quiz logic
+    private fun endQuizResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
+        val countOfAllQuestions = quiz.countOfQuestions()
+
+        val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
+        val scorePhrase = getScorePhrase(quiz, score, rightAnswersCount, countOfAllQuestions)
+
+        log("execute: end of quiz. ${quiz.name()}, score: $score")
+
+        val responseParams: ResponseParams = when {
+            quiz.usualQuiz && score >= EXCELLENT_SCORE_VALUE -> bonusQuizProposalParams()
+            quiz.bonusQuiz -> askToRateParams()
+            else -> endOfQuizParams()
+        }
+
+        return ResponseObject.of(
+            text = WINNING_PHRASE_TEXT_TEMPLATE.format(scorePhrase),
+            tts = WINNING_PHRASE_TTS_TEMPLATE.format(VICTORY_FANFARE, scorePhrase),
+            endSession = false,
+            sessionState = SessionState(responseParams.transitionCommands),
+            buttons = responseParams.buttons,
+            appState = responseParams.appState
+        )
+    }
+
+    private fun getScorePhrase(quiz: Quiz, score: Double, rightAnswersCount: Int, countOfAllQuestions: Int): String {
+        return when {
+            quiz.bonusQuiz && (score >= EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            quiz.bonusQuiz && (score < EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
+            score >= EXCELLENT_SCORE_VALUE -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            score >= 85 -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
+            score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
+            else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
+        }.format(rightAnswersCount, countOfAllQuestions)
+    }
+
+    private fun bonusQuizProposalParams() = ResponseParams(
+        buttons = listOf(Button.agreement(), Button.disagreement()),
+        transitionCommands = setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()),
+        appState = ApplicationState(quizName = null, bonusQuiz = true)
+    )
+
+    private fun askToRateParams() = ResponseParams(
+        buttons = listOf(Button.iKnow(), Button.iDontKnow()),
+        transitionCommands = setOf(IKnowHowToRateCommand.name(), IDoNotKnowHowToRateCommand.name()),
+        appState = ApplicationState.KEEP_AS_IS
+    )
+
+    private fun endOfQuizParams() = ResponseParams(
+        buttons = listOf(Button.rate(), Button.goodbye()),
+        transitionCommands = setOf(RateCommand.name(), PartingCommand.name()),
+        appState = ApplicationState.KEEP_AS_IS
+    )
+
+    data class ResponseParams(
+        val buttons: List<Button>,
+        val transitionCommands: Set<String>,
+        val appState: ApplicationState?
+    )
+    //endregion End of quiz
+
+    //region Achievements logic
     private fun processAchievements(
         rightAnswersCount: Int, currentQuestionNumber: Int, requestSessionState: SessionState
     ): ResponseObject? {
@@ -68,104 +169,6 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             .firstOrNull()
     }
 
-    private fun getRightAnswersCount(sessionState: SessionState, currentQuestion: Int): Int {
-        val rightAnswersCount: Int = sessionState.rightAnswersCount
-
-        val wasUsedHint = sessionState.hintedQuestions.contains(currentQuestion)
-        return when {
-            wasUsedHint -> rightAnswersCount
-            else -> rightAnswersCount + 1
-        }
-    }
-
-    private fun nextQuestionResponse(
-        nextQuestionNumber: Int,
-        rightAnswersCount: Int,
-        sessionState: SessionState,
-        quiz: Quiz
-    ) =
-        ResponseObject.of(
-            //@formatter:off
-            text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${quiz.question(nextQuestionNumber)}",
-            //@formatter:on
-            state = SessionState(
-                nextQuestionNumber,
-                rightAnswersCount,
-                sessionState.hintedQuestions,
-                previousHintNumber = 0,
-                setOf(NextQuestionCommand.name())
-            ),
-            endSession = false,
-            buttons = Button.skip_repeat_hint()
-        )
-
-    private fun wrongAnswerResponse(sessionState: SessionState): ResponseObject {
-        log("execute: wrong answer")
-        return ResponseObject.of(
-            text = WRONG_ANSWER_PHRASES.random(),
-            state = sessionState,
-            endSession = false,
-            buttons = Button.skip_repeat_hint()
-        )
-    }
-
-    private fun endQuizResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
-        val countOfAllQuestions = quiz.countOfQuestions()
-
-        val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
-        val responseParams: ResponseParams = getEndQuizResponseParams(quiz, score)
-
-        val scorePhrase = when {
-            quiz.bonusQuiz && (score >= EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
-            quiz.bonusQuiz && (score < EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
-            score >= EXCELLENT_SCORE_VALUE -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
-            score >= 85 -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
-            score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
-            else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
-        }.format(rightAnswersCount, countOfAllQuestions)
-
-        log("execute: end of quiz. ${quiz.name()}, score: $score")
-
-        return ResponseObject.of(
-            text = WINNING_PHRASE_TEXT_TEMPLATE.format(scorePhrase),
-            tts = WINNING_PHRASE_TTS_TEMPLATE.format(VICTORY_FANFARE, scorePhrase),
-            endSession = false,
-            sessionState = SessionState(responseParams.transitionCommands),
-            buttons = responseParams.buttons,
-            appState = responseParams.appState
-        )
-    }
-
-    private fun getEndQuizResponseParams(quiz: Quiz, score: Double): ResponseParams {
-        if (quiz.usualQuiz && score >= EXCELLENT_SCORE_VALUE) {
-            return ResponseParams(
-                buttons = listOf(Button.agreement(), Button.disagreement()),
-                transitionCommands = setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()),
-                appState = ApplicationState(quizName = null, bonusQuiz = true)
-            )
-        }
-
-        if (quiz.bonusQuiz) {
-            return ResponseParams(
-                buttons = listOf(Button.iKnow(), Button.iDontKnow()),
-                transitionCommands = setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()),
-                appState = ApplicationState.KEEP_AS_IS
-            )
-        }
-
-        return ResponseParams(
-            buttons = listOf(Button.rate(), Button.goodbye()),
-            transitionCommands = setOf(RateCommand.name(), PartingCommand.name()),
-            appState = ApplicationState.KEEP_AS_IS
-        )
-    }
-
-    data class ResponseParams(
-        val buttons: List<Button>,
-        val transitionCommands: Set<String>,
-        val appState: ApplicationState?
-    )
-
     enum class Achievement(val rightAnswersCount: Int, val responseText: String, val responseTts: String) {
         FIVE_RIGHT_ANSWERS(
             rightAnswersCount = 5,
@@ -183,6 +186,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             responseTts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS
         ),
     }
+    //endregion Achievements logic
 
     companion object {
         private const val EXCELLENT_SCORE_VALUE = 95

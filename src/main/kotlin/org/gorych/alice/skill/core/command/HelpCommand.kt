@@ -4,7 +4,7 @@ import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.quiz.Quiz
-import org.gorych.alice.skill.fairytail.command.HELP_INTENT_ID
+import org.gorych.alice.skill.fairytail.command.HintCommand.Companion.HELP_INTENT_ID
 
 private const val HELP_YANDEX_INTENT_ID = "YANDEX.HELP"
 

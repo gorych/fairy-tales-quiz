@@ -2,11 +2,8 @@ package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.Command
-import org.gorych.alice.skill.core.command.PartingCommand
-import org.gorych.alice.skill.core.command.RateCommand
 import org.gorych.alice.skill.core.quiz.Quiz
 
-private const val AGREEMENT_INTENT_ID = "g911.agreement"
 
 class PlayingAgreementCommand : Command {
 
@@ -21,20 +18,11 @@ class PlayingAgreementCommand : Command {
             return ResponseObject.ofUnclearCommand(requestObject)
         }
 
-        //order is important here
         return when {
-            quiz.bonusQuiz -> rateAndPartingResponse()
             !requestObject.hasCurrentQuestion() -> firstQuestionResponse(quiz)
             else -> nextQuestionResponse(requestObject, quiz)
         }
     }
-
-    private fun rateAndPartingResponse() = ResponseObject.of(
-        text = "Отлично! С удовольствием ознакомлюсь с твоим мнением. Пока!",
-        endSession = false,
-        buttons = listOf(Button.rate(), Button.goodbye()),
-        transitionCommands = setOf(RateCommand.name(), PartingCommand.name())
-    )
 
     private fun firstQuestionResponse(quiz: Quiz): ResponseObject {
         val questionNumber = 1
@@ -69,7 +57,7 @@ class PlayingAgreementCommand : Command {
     }
 
     companion object {
-        fun name(): String = PlayingAgreementCommand::class.java.simpleName
+        private const val AGREEMENT_INTENT_ID = "g911.agreement"
 
         private val CONTINUE_PLAYING_OPENING_PHRASES: Set<String> =
             setOf(
@@ -78,5 +66,7 @@ class PlayingAgreementCommand : Command {
                 "Хороший выбор. Продолжаем!",
                 "Приятно слышать. Продолжаем!"
             )
+
+        fun name(): String = PlayingAgreementCommand::class.java.simpleName
     }
 }

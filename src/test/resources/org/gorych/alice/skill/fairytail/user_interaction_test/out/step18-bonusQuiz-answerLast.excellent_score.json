@@ -23,8 +23,8 @@
     "hintedQuestions": [],
     "previousHintNumber": 0,
     "transitionCommands": [
-      "PlayingAgreementCommand",
-      "PlayingDisagreementCommand"
+      "IKnowHowToRateCommand",
+      "IDoNotKnowHowToRateCommand"
     ]
   },
   "application_state": null

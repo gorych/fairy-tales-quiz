@@ -1,18 +1,17 @@
-package org.gorych.alice.skill.core.command
+package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
+import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.core.quiz.Quiz
-
-private const val RATE_INTENT_ID = "g911.rate"
 
 class RateCommand : Command {
 
     override fun name(): String = RateCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.containsIntent(RATE_INTENT_ID) && requestObject.containsRateCommand()
+        return requestObject.containsIntent(RATE_INTENT_ID) && requestObject.containsCommand(name())
     }
 
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
@@ -23,6 +22,8 @@ class RateCommand : Command {
     }
 
     companion object {
+        private const val RATE_INTENT_ID = "g911.rate"
+
         fun name(): String = RateCommand::class.java.simpleName
     }
 }

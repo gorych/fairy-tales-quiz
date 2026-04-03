@@ -7,8 +7,6 @@ import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Quiz
 
-private const val REPEAT_INTENT_ID = "g911.repeat"
-
 class RepeatQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     override fun name() = RepeatQuestionCommand.name()
@@ -35,6 +33,8 @@ class RepeatQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     companion object {
+        private const val REPEAT_INTENT_ID = "g911.repeat"
+
         val BEFORE_QUESTION_PHRASES = setOf("Без проблем.", "Хорошо, только слушай внимательно.", "Повторяю.")
 
         fun name(): String = RepeatQuestionCommand::class.java.simpleName
