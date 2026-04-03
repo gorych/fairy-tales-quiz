@@ -112,7 +112,7 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
         fun disagreement() = Button("❌ Нет, не хочу")
 
         fun iKnow() = Button("\uD83D\uDFE2 Да, знаю")
-        fun iDontKnow() = Button("\uD83D\uDD34 Нет, не знаю")
+        fun iDontKnow() = Button("\uD83D\uDFE5 Нет, не знаю")
 
         fun skipQuestion() = Button("➡\uFE0F Следующий вопрос")
         fun repeatQuestion() = Button("\uD83D\uDD01 Повтори вопрос")
