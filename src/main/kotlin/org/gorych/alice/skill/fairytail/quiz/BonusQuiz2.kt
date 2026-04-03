@@ -23,7 +23,7 @@ class BonusQuiz2 : Quiz(bonusQuiz = true) {
                 number = 2,
                 level = EASY,
                 question = "Как звали друга Чебурашки?",
-                answers = listOf("крокодил Гена", "гена", "Гена"),
+                answers = listOf("крокодил Гена", "гена", "Гена", "крокодил гена"),
                 hints = listOf(
                     "Это крокодил.",
                     "Его имя начинается на букву 'Г'.",
@@ -33,7 +33,7 @@ class BonusQuiz2 : Quiz(bonusQuiz = true) {
                 number = 3,
                 level = EASY,
                 question = "Какой персонаж имел голову-луковицу?",
-                answers = listOf("Чиполлино", "чипалино", "чиполино"),
+                answers = listOf("Чиполлино", "чипалино", "чиполино", "чиполлино"),
                 hints = listOf(
                     "Начальный слог этого слова - 'ЧИ'.",
                     "Второй слог этого слова - 'ПОЛ'.",
