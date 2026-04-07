@@ -44,6 +44,7 @@ private val quizHolder = QuizHolder(
 
         BonusQuiz1(),
         BonusQuiz2(),
+        BonusQuiz3(),
     )
 )
 
