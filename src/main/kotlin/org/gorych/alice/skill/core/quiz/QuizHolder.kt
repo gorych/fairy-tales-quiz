@@ -21,7 +21,7 @@ class QuizHolder(quizzes: List<Quiz>) {
         val bonusQuiz = applicationState?.bonusQuiz ?: false
         if (bonusQuiz && quizName == null) {
             val bonusQuizList: List<Quiz> = quizzesMap.values.filter { it.bonusQuiz }
-            return selectQuizRandomly(bonusQuizList, quizName)
+            return selectQuizRandomly(bonusQuizList, quizName = null)
         }
 
         val quiz = quizzesMap[quizName]

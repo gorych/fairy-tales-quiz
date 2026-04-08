@@ -11,10 +11,7 @@ data class ResponseObject(
     @JsonProperty("application_state") val applicationState: ApplicationState? = null
 ) {
     constructor(response: ResponseValue, sessionState: SessionState) : this(
-        response,
-        HTTP_VERSION,
-        sessionState,
-        null
+        response, HTTP_VERSION, sessionState, null
     )
 
     companion object {
@@ -50,11 +47,7 @@ data class ResponseObject(
         }
 
         fun of(
-            text: String,
-            tts: String,
-            buttons: List<Button>,
-            sessionState: SessionState?,
-            endSession: Boolean
+            text: String, tts: String, buttons: List<Button>, sessionState: SessionState?, endSession: Boolean
         ): ResponseObject {
             return ResponseObject(ResponseValue(text, endSession, buttons, tts), sessionState ?: SessionState())
         }

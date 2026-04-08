@@ -18,9 +18,6 @@ abstract class RequestSessionStatedQuestionCommand : Command {
     }
 
     abstract fun execute(
-        requestObject: RequestObject,
-        requestSessionState: SessionState,
-        currentQuestionNumber: Int,
-        quiz: Quiz
+        requestObject: RequestObject, requestSessionState: SessionState, currentQuestionNumber: Int, quiz: Quiz
     ): ResponseObject
 }

@@ -12,18 +12,12 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
     override fun name() = HintCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        val hasHelpOrDoubtIntent: Boolean =
-            requestObject.containsIntent(HELP_INTENT_ID)
-        return hasHelpOrDoubtIntent
-                && requestObject.hasCurrentQuestion()
-                && requestObject.containsNextQuestionCommand()
+        val hasHelpOrDoubtIntent: Boolean = requestObject.containsIntent(HELP_INTENT_ID)
+        return hasHelpOrDoubtIntent && requestObject.hasCurrentQuestion() && requestObject.containsNextQuestionCommand()
     }
 
     override fun execute(
-        requestObject: RequestObject,
-        requestSessionState: SessionState,
-        currentQuestionNumber: Int,
-        quiz: Quiz
+        requestObject: RequestObject, requestSessionState: SessionState, currentQuestionNumber: Int, quiz: Quiz
     ): ResponseObject {
         val currentHintNumber = requestSessionState.previousHintNumber + 1
         log("execute: question number: $currentQuestionNumber, hint number: $currentHintNumber")
