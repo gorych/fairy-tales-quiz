@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter
 
 plugins {
     kotlin("jvm") version "2.0.0"
+    id("org.jetbrains.kotlinx.kover") version "0.9.8"
 }
 
 group = "org.gorych"
@@ -40,7 +41,7 @@ tasks.register<Zip>("zipContent") {
     val timestamp = ZonedDateTime
         .now()
         .format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"))
-    archiveFileName.set("fairy-tales-quiz-$timestamp.zip")
+    archiveFileName.set("fairy-tales-quiz-$version-$timestamp.zip")
 
     destinationDirectory.set(layout.buildDirectory.dir("out"))
 }
