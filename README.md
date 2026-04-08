@@ -3,8 +3,13 @@ An interactive skill for Yandex Alice that assesses how well kids understand fai
 
 https://alice.ya.ru/s/8070abca-f39f-40ec-bc59-377070bed8b8
 
+## Available on
+- PCs
+- Smartphones
+- Yandex stations
+
+## Screens
 <details open>
-  <summary>Screens</summary>
   <p align="center">
     <hr width="50%">
     <img src="https://github.com/gorych/fairy-tales-quiz/blob/master/assets/1.png" width="50%" alt="About skill"/>
