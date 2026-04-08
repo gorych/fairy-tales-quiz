@@ -2,7 +2,6 @@ package org.gorych.alice.skill.fairytail.quiz
 
 import org.gorych.alice.skill.core.quiz.Quiz
 import org.gorych.alice.skill.core.quiz.QuizItem
-import org.gorych.alice.skill.core.quiz.QuizItem.Level.HARD
 
 class BonusQuiz1 : Quiz(bonusQuiz = true) {
 
@@ -10,7 +9,6 @@ class BonusQuiz1 : Quiz(bonusQuiz = true) {
         get() = listOf(
             QuizItem(
                 number = 1,
-                level = HARD,
                 question = "К какому предмету обращалась злая мачеха, чтобы узнать, кто на свете всех милее?",
                 answers = listOf("зеркальце", "зеркальцу", "к зеркальцу", "зеркало", "к зеркалу"),
                 hints = listOf(
@@ -20,7 +18,6 @@ class BonusQuiz1 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 2,
-                level = HARD,
                 question = "Сколько раз забрасывал невод в море старик из сказки 'О рыбаке и рыбке'?",
                 answers = listOf("3", "три"),
                 hints = listOf(
@@ -30,7 +27,6 @@ class BonusQuiz1 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 3,
-                level = HARD,
                 question = "Сколько месяцев сидело у костра в новогоднем лесу?",
                 answers = listOf("12", "двенадцать"),
                 hints = listOf(
@@ -41,7 +37,6 @@ class BonusQuiz1 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 4,
-                level = HARD,
                 question = "Как называется скатерть, которая сама кормит?",
                 answers = listOf("самобранка", "скатерть самобранка"),
                 hints = listOf(
@@ -51,7 +46,6 @@ class BonusQuiz1 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 5,
-                level = HARD,
                 question = "Из какой сказки фраза: Лети, лети лепесток, через запад на восток...",
                 answers = listOf("цветик-семицветик", "цветик семицветик", "цветик, семицветик", "цветик,семицветик"),
                 hints = listOf(

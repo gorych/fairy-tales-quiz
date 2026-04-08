@@ -2,7 +2,6 @@ package org.gorych.alice.skill.fairytail.quiz
 
 import org.gorych.alice.skill.core.quiz.Quiz
 import org.gorych.alice.skill.core.quiz.QuizItem
-import org.gorych.alice.skill.core.quiz.QuizItem.Level.HARD
 
 class BonusQuiz3 : Quiz(bonusQuiz = true) {
 
@@ -10,7 +9,6 @@ class BonusQuiz3 : Quiz(bonusQuiz = true) {
         get() = listOf(
             QuizItem(
                 number = 1,
-                level = HARD,
                 question = "Из какого города были знаменитые бродячие музыканты?",
                 answers = listOf("Бремен", "из Бремена", "бремен", "из бремена"),
                 hints = listOf(
@@ -21,7 +19,6 @@ class BonusQuiz3 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 2,
-                level = HARD,
                 question = "Как звали крысу старухи Шапокляк?",
                 answers = listOf("Лариска", "Лариса", "крыска Лариска", "лариска", "лариса", "крыска лариска"),
                 hints = listOf(
@@ -32,7 +29,6 @@ class BonusQuiz3 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 3,
-                level = HARD,
                 question = "Из какой крупы была каша, которую варил горшочек?",
                 answers = listOf("пшено", "пшенная", "просо"),
                 hints = listOf(
@@ -42,7 +38,6 @@ class BonusQuiz3 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 4,
-                level = HARD,
                 question = "Как звали кота из деревни Простоквашино?",
                 answers = listOf("Матроскин", "кот Матроскин", "матроскин", "кот матроскин"),
                 hints = listOf(
@@ -54,7 +49,6 @@ class BonusQuiz3 : Quiz(bonusQuiz = true) {
             ),
             QuizItem(
                 number = 5,
-                level = HARD,
                 question = "Как назывался город, в котором жил Незнайка и его друзья?",
                 answers = listOf("Цветочный город", "Цветочный", "цветочный город", "цветочный"),
                 hints = listOf(
