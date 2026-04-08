@@ -1,14 +1,15 @@
 # About
 An interactive skill for Yandex Alice that assesses how well kids understand fairy tales.
 
+### URL
 https://alice.ya.ru/s/8070abca-f39f-40ec-bc59-377070bed8b8
 
-## Available on
+### Available on
 - PCs
 - Smartphones
 - Yandex stations
 
-## Screens
+### Screens
 <details open>
   <p align="center">
     <hr width="50%">
