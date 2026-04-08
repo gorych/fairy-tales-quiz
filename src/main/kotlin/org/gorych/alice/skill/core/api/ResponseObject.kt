@@ -15,13 +15,7 @@ data class ResponseObject(
     )
 
     companion object {
-        fun of(text: String, endSession: Boolean): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession))
-        }
-
-        fun of(text: String, tts: String, endSession: Boolean): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession, listOf(), tts))
-        }
+        fun of(text: String, endSession: Boolean) = ResponseObject(ResponseValue(text, endSession))
 
         fun of(text: String, endSession: Boolean, button: Button) =
             ResponseObject(ResponseValue(text, endSession, listOf(button)))
@@ -34,9 +28,6 @@ data class ResponseObject(
 
         fun of(text: String, tts: String, endSession: Boolean, buttons: List<Button>, transitionCommands: Set<String>) =
             ResponseObject(ResponseValue(text, endSession, buttons, tts), SessionState(transitionCommands))
-
-        fun of(text: String, tts: String, endSession: Boolean, buttons: List<Button>) =
-            ResponseObject(ResponseValue(text, endSession, buttons, tts))
 
         fun of(text: String, state: SessionState?, endSession: Boolean): ResponseObject {
             return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())

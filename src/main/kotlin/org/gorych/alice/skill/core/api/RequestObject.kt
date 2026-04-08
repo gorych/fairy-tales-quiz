@@ -14,7 +14,6 @@ data class RequestObject(
 
     fun command(): String = request?.command ?: ""
 
-    fun tokens(): List<String> = request?.nlu?.tokens ?: listOf()
     fun containsToken(key: String): Boolean = request?.nlu?.tokens?.any { it == key } ?: false
 
     fun hasCurrentQuestion(): Boolean = state?.session?.currentQuestion != null
