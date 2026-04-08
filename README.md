@@ -1,6 +1,8 @@
 # About
 An interactive skill for Yandex Alice that assesses how well kids understand fairy tales.
 
+https://alice.ya.ru/s/8070abca-f39f-40ec-bc59-377070bed8b8
+
 <details open>
   <summary>Screens</summary>
   <p align="center">
