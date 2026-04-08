@@ -15,10 +15,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     override fun execute(
-        requestObject: RequestObject,
-        requestSessionState: SessionState,
-        currentQuestionNumber: Int,
-        quiz: Quiz
+        requestObject: RequestObject, requestSessionState: SessionState, currentQuestionNumber: Int, quiz: Quiz
     ): ResponseObject {
         log("execute: question number: $currentQuestionNumber")
         val rightAnswers: List<String> = quiz.answerTo(currentQuestionNumber)
@@ -55,14 +52,9 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     private fun nextQuestionResponse(
-        nextQuestionNumber: Int,
-        rightAnswersCount: Int,
-        sessionState: SessionState,
-        quiz: Quiz
+        nextQuestionNumber: Int, rightAnswersCount: Int, sessionState: SessionState, quiz: Quiz
     ) = ResponseObject.of(
-        //@formatter:off
-            text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${quiz.question(nextQuestionNumber)}",
-            //@formatter:on
+        text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${quiz.question(nextQuestionNumber)}",
         state = SessionState(
             nextQuestionNumber,
             rightAnswersCount,
@@ -94,8 +86,8 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         log("execute: end of quiz. ${quiz.name()}, score: $score")
 
         val responseParams: ResponseParams = when {
-            quiz.usualQuiz && score >= EXCELLENT_SCORE_VALUE -> bonusQuizProposalParams()
-            quiz.bonusQuiz || (quiz.usualQuiz && score >= GOOD_SCORE_VALUE) -> askToRateParams()
+            quiz.usualQuiz && score >= EXCELLENT_SCORE_MIN_VALUE -> bonusQuizProposalParams()
+            quiz.bonusQuiz || (quiz.usualQuiz && score >= GOOD_SCORE_MIN_VALUE) -> askToRateParams()
             else -> endOfQuizParams()
         }
 
@@ -111,11 +103,11 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     private fun getScorePhrase(quiz: Quiz, score: Double, rightAnswersCount: Int, countOfAllQuestions: Int): String {
         return when {
-            quiz.bonusQuiz && (score >= EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
-            quiz.bonusQuiz && (score < EXCELLENT_SCORE_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
-            score >= EXCELLENT_SCORE_VALUE -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
-            score >= GOOD_SCORE_VALUE -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
-            score < 30 -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
+            quiz.bonusQuiz && (score >= EXCELLENT_SCORE_MIN_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            quiz.bonusQuiz && (score < EXCELLENT_SCORE_MIN_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
+            score >= EXCELLENT_SCORE_MIN_VALUE -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            score >= GOOD_SCORE_MIN_VALUE -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
+            score < BAD_SCORE_MAX_VALUE -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
     }
@@ -139,9 +131,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     )
 
     data class ResponseParams(
-        val buttons: List<Button>,
-        val transitionCommands: Set<String>,
-        val appState: ApplicationState?
+        val buttons: List<Button>, val transitionCommands: Set<String>, val appState: ApplicationState?
     )
     //endregion End of quiz
 
@@ -151,23 +141,27 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     ): ResponseObject? {
         return Achievement.entries
             .filter { it.rightAnswersCount == rightAnswersCount }
-            .map {
-                ResponseObject.of(
-                    text = it.responseText,
-                    tts = it.responseTts,
-                    sessionState = SessionState(
-                        currentQuestionNumber,
-                        rightAnswersCount,
-                        requestSessionState.hintedQuestions,
-                        previousHintNumber = 0,
-                        setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
-                    ),
-                    endSession = false,
-                    buttons = Button.agreement_and_disagreement()
-                )
-            }
+            .map { achievementResponse(it, currentQuestionNumber, rightAnswersCount, requestSessionState) }
             .firstOrNull()
     }
+
+    private fun achievementResponse(
+        it: Achievement,
+        currentQuestionNumber: Int,
+        rightAnswersCount: Int,
+        requestSessionState: SessionState
+    ) = ResponseObject.of(
+        text = it.responseText,
+        tts = it.responseTts,
+        sessionState = SessionState(
+            currentQuestionNumber,
+            rightAnswersCount,
+            requestSessionState.hintedQuestions,
+            previousHintNumber = 0,
+            setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
+        ),
+        endSession = false, buttons = Button.agreement_and_disagreement()
+    )
 
     enum class Achievement(val rightAnswersCount: Int, val responseText: String, val responseTts: String) {
         FIVE_RIGHT_ANSWERS(
@@ -189,8 +183,9 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     //endregion Achievements logic
 
     companion object {
-        private const val EXCELLENT_SCORE_VALUE = 90
-        private const val GOOD_SCORE_VALUE = 80
+        private const val EXCELLENT_SCORE_MIN_VALUE = 90
+        private const val GOOD_SCORE_MIN_VALUE = 80
+        private const val BAD_SCORE_MAX_VALUE = 30
 
         private const val WINNING_PHRASE_CONGRATULATION_AND_SCORE_TEMPLATE = "" +
                 "Поздравляю, это был последний вопрос. " +
