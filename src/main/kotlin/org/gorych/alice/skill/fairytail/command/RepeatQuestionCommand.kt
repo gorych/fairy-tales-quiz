@@ -12,7 +12,9 @@ class RepeatQuestionCommand : RequestSessionStatedQuestionCommand() {
     override fun name() = RepeatQuestionCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.containsIntent(REPEAT_INTENT_ID) && requestObject.hasCurrentQuestion() && requestObject.containsNextQuestionCommand()
+        return requestObject.containsIntent(REPEAT_INTENT_ID)
+                && requestObject.hasCurrentQuestion()
+                && requestObject.containsNextQuestionCommand()
     }
 
     override fun execute(

@@ -12,7 +12,9 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
     override fun name() = SkipQuestionCommand.name()
 
     override fun canHandle(requestObject: RequestObject): Boolean {
-        return requestObject.containsIntent(SKIP_INTENT_ID) && requestObject.hasCurrentQuestion() && requestObject.containsNextQuestionCommand()
+        return requestObject.containsIntent(SKIP_INTENT_ID)
+                && requestObject.hasCurrentQuestion()
+                && requestObject.containsNextQuestionCommand()
     }
 
     override fun execute(
@@ -52,9 +54,9 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
 
         private const val NO_QUESTION_RESPONSE_TEXT_TEMPLATE =
             "Кажется, у меня больше не осталось вопросов. " +
-            "А это значит, что пора подводить итоги. " +
-            "Твой результат - %d из %d. " +
-            "Хорошо это или плохо - судить тебе. Спасибо за игру. Пока!"
+                    "А это значит, что пора подводить итоги. " +
+                    "Твой результат - %d из %d. " +
+                    "Хорошо это или плохо - судить тебе. Спасибо за игру. Пока!"
 
         private val BEFORE_QUESTION_PHRASES = setOf(
             "Хорошо, слушай следующий вопрос.",
