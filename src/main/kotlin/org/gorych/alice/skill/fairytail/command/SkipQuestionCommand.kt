@@ -41,7 +41,7 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     private fun noQuestionsResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
         return ResponseObject.of(
-            text = "Кажется, у меня больше не осталось вопросов. " + "А это значит, что пора подводить итоги. " + "Твой результат - ${rightAnswersCount} из ${quiz.countOfQuestions()}. " + "Хорошо это или плохо - судить тебе. Спасибо за игру. Пока!",
+            text = NO_QUESTION_RESPONSE_TEXT_TEMPLATE.format(rightAnswersCount, quiz.countOfQuestions()),
             endSession = false,
             button = Button.goodbye()
         )
@@ -49,6 +49,12 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     companion object {
         private const val SKIP_INTENT_ID = "g911.skip"
+
+        private const val NO_QUESTION_RESPONSE_TEXT_TEMPLATE =
+            "Кажется, у меня больше не осталось вопросов. " +
+            "А это значит, что пора подводить итоги. " +
+            "Твой результат - %d из %d. " +
+            "Хорошо это или плохо - судить тебе. Спасибо за игру. Пока!"
 
         private val BEFORE_QUESTION_PHRASES = setOf(
             "Хорошо, слушай следующий вопрос.",
