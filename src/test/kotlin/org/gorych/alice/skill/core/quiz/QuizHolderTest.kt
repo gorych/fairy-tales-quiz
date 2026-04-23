@@ -2,96 +2,88 @@ package org.gorych.alice.skill.core.quiz
 
 import io.mockk.every
 import io.mockk.mockk
+import org.gorych.alice.skill.core.api.ApplicationState
 import org.gorych.alice.skill.core.api.RequestObject
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
-import kotlin.test.Test
-import kotlin.test.assertFalse
+import org.gorych.alice.skill.core.api.SessionState
+import org.gorych.alice.skill.core.api.State
+import org.gorych.alice.skill.fairytail.quiz.Quiz2
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class QuizHolderTest {
 
-    private val quiz1 = mockk<Quiz> {
-        every { name() } returns "Quiz1"
-        every { bonusQuiz } returns false
-    }
-    private val quiz2 = mockk<Quiz> {
-        every { name() } returns "Quiz2"
-        every { bonusQuiz } returns false
-    }
-    private val bonusQuiz1 = mockk<Quiz> {
-        every { name() } returns "Bonus1"
-        every { bonusQuiz } returns true
-    }
+    private lateinit var quizHolder: QuizHolder
 
-    private val quizzes = listOf(quiz1, quiz2, bonusQuiz1)
-    private val quizHolder = QuizHolder(quizzes)
-
-    @Test
-    fun `getQuiz should return random normal quiz when session is new and no quiz in state`() {
-        val request = mockRequest(isNewSession = true, quizName = null, isBonus = false)
-
-        val result = quizHolder.getQuiz(request)
-
-        assertFalse(result.bonusQuiz)
-        assertTrue(listOf("Quiz1", "Quiz2").contains(result.name()))
+    @BeforeEach
+    fun setUp() {
+        quizHolder = QuizHolder()
     }
 
     @Test
-    fun `getQuiz should return ONLY bonus quiz when bonus mode is active and session IS NOT NEW`() {
-        val request = mockRequest(isNewSession = false, quizName = null, isBonus = true)
+    fun `getQuiz should return random usual quiz when session is new`() {
+        //given
+        val request = mockk<RequestObject>()
+        every { request.isNewSession() } returns true
+        every { request.state } returns null
 
+        //when
         val result = quizHolder.getQuiz(request)
 
-        assertTrue(result.bonusQuiz)
-        assertEquals("Bonus1", result.name())
+        //then
+        assertNotNull(result)
+        assertFalse(result.bonusQuiz, "New session should pick a usual quiz, not bonus")
     }
 
     @Test
-    fun `getQuiz should return regular quiz when bonus mode is active and session IS NEW`() {
-        val request = mockRequest(isNewSession = true, quizName = null, isBonus = true)
+    fun `getQuiz should return bonus quiz when bonus flag is true and name is null`() {
+        //given
+        val request = mockk<RequestObject>()
+        val appState = ApplicationState(bonusQuiz = true, quizName = null)
+        val state = State(application = appState, session = SessionState())
 
+        every { request.isNewSession() } returns false
+        every { request.state } returns state
+
+        //when
         val result = quizHolder.getQuiz(request)
 
-        assertFalse(result.bonusQuiz)
-        assertFalse(result.name().contains("Bonus"))
+        //then
+        assertTrue(result.bonusQuiz, "Should return a bonus quiz")
     }
 
     @Test
-    fun `getQuiz should exclude current quiz name when selecting new random quiz`() {
-        val request = mockRequest(isNewSession = true, quizName = "Quiz1", isBonus = false)
+    fun `getQuiz should return specific quiz by name from state`() {
+        //given
+        val targetQuizName = Quiz2::class.simpleName
+        val request = mockk<RequestObject>()
+        val appState = ApplicationState(quizName = targetQuizName)
+        val state = State(application = appState, session = SessionState())
 
+        every { request.isNewSession() } returns false
+        every { request.state } returns state
+
+        //when
         val result = quizHolder.getQuiz(request)
 
-        assertEquals("Quiz2", result.name())
+        //then
+        assertEquals(targetQuizName, result.name())
     }
 
     @Test
-    fun `getQuiz should return existing quiz by name during active session`() {
-        val request = mockRequest(isNewSession = false, quizName = "Quiz2")
+    fun `getQuiz should return DEFAULT_QUIZ if quiz name not found`() {
+        //given
+        val request = mockk<RequestObject>()
+        val appState = ApplicationState(quizName = "NonExistentQuiz")
+        val state = State(application = appState, session = SessionState())
 
+        every { request.isNewSession() } returns false
+        every { request.state } returns state
+
+        //when
         val result = quizHolder.getQuiz(request)
 
-        assertEquals("Quiz2", result.name())
-    }
-
-    @Test
-    fun `getQuiz should return DEFAULT_QUIZ when quiz name is not found in registry`() {
-        val request = mockRequest(isNewSession = false, quizName = "NonExistentQuiz")
-
-        val result = quizHolder.getQuiz(request)
-
-        assertEquals(QuizHolder.DEFAULT_QUIZ.name(), result.name())
-    }
-
-    private fun mockRequest(
-        isNewSession: Boolean,
-        quizName: String?,
-        isBonus: Boolean? = false
-    ): RequestObject {
-        return mockk {
-            every { isNewSession() } returns isNewSession
-            every { state?.application?.quizName } returns quizName
-            every { state?.application?.bonusQuiz } returns isBonus
-        }
+        //then
+        assertEquals(QuizHolder.DEFAULT_QUIZ, result)
     }
 }

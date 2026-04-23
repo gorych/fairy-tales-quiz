@@ -5,7 +5,6 @@ import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.command.*
 import org.gorych.alice.skill.core.quiz.QuizHolder
 import org.gorych.alice.skill.fairytail.command.*
-import org.gorych.alice.skill.fairytail.quiz.*
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
@@ -36,17 +35,7 @@ private val commandRegistry: List<Command> = listOf(
     NextQuestionCommand(),
 )
 
-private val quizHolder = QuizHolder(
-    listOf(
-        Quiz1(),
-        Quiz2(),
-        Quiz3(),
-
-        BonusQuiz1(),
-        BonusQuiz2(),
-        BonusQuiz3(),
-    )
-)
+private val quizHolder = QuizHolder()
 
 fun handle(input: String): String {
     val mapper = jacksonObjectMapper()

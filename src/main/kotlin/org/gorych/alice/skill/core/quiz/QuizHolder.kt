@@ -2,43 +2,54 @@ package org.gorych.alice.skill.core.quiz
 
 import org.gorych.alice.skill.core.api.ApplicationState
 import org.gorych.alice.skill.core.api.RequestObject
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
+import org.gorych.alice.skill.fairytail.quiz.*
 
-class QuizHolder(quizzes: List<Quiz>) {
+class QuizHolder {
 
-    private val quizzesMap: Map<String, Quiz> = quizzes.associateBy { it.name() }
+    private val allQuizzes: List<Quiz> by lazy {
+        listOf(
+            Quiz1(),
+            Quiz2(),
+            Quiz3(),
+
+            BonusQuiz1(),
+            BonusQuiz2(),
+            BonusQuiz3(),
+        )
+    }
+
+    private val partitionedQuizLists by lazy { allQuizzes.partition { it.bonusQuiz } }
+
+    private val bonusQuizList get() = partitionedQuizLists.first
+    private val usualQuizList get() = partitionedQuizLists.second
+
+    private val allQuizzesMap: Map<String, Quiz> by lazy {
+        allQuizzes.associateBy { it.name() }
+    }
 
     fun getQuiz(requestObject: RequestObject): Quiz {
         val applicationState: ApplicationState? = requestObject.state?.application
 
         val quizName = applicationState?.quizName
 
-        if (requestObject.isNewSession()) {
-            val usualQuizList: List<Quiz> = quizzesMap.values.filterNot { it.bonusQuiz }
-            return selectQuizRandomly(usualQuizList, quizName)
-        }
+        return when {
+            requestObject.isNewSession() ->
+                selectQuizRandomly(usualQuizList, quizName)
 
-        val bonusQuiz = applicationState?.bonusQuiz ?: false
-        if (bonusQuiz && quizName == null) {
-            val bonusQuizList: List<Quiz> = quizzesMap.values.filter { it.bonusQuiz }
-            return selectQuizRandomly(bonusQuizList, quizName = null)
-        }
+            applicationState?.bonusQuiz == true && quizName == null ->
+                selectQuizRandomly(bonusQuizList, quizName = null)
 
-        val quiz = quizzesMap[quizName]
-        if (quiz != null) {
-            return quiz
+            else -> allQuizzesMap[quizName] ?: DEFAULT_QUIZ
         }
-
-        return DEFAULT_QUIZ
     }
 
     private fun selectQuizRandomly(quizList: List<Quiz>, quizName: String?): Quiz {
         return when (quizName) {
-            null -> quizList.random()
+            null -> quizList.randomOrNull()
             else -> quizList
                 .filterNot { it.name() == quizName }
-                .random()
-        }
+                .randomOrNull()
+        } ?: DEFAULT_QUIZ
     }
 
     companion object {
