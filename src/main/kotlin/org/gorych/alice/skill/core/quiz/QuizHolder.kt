@@ -11,10 +11,12 @@ class QuizHolder {
             Quiz1(),
             Quiz2(),
             Quiz3(),
+            Quiz4(),
 
             BonusQuiz1(),
             BonusQuiz2(),
             BonusQuiz3(),
+            BonusQuiz4(),
         )
     }
 
