@@ -72,7 +72,7 @@ class ResponseObjectTest {
         assertNotNull(card)
         assertEquals("image-1", card?.imageId)
         assertEquals("Слушай вопрос.", card?.title)
-        assertEquals("Кто посадил репку?", card?.description)
+        assertEquals("1. Кто посадил репку?", card?.description)
         assertEquals("Слушай вопрос. Кто посадил репку?", response.response.text)
         assertEquals("Слушай вопрос. Кто посадил репку?", response.response.tts)
     }

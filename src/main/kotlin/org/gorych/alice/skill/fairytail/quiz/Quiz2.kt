@@ -11,7 +11,8 @@ class Quiz2 : Quiz() {
                 number = 1,
                 question = "Кого встретил колобок последним?",
                 answers = listOf("лиса", "лису", "лисичку", "лисичка"),
-                hints = listOf("Она рыжая и хитрая.", "Она его съела.")
+                hints = listOf("Она рыжая и хитрая.", "Она его съела."),
+                imageId = "997614/hhilgl049pn6oxwtubyn",
             ),
             QuizItem(
                 number = 2,
@@ -46,7 +47,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "В ней пекут пирожки.",
                     "Её топят дровами."
-                )
+                ),
+                imageId = "1652229/b0tr4ri95k06hh1jrcu4",
             ),
             QuizItem(
                 number = 6,
@@ -55,7 +57,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Им укрываются.",
                     "Оно улетело вместе с простыней."
-                )
+                ),
+                imageId = "1521359/hnfuzdc86t9rpzkvo400",
             ),
             QuizItem(
                 number = 7,
@@ -66,7 +69,8 @@ class Quiz2 : Quiz() {
                     "Это чашки, ложки и кастрюли одним словом.",
                     "Это слово начинается на букву 'П'.",
                     "Последний слог этого слова - 'ДА'.",
-                )
+                ),
+                imageId = "1030494/gqkyvur56nscnr9z983v",
             ),
             QuizItem(
                 number = 8,
@@ -76,7 +80,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "За это можно что-то купить.",
                     "Они лежат в кошельке.",
-                )
+                ),
+                imageId = "965417/06ppvroy2gmlwpvx66e8",
             ),
             //region Level 2
             QuizItem(
@@ -87,7 +92,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Он тяжелый, красный и крепкий.",
                     "Из него строят настоящие дома.",
-                )
+                ),
+                imageId = "1540737/pdxrfdyvrmza2hfjfl0q",
             ),
             QuizItem(
                 number = 10,
@@ -118,7 +124,8 @@ class Quiz2 : Quiz() {
                     "Это слово начинается на букву 'А'.",
                     "Там очень жарко и течет Лимпопо.",
                     "Там живут жирафы."
-                )
+                ),
+                imageId = "1540737/ip77uwwexw52ak5a6a9z",
             ),
             QuizItem(
                 number = 13,
@@ -128,7 +135,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Их столько же, как дней в неделе.",
                     "Их было столько же, сколько козлят в сказке про волка.",
-                )
+                ),
+                imageId = "1540737/ydrzzh0rhxaftotw4t2k",
             ),
             QuizItem(
                 number = 14,
@@ -155,7 +163,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Оно сладкое и в банке.",
                     "Его варят из ягод."
-                )
+                ),
+                imageId = "13200873/90j73f1q0h24orxdar10",
             ),
             QuizItem(
                 number = 16,
@@ -164,7 +173,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Они есть у всех на голове.",
                     "Их можно стричь."
-                )
+                ),
+                imageId = "997614/du4hbcj95nncs12i6ct9",
             ),
             //endregion
 
@@ -195,7 +205,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Он живёт под землёй.",
                     "Он плохо видит.",
-                )
+                ),
+                imageId = "997614/td86oatauljcx2rgiqgr",
             ),
             QuizItem(
                 number = 20,

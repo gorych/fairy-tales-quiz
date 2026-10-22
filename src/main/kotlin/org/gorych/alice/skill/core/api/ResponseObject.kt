@@ -45,7 +45,7 @@ data class ResponseObject(
             val question = quiz.question(questionNumber)
             val text = "$phrase $question"
             val card = quiz.imageIdTo(questionNumber)?.let {
-                BigImageCard(imageId = it, title = phrase, description = question)
+                BigImageCard(imageId = it, title = phrase, description = "$questionNumber. $question")
             }
 
             return ResponseObject(

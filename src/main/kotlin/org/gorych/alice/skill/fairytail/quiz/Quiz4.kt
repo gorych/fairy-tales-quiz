@@ -24,7 +24,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Это птица, которую девочка спасла зимой.",
                     "У неё длинные крылья и хвост."
-                )
+                ),
+                imageId = "997614/td86oatauljcx2rgiqgr",
             ),
             QuizItem(
                 number = 3,
@@ -42,7 +43,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Она съела кашу из самой маленькой чашки.",
                     "Она уснула в кроватке Мишутки."
-                )
+                ),
+                imageId = "1521359/tduhbog6egpl7ngrmdtz",
             ),
             QuizItem(
                 number = 5,
@@ -107,7 +109,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Оно не золотое.",
                     "Это обычное яйцо.",
-                )
+                ),
+                imageId = "997614/tt4lyy7esm6hquviqemc",
             ),
             QuizItem(
                 number = 12,
@@ -144,7 +147,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Он начальник умывальников.",
                     "Он сердито топнул ногой."
-                )
+                ),
+                imageId = "1521359/hnfuzdc86t9rpzkvo400",
             ),
             QuizItem(
                 number = 16,
@@ -153,7 +157,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "У него длинные уши.",
                     "Он любит морковку."
-                )
+                ),
+                imageId = "997614/hhilgl049pn6oxwtubyn",
             ),
             QuizItem(
                 number = 17,
@@ -162,7 +167,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Они работают в лесу.",
                     "У них есть топоры."
-                )
+                ),
+                imageId = "965417/wbje5qkvh6ofe4hy83xu",
             ),
             QuizItem(
                 number = 18,
@@ -201,7 +207,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Он маленький мальчик.",
                     "Он живёт в обычной квартире."
-                )
+                ),
+                imageId = "13200873/90j73f1q0h24orxdar10",
             ),
             QuizItem(
                 number = 22,
@@ -219,7 +226,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Это желтая сухая трава.",
                     "Из нее дом получился непрочным."
-                )
+                ),
+                imageId = "1540737/pdxrfdyvrmza2hfjfl0q",
             ),
             QuizItem(
                 number = 24,

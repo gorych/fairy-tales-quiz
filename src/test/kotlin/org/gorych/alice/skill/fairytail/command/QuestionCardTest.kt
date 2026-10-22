@@ -41,7 +41,7 @@ class QuestionCardTest {
         val card = response.response.card
         assertNotNull(card)
         assertEquals("image-1", card?.imageId)
-        assertEquals("Кто посадил репку?", card?.description)
+        assertEquals("1. Кто посадил репку?", card?.description)
         assertTrue(RepeatQuestionCommand.BEFORE_QUESTION_PHRASES.contains(card?.title))
         assertTrue(response.response.text.contains("Кто посадил репку?"))
     }
@@ -70,7 +70,7 @@ class QuestionCardTest {
         val card = response.response.card
         assertNotNull(card)
         assertEquals("image-2", card?.imageId)
-        assertEquals("Кто съел колобка?", card?.description)
+        assertEquals("2. Кто съел колобка?", card?.description)
     }
 
     @Test
@@ -85,7 +85,7 @@ class QuestionCardTest {
         val card = response.response.card
         assertNotNull(card)
         assertEquals("image-1", card?.imageId)
-        assertEquals("Кто посадил репку?", card?.description)
+        assertEquals("1. Кто посадил репку?", card?.description)
     }
 
     @Test
@@ -103,7 +103,7 @@ class QuestionCardTest {
         val card = response.response.card
         assertNotNull(card)
         assertEquals("image-2", card?.imageId)
-        assertEquals("Кто съел колобка?", card?.description)
+        assertEquals("2. Кто съел колобка?", card?.description)
         assertTrue(response.response.text.contains("Кто съел колобка?"))
     }
 }
