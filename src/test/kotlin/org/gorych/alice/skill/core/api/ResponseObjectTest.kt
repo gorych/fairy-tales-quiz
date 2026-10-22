@@ -1,6 +1,7 @@
 package org.gorych.alice.skill.core.api
 
 import io.kotest.assertions.json.shouldContainJsonKey
+import org.gorych.alice.skill.core.quiz.Achievement
 import org.gorych.alice.skill.core.quiz.Quiz
 import org.gorych.alice.skill.core.quiz.QuizItem
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -95,12 +96,18 @@ class ResponseObjectTest {
     }
 
     @Test
-    fun `achievement response should contain card with image`() {
-        //when
-        val response = ResponseObject.ofAchievement(
+    fun `achievement response should contain card built from the achievement`() {
+        //given
+        val achievement = Achievement(
+            rightAnswersCount = 5,
             text = "5 правильных ответов",
             tts = "5 правильных ответов",
-            imageId = "achievement-5",
+            imageId = "achievement-5"
+        )
+
+        //when
+        val response = ResponseObject.ofAchievement(
+            achievement = achievement,
             buttons = emptyList(),
             sessionState = SessionState(),
             endSession = false
@@ -112,21 +119,7 @@ class ResponseObjectTest {
         assertEquals("achievement-5", card?.imageId)
         assertEquals("5 правильных ответов", card?.description)
         assertNull(card?.title)
-    }
-
-    @Test
-    fun `achievement response should not contain card when there is no image`() {
-        //when
-        val response = ResponseObject.ofAchievement(
-            text = "5 правильных ответов",
-            tts = "5 правильных ответов",
-            imageId = null,
-            buttons = emptyList(),
-            sessionState = SessionState(),
-            endSession = false
-        )
-
-        //then
-        assertNull(response.response.card)
+        assertEquals("5 правильных ответов", response.response.text)
+        assertEquals("5 правильных ответов", response.response.tts)
     }
 }

@@ -4,6 +4,7 @@ import org.gorych.alice.skill.core.VICTORY_FANFARE
 import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.PartingCommand
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
+import org.gorych.alice.skill.core.quiz.Achievement
 import org.gorych.alice.skill.core.quiz.Quiz
 
 class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
@@ -148,7 +149,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     private fun processAchievements(
         rightAnswersCount: Int, currentQuestionNumber: Int, requestSessionState: SessionState
     ): ResponseObject? {
-        return Achievement.entries
+        return ACHIEVEMENTS
             .filter { it.rightAnswersCount == rightAnswersCount }
             .map { achievement -> achievementResponse(achievement, currentQuestionNumber, rightAnswersCount, requestSessionState) }
             .firstOrNull()
@@ -160,9 +161,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         rightAnswersCount: Int,
         requestSessionState: SessionState
     ) = ResponseObject.ofAchievement(
-        text = achievement.responseText,
-        tts = achievement.responseTts,
-        imageId = achievement.imageId,
+        achievement = achievement,
         buttons = Button.agreement_and_disagreement(),
         sessionState = SessionState(
             currentQuestionNumber,
@@ -174,31 +173,6 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         endSession = false
     )
 
-    enum class Achievement(
-        val rightAnswersCount: Int,
-        val responseText: String,
-        val responseTts: String,
-        val imageId: String
-    ) {
-        FIVE_RIGHT_ANSWERS(
-            rightAnswersCount = 5,
-            responseText = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-            responseTts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-            imageId = "13200873/bu2umubiu4bghyuzkqqx"
-        ),
-        TEN_RIGHT_ANSWERS(
-            rightAnswersCount = 10,
-            responseText = TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-            responseTts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-            imageId = "997614/wtw43d41mfcolljcg8x4"
-        ),
-        TWENTY_RIGHT_ANSWERS(
-            rightAnswersCount = 20,
-            responseText = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-            responseTts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-            imageId = "997614/axt31t41h10q2y2wzjmj"
-        ),
-    }
     //endregion Achievements logic
 
     companion object {
@@ -274,6 +248,27 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE =
             "2\uFE0F⃣0\uFE0F⃣ $TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT"
         private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS = VICTORY_FANFARE + TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
+
+        private val ACHIEVEMENTS: List<Achievement> = listOf(
+            Achievement(
+                rightAnswersCount = 5,
+                text = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
+                tts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
+                imageId = "13200873/bu2umubiu4bghyuzkqqx"
+            ),
+            Achievement(
+                rightAnswersCount = 10,
+                text = TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
+                tts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
+                imageId = "997614/wtw43d41mfcolljcg8x4"
+            ),
+            Achievement(
+                rightAnswersCount = 20,
+                text = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
+                tts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
+                imageId = "997614/axt31t41h10q2y2wzjmj"
+            ),
+        )
 
         fun name(): String = NextQuestionCommand::class.java.simpleName
     }
