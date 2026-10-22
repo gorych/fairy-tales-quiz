@@ -254,13 +254,13 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 rightAnswersCount = 5,
                 text = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
                 tts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "1540737/2r9xra6urchmrzktodvy"
+                imageId = "1540737/fouu4y25mjlerkqbj001"
             ),
             Achievement(
                 rightAnswersCount = 10,
                 text = TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
                 tts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "937455/2c0fqczf3oviq0v998ky"
+                imageId = "1533899/q2r93hurlg0sobsr1jqf"
             ),
             Achievement(
                 rightAnswersCount = 20,
