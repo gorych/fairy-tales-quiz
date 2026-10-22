@@ -106,4 +106,23 @@ class QuestionCardTest {
         assertEquals("2. Кто съел колобка?", card?.description)
         assertTrue(response.response.text.contains("Кто съел колобка?"))
     }
+
+    @Test
+    fun `achievement should return achievement text`() {
+        val request = RequestObject(
+            request = Request(command = "дед"),
+            state = State(
+                SessionState(
+                    currentQuestion = 1,
+                    rightAnswersCount = 4,
+                    transitionCommands = setOf(NextQuestionCommand.name())
+                ),
+                null
+            )
+        )
+
+        val response = NextQuestionCommand().execute(request, QuizWithImages())
+
+        assertTrue(response.response.text.contains("достижение"))
+    }
 }

@@ -25,11 +25,14 @@ data class ResponseObject(
             sessionState: SessionState? = null,
             appState: ApplicationState? = null,
         ): ResponseObject {
-            return ResponseObject(
-                response = ResponseValue(text, endSession, buttons, tts),
-                version = HTTP_VERSION,
-                sessionState = sessionState ?: SessionState(),
-                applicationState = appState
+            return response(
+                text = text,
+                tts = tts,
+                buttons = buttons,
+                sessionState = sessionState,
+                appState = appState,
+                endSession = endSession,
+                card = null
             )
         }
 
@@ -43,16 +46,39 @@ data class ResponseObject(
             appState: ApplicationState? = null
         ): ResponseObject {
             val question = quiz.question(questionNumber)
-            val text = "$phrase $question"
             val card = quiz.imageIdTo(questionNumber)?.let {
                 BigImageCard(imageId = it, title = phrase, description = "$questionNumber. $question")
             }
 
-            return ResponseObject(
-                response = ResponseValue(text, endSession, buttons, text, card),
-                version = HTTP_VERSION,
-                sessionState = sessionState ?: SessionState(),
-                applicationState = appState
+            return response(
+                text = "$phrase $question",
+                tts = "$phrase $question",
+                buttons = buttons,
+                sessionState = sessionState,
+                appState = appState,
+                endSession = endSession,
+                card = card
+            )
+        }
+
+        fun ofAchievement(
+            text: String,
+            tts: String,
+            imageId: String?,
+            buttons: List<Button>,
+            sessionState: SessionState?,
+            endSession: Boolean
+        ): ResponseObject {
+            val card = imageId?.let { BigImageCard(imageId = it, description = text) }
+
+            return response(
+                text = text,
+                tts = tts,
+                buttons = buttons,
+                sessionState = sessionState,
+                appState = null,
+                endSession = endSession,
+                card = card
             )
         }
 
@@ -71,6 +97,23 @@ data class ResponseObject(
                 text = "Извините, произошла техническая ошибка. Попробуйте еще раз.",
                 endSession = false,
                 sessionState = sessionState
+            )
+        }
+
+        private fun response(
+            text: String,
+            tts: String?,
+            buttons: List<Button>,
+            sessionState: SessionState?,
+            appState: ApplicationState?,
+            endSession: Boolean,
+            card: BigImageCard?
+        ): ResponseObject {
+            return ResponseObject(
+                response = ResponseValue(text, endSession, buttons, tts, card),
+                version = HTTP_VERSION,
+                sessionState = sessionState ?: SessionState(),
+                applicationState = appState
             )
         }
     }

@@ -150,18 +150,20 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     ): ResponseObject? {
         return Achievement.entries
             .filter { it.rightAnswersCount == rightAnswersCount }
-            .map { achievementResponse(it, currentQuestionNumber, rightAnswersCount, requestSessionState) }
+            .map { achievement -> achievementResponse(achievement, currentQuestionNumber, rightAnswersCount, requestSessionState) }
             .firstOrNull()
     }
 
     private fun achievementResponse(
-        it: Achievement,
+        achievement: Achievement,
         currentQuestionNumber: Int,
         rightAnswersCount: Int,
         requestSessionState: SessionState
-    ) = ResponseObject.of(
-        text = it.responseText,
-        tts = it.responseTts,
+    ) = ResponseObject.ofAchievement(
+        text = achievement.responseText,
+        tts = achievement.responseTts,
+        imageId = achievement.imageId,
+        buttons = Button.agreement_and_disagreement(),
         sessionState = SessionState(
             currentQuestionNumber,
             rightAnswersCount,
@@ -169,24 +171,32 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             previousHintNumber = 0,
             setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name())
         ),
-        endSession = false, buttons = Button.agreement_and_disagreement()
+        endSession = false
     )
 
-    enum class Achievement(val rightAnswersCount: Int, val responseText: String, val responseTts: String) {
+    enum class Achievement(
+        val rightAnswersCount: Int,
+        val responseText: String,
+        val responseTts: String,
+        val imageId: String
+    ) {
         FIVE_RIGHT_ANSWERS(
             rightAnswersCount = 5,
             responseText = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-            responseTts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS
+            responseTts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
+            imageId = "13200873/bu2umubiu4bghyuzkqqx"
         ),
         TEN_RIGHT_ANSWERS(
             rightAnswersCount = 10,
             responseText = TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-            responseTts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS
+            responseTts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
+            imageId = "997614/wtw43d41mfcolljcg8x4"
         ),
         TWENTY_RIGHT_ANSWERS(
             rightAnswersCount = 20,
             responseText = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-            responseTts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS
+            responseTts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
+            imageId = "997614/axt31t41h10q2y2wzjmj"
         ),
     }
     //endregion Achievements logic

@@ -93,4 +93,40 @@ class ResponseObjectTest {
         assertNull(response.response.card)
         assertEquals("Слушай вопрос. Кто посадил репку?", response.response.text)
     }
+
+    @Test
+    fun `achievement response should contain card with image`() {
+        //when
+        val response = ResponseObject.ofAchievement(
+            text = "5 правильных ответов",
+            tts = "5 правильных ответов",
+            imageId = "achievement-5",
+            buttons = emptyList(),
+            sessionState = SessionState(),
+            endSession = false
+        )
+
+        //then
+        val card = response.response.card
+        assertNotNull(card)
+        assertEquals("achievement-5", card?.imageId)
+        assertEquals("5 правильных ответов", card?.description)
+        assertNull(card?.title)
+    }
+
+    @Test
+    fun `achievement response should not contain card when there is no image`() {
+        //when
+        val response = ResponseObject.ofAchievement(
+            text = "5 правильных ответов",
+            tts = "5 правильных ответов",
+            imageId = null,
+            buttons = emptyList(),
+            sessionState = SessionState(),
+            endSession = false
+        )
+
+        //then
+        assertNull(response.response.card)
+    }
 }
