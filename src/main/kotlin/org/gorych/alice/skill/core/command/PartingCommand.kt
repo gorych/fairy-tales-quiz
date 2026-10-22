@@ -21,7 +21,7 @@ class PartingCommand : Command {
                 it.containsToken("прощай") -> "Надеюсь, тебе понравилось!"
                 else -> "До новых встреч!"
             }
-            return ResponseObject.of(responseText, true)
+            return ResponseObject.of(text = responseText, endSession = true)
         }
     }
 

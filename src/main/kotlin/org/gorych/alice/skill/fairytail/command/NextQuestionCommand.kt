@@ -53,26 +53,35 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     private fun nextQuestionResponse(
         nextQuestionNumber: Int, rightAnswersCount: Int, sessionState: SessionState, quiz: Quiz
-    ) = ResponseObject.of(
-        text = "${RIGHT_ANSWER_PHRASES.random()} ${NEXT_QUESTION_PHRASES.random()} ${quiz.question(nextQuestionNumber)}",
-        state = SessionState(
+    ): ResponseObject {
+        val rightAnswerPhrase = RIGHT_ANSWER_PHRASES.random()
+        val nextQuestionPhrase = NEXT_QUESTION_PHRASES.random()
+
+        val responseSessionState = SessionState(
             nextQuestionNumber,
             rightAnswersCount,
             sessionState.hintedQuestions,
             previousHintNumber = 0,
             setOf(NextQuestionCommand.name())
-        ),
-        endSession = false,
-        buttons = Button.skip_repeat_hint()
-    )
+        )
+
+        return ResponseObject.ofQuestion(
+            quiz = quiz,
+            questionNumber = nextQuestionNumber,
+            phrase = "$rightAnswerPhrase $nextQuestionPhrase",
+            buttons = Button.skip_repeat_hint(),
+            sessionState = responseSessionState,
+            endSession = false
+        )
+    }
 
     private fun wrongAnswerResponse(sessionState: SessionState): ResponseObject {
         log("execute: wrong answer")
         return ResponseObject.of(
             text = WRONG_ANSWER_PHRASES.random(),
-            state = sessionState,
             endSession = false,
-            buttons = Button.skip_repeat_hint()
+            buttons = Button.skip_repeat_hint(),
+            sessionState = sessionState
         )
     }
 

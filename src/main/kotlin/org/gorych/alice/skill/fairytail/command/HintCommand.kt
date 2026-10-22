@@ -27,9 +27,12 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
 
         return ResponseObject.of(
             text = "${BEFORE_HINT_PHRASES.random()} ${quiz.hintTo(currentQuestionNumber, currentHintNumber)}",
-            state = requestSessionState.copy(hintedQuestions = hintedQuestions, previousHintNumber = currentHintNumber),
             endSession = false,
-            buttons = Button.skip_repeat_hint()
+            buttons = Button.skip_repeat_hint(),
+            sessionState = requestSessionState.copy(
+                hintedQuestions = hintedQuestions,
+                previousHintNumber = currentHintNumber
+            )
         )
     }
 

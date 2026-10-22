@@ -17,7 +17,7 @@ class StopCommand : Command {
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         requestObject.let {
             val responseText = "Поняла. Если станет скучно - заходи!"
-            return ResponseObject.of(responseText, true)
+            return ResponseObject.of(text = responseText, endSession = true)
         }
     }
 

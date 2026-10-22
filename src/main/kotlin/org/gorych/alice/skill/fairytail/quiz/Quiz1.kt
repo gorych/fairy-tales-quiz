@@ -11,7 +11,8 @@ class Quiz1 : Quiz() {
                 number = 1,
                 question = "Кто посадил репку?",
                 answers = listOf("дедка", "деда", "дед", "детка"),
-                hints = listOf("Он живёт с бабкой.", "Это слово начинается на букву 'Д'.")
+                hints = listOf("Он живёт с бабкой.", "Это слово начинается на букву 'Д'."),
+                imageId = "213044/3x9k4h7rbk510tcq818u",
             ),
             QuizItem(
                 number = 2,

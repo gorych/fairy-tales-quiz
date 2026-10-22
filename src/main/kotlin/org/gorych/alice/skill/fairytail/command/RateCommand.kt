@@ -17,7 +17,11 @@ class RateCommand : Command {
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         requestObject.let {
             val responseText = "\uD83D\uDE4F Спасибо! С твоей помощью викторина будет только интереснее!"
-            return ResponseObject.of(responseText, false, buttons = listOf(Button.goodbye()))
+            return ResponseObject.of(
+                text = responseText,
+                endSession = false,
+                buttons = listOf(Button.goodbye())
+            )
         }
     }
 

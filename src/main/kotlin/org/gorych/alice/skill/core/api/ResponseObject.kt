@@ -1,6 +1,8 @@
 package org.gorych.alice.skill.core.api
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.gorych.alice.skill.core.quiz.Quiz
 
 private const val HTTP_VERSION = "1.0"
 
@@ -15,41 +17,13 @@ data class ResponseObject(
     )
 
     companion object {
-        fun of(text: String, endSession: Boolean) = ResponseObject(ResponseValue(text, endSession))
-
-        fun of(text: String, endSession: Boolean, button: Button) =
-            ResponseObject(ResponseValue(text, endSession, listOf(button)))
-
-        fun of(text: String, endSession: Boolean, buttons: List<Button>) =
-            ResponseObject(ResponseValue(text, endSession, buttons))
-
-        fun of(text: String, endSession: Boolean, buttons: List<Button>, transitionCommands: Set<String>) =
-            ResponseObject(ResponseValue(text, endSession, buttons), SessionState(transitionCommands))
-
-        fun of(text: String, tts: String, endSession: Boolean, buttons: List<Button>, transitionCommands: Set<String>) =
-            ResponseObject(ResponseValue(text, endSession, buttons, tts), SessionState(transitionCommands))
-
-        fun of(text: String, state: SessionState?, endSession: Boolean): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession), state ?: SessionState())
-        }
-
-        fun of(text: String, buttons: List<Button>, state: SessionState?, endSession: Boolean): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession, buttons), state ?: SessionState())
-        }
-
-        fun of(
-            text: String, tts: String, buttons: List<Button>, sessionState: SessionState?, endSession: Boolean
-        ): ResponseObject {
-            return ResponseObject(ResponseValue(text, endSession, buttons, tts), sessionState ?: SessionState())
-        }
-
         fun of(
             text: String,
-            tts: String,
-            buttons: List<Button>,
-            sessionState: SessionState?,
-            appState: ApplicationState?,
-            endSession: Boolean
+            endSession: Boolean,
+            tts: String = text,
+            buttons: List<Button> = listOf(),
+            sessionState: SessionState? = null,
+            appState: ApplicationState? = null,
         ): ResponseObject {
             return ResponseObject(
                 response = ResponseValue(text, endSession, buttons, tts),
@@ -59,15 +33,23 @@ data class ResponseObject(
             )
         }
 
-        fun of(
-            text: String,
+        fun ofQuestion(
+            quiz: Quiz,
+            questionNumber: Int,
+            phrase: String,
             buttons: List<Button>,
             sessionState: SessionState?,
-            appState: ApplicationState?,
-            endSession: Boolean
+            endSession: Boolean,
+            appState: ApplicationState? = null
         ): ResponseObject {
+            val question = quiz.question(questionNumber)
+            val text = "$phrase $question"
+            val card = quiz.imageIdTo(questionNumber)?.let {
+                BigImageCard(imageId = it, title = phrase, description = question)
+            }
+
             return ResponseObject(
-                response = ResponseValue(text, endSession, buttons),
+                response = ResponseValue(text, endSession, buttons, text, card),
                 version = HTTP_VERSION,
                 sessionState = sessionState ?: SessionState(),
                 applicationState = appState
@@ -76,12 +58,20 @@ data class ResponseObject(
 
         fun ofUnclearCommand(requestObject: RequestObject?): ResponseObject {
             val sessionState = requestObject?.state?.session ?: SessionState()
-            return of("Я вас не поняла, повторите, пожалуйста.", sessionState, false)
+            return of(
+                text = "Я вас не поняла, повторите, пожалуйста.",
+                endSession = false,
+                sessionState = sessionState
+            )
         }
 
         fun ofTechnicalError(requestObject: RequestObject?): ResponseObject {
             val sessionState = requestObject?.state?.session ?: SessionState()
-            return of("Извините, произошла техническая ошибка. Попробуйте еще раз.", sessionState, false)
+            return of(
+                text = "Извините, произошла техническая ошибка. Попробуйте еще раз.",
+                endSession = false,
+                sessionState = sessionState
+            )
         }
     }
 }
@@ -91,7 +81,19 @@ data class ResponseValue(
     @JsonProperty("end_session") val endSession: Boolean,
     val buttons: List<Button> = listOf(),
     val tts: String? = text,
+    @JsonInclude(JsonInclude.Include.NON_NULL) val card: BigImageCard? = null,
 )
+
+data class BigImageCard(
+    @JsonProperty("image_id") val imageId: String,
+    val title: String? = null,
+    val description: String? = null,
+    val type: String = BIG_IMAGE_TYPE,
+) {
+    companion object {
+        const val BIG_IMAGE_TYPE = "BigImage"
+    }
+}
 
 data class Button(val title: String, val hide: Boolean = true, val payload: String = "{}", val url: String? = null) {
     companion object {

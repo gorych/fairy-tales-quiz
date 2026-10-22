@@ -97,7 +97,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Она маленькая и серая.",
                     "Она живёт в норке."
-                )
+                ),
+                imageId = "213044/3x9k4h7rbk510tcq818u",
             ),
             QuizItem(
                 number = 11,

@@ -3,6 +3,7 @@ package org.gorych.alice.skill.fairytail.command
 import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
+import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.core.command.PartingCommand
 import org.gorych.alice.skill.core.quiz.Quiz
@@ -18,10 +19,10 @@ class IDoNotKnowHowToRateCommand : Command {
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         return ResponseObject.of(
             text = RESPONSE_MESSAGE,
-            tts = RESPONSE_TTS,
             endSession = false,
+            tts = RESPONSE_TTS,
             buttons = listOf(Button.rate(), Button.goodbye()),
-            transitionCommands = setOf(RateCommand.name(), PartingCommand.name())
+            sessionState = SessionState(setOf(RateCommand.name(), PartingCommand.name()))
         )
     }
 

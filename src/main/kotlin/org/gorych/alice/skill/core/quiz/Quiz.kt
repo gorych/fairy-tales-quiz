@@ -32,4 +32,9 @@ abstract class Quiz(val bonusQuiz: Boolean = false) {
     }
 
     fun countOfQuestions(): Int = items.size
+
+    fun imageIdTo(questionNumber: Int): String? {
+        require(questionNumber > 0) { "Question number must be greater than zero" }
+        return items[questionNumber - 1].imageId
+    }
 }

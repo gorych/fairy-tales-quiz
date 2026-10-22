@@ -21,11 +21,14 @@ class RepeatQuestionCommand : RequestSessionStatedQuestionCommand() {
         requestObject: RequestObject, requestSessionState: SessionState, currentQuestionNumber: Int, quiz: Quiz
     ): ResponseObject {
         log("execute: question number: $currentQuestionNumber")
-        return ResponseObject.of(
-            text = "${BEFORE_QUESTION_PHRASES.random()} ${quiz.question(currentQuestionNumber)}",
-            state = requestSessionState,
-            endSession = false,
-            buttons = Button.skip_repeat_hint()
+
+        return ResponseObject.ofQuestion(
+            quiz = quiz,
+            questionNumber = currentQuestionNumber,
+            phrase = BEFORE_QUESTION_PHRASES.random(),
+            buttons = Button.skip_repeat_hint(),
+            sessionState = requestSessionState,
+            endSession = false
         )
     }
 

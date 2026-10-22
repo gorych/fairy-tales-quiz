@@ -22,12 +22,14 @@ class PlayingAgreementCommand : Command {
 
     private fun firstQuestionResponse(quiz: Quiz): ResponseObject {
         val questionNumber = 1
-        return ResponseObject.of(
-            text = "Отлично. Слушай первый вопрос. ${quiz.question(questionNumber)}",
+        return ResponseObject.ofQuestion(
+            quiz = quiz,
+            questionNumber = questionNumber,
+            phrase = "Отлично. Слушай первый вопрос.",
             buttons = Button.skip_repeat_hint(),
             sessionState = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
             endSession = false,
-            appState = ApplicationState(quiz),
+            appState = ApplicationState(quiz)
         )
     }
 
@@ -39,16 +41,16 @@ class PlayingAgreementCommand : Command {
         requireNotNull(currentQuestionNumber) { "Current question number must not be NULL" }
 
         val nextQuestionNumber = currentQuestionNumber + 1
-        return ResponseObject.of(
-            //@formatter:off
-            text = "${CONTINUE_PLAYING_OPENING_PHRASES.random()} Слушай следующий вопрос. ${quiz.question(nextQuestionNumber)}",
-            //@formatter:on
-            state = requestSessionState.copy(
+        return ResponseObject.ofQuestion(
+            quiz = quiz,
+            questionNumber = nextQuestionNumber,
+            phrase = "${CONTINUE_PLAYING_OPENING_PHRASES.random()} Слушай следующий вопрос.",
+            buttons = Button.skip_repeat_hint(),
+            sessionState = requestSessionState.copy(
                 currentQuestion = nextQuestionNumber,
                 transitionCommands = setOf(NextQuestionCommand.name())
             ),
-            endSession = false,
-            buttons = Button.skip_repeat_hint()
+            endSession = false
         )
     }
 

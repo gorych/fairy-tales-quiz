@@ -29,23 +29,28 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
         return noQuestionsResponse(requestSessionState.rightAnswersCount, quiz)
     }
 
-    private fun nextQuestionResponse(nextQuestionNumber: Int, sessionState: SessionState, quiz: Quiz) =
-        ResponseObject.of(
-            text = "${BEFORE_QUESTION_PHRASES.random()} ${quiz.question(nextQuestionNumber)}",
-            state = sessionState.copy(
+    private fun nextQuestionResponse(
+        nextQuestionNumber: Int, sessionState: SessionState, quiz: Quiz
+    ): ResponseObject {
+        return ResponseObject.ofQuestion(
+            quiz = quiz,
+            questionNumber = nextQuestionNumber,
+            phrase = BEFORE_QUESTION_PHRASES.random(),
+            buttons = Button.skip_repeat_hint(),
+            sessionState = sessionState.copy(
                 currentQuestion = nextQuestionNumber,
                 transitionCommands = setOf(NextQuestionCommand.name()),
                 previousHintNumber = 0
             ),
-            endSession = false,
-            buttons = Button.skip_repeat_hint()
+            endSession = false
         )
+    }
 
     private fun noQuestionsResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
         return ResponseObject.of(
             text = NO_QUESTION_RESPONSE_TEXT_TEMPLATE.format(rightAnswersCount, quiz.countOfQuestions()),
             endSession = false,
-            button = Button.goodbye()
+            buttons = listOf(Button.goodbye())
         )
     }
 

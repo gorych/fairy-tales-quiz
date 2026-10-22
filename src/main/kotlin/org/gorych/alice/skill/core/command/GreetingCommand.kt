@@ -22,7 +22,11 @@ class GreetingCommand : Command {
                 it.containsToken("здравствуйте") -> "И вам, здравствуйте!"
                 else -> "И вам доброго времени суток!"
             }
-            return ResponseObject.of(responseText, requestObject.state?.session, false)
+            return ResponseObject.of(
+                text = responseText,
+                endSession = false,
+                sessionState = requestObject.state?.session
+            )
         }
     }
 

@@ -33,7 +33,12 @@ class HelpCommand : Command {
             buttons.addAll(Button.skip_repeat_hint_stop())
         }
         requestObject.let {
-            return ResponseObject.of(responseText, buttons, requestObject.state?.session, false)
+            return ResponseObject.of(
+                text = responseText,
+                endSession = false,
+                buttons = buttons,
+                sessionState = requestObject.state?.session
+            )
         }
     }
 

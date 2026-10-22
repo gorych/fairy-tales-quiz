@@ -4,5 +4,6 @@ data class QuizItem(
     val number: Int,
     val question: String,
     val answers: List<String>,
-    val hints: List<String>
+    val hints: List<String>,
+    val imageId: String? = null
 )

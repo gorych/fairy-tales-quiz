@@ -16,7 +16,11 @@ class GratitudeCommand : Command {
 
     override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
         val responseText = GRATITUDE_PHRASES.random()
-        return ResponseObject.of(responseText, requestObject.state?.session, false)
+        return ResponseObject.of(
+            text = responseText,
+            endSession = false,
+            sessionState = requestObject.state?.session
+        )
     }
 
     companion object {

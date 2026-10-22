@@ -33,7 +33,12 @@ class WhatCanYouDoCommand : Command {
             } else {
                 buttons.addAll(Button.skip_repeat_hint_stop())
             }
-            return ResponseObject.of(responseText, buttons, requestObject.state?.session, false)
+            return ResponseObject.of(
+                text = responseText,
+                endSession = false,
+                buttons = buttons,
+                sessionState = requestObject.state?.session
+            )
         }
     }
 

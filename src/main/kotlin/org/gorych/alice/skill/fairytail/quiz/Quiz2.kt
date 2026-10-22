@@ -17,7 +17,8 @@ class Quiz2 : Quiz() {
                 number = 2,
                 question = "Кого позвала Жучка, чтобы вытянуть репку?",
                 answers = listOf("кошка", "кошку"),
-                hints = listOf("Она говорит 'мяу'.", "Она любит ловить мышей.")
+                hints = listOf("Она говорит 'мяу'.", "Она любит ловить мышей."),
+                imageId = "213044/3x9k4h7rbk510tcq818u",
             ),
             QuizItem(
                 number = 3,
