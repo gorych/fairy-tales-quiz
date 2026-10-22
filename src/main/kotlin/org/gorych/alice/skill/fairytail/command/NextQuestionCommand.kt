@@ -254,19 +254,19 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 rightAnswersCount = 5,
                 text = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
                 tts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "1540737/ar9xw2gs3u5u0s8isg36"
+                imageId = "213044/jgkjroqohtmf57pd2z5c"
             ),
             Achievement(
                 rightAnswersCount = 10,
                 text = TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
                 tts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "997614/wtw43d41mfcolljcg8x4"
+                imageId = "1030494/4gy836gclc2990z4mra1"
             ),
             Achievement(
                 rightAnswersCount = 20,
                 text = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
                 tts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "965417/337lwmj31hmdidyh2sw4"
+                imageId = "1030494/68kybvayf4ptqww27auq"
             ),
         )
 

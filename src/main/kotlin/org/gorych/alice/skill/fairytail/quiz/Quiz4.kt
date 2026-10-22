@@ -25,7 +25,7 @@ class Quiz4 : Quiz() {
                     "Это птица, которую девочка спасла зимой.",
                     "У неё длинные крылья и хвост."
                 ),
-                imageId = "997614/td86oatauljcx2rgiqgr",
+                imageId = "1656841/la78y7i5awruid1x9xd2",
             ),
             QuizItem(
                 number = 3,
@@ -44,7 +44,7 @@ class Quiz4 : Quiz() {
                     "Она съела кашу из самой маленькой чашки.",
                     "Она уснула в кроватке Мишутки."
                 ),
-                imageId = "1521359/tduhbog6egpl7ngrmdtz",
+                imageId = "14236656/q37at1n5a6megrp0xgyt",
             ),
             QuizItem(
                 number = 5,
@@ -100,7 +100,7 @@ class Quiz4 : Quiz() {
                     "Она маленькая и серая.",
                     "Она живёт в норке."
                 ),
-                imageId = "213044/3x9k4h7rbk510tcq818u",
+                imageId = "213044/fn6tcye576l04syaqxi0",
             ),
             QuizItem(
                 number = 11,
@@ -110,7 +110,7 @@ class Quiz4 : Quiz() {
                     "Оно не золотое.",
                     "Это обычное яйцо.",
                 ),
-                imageId = "997614/tt4lyy7esm6hquviqemc",
+                imageId = "14236656/v3vzwbrs29fmdp2ckifm",
             ),
             QuizItem(
                 number = 12,
@@ -148,7 +148,7 @@ class Quiz4 : Quiz() {
                     "Он начальник умывальников.",
                     "Он сердито топнул ногой."
                 ),
-                imageId = "1521359/hnfuzdc86t9rpzkvo400",
+                imageId = "965417/0f8yay4wmwknzzzunsop",
             ),
             QuizItem(
                 number = 16,
@@ -158,7 +158,7 @@ class Quiz4 : Quiz() {
                     "У него длинные уши.",
                     "Он любит морковку."
                 ),
-                imageId = "997614/hhilgl049pn6oxwtubyn",
+                imageId = "213044/1gfhobbwnqii3em6l40c",
             ),
             QuizItem(
                 number = 17,
@@ -168,7 +168,7 @@ class Quiz4 : Quiz() {
                     "Они работают в лесу.",
                     "У них есть топоры."
                 ),
-                imageId = "965417/wbje5qkvh6ofe4hy83xu",
+                imageId = "14236656/anv5sa3jbtv43budzl3e",
             ),
             QuizItem(
                 number = 18,
@@ -208,7 +208,7 @@ class Quiz4 : Quiz() {
                     "Он маленький мальчик.",
                     "Он живёт в обычной квартире."
                 ),
-                imageId = "13200873/90j73f1q0h24orxdar10",
+                imageId = "1521359/sv6lz4o9qkt91gr4zgzy",
             ),
             QuizItem(
                 number = 22,
@@ -227,7 +227,7 @@ class Quiz4 : Quiz() {
                     "Это желтая сухая трава.",
                     "Из нее дом получился непрочным."
                 ),
-                imageId = "1540737/pdxrfdyvrmza2hfjfl0q",
+                imageId = "1030494/eflhlsj7loxcxd8vsv65",
             ),
             QuizItem(
                 number = 24,

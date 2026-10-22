@@ -36,14 +36,14 @@ class Quiz3 : Quiz() {
                     "Средний слог этого слова - 'МО'.",
                     "Последний слог этого слова - 'ВАР'."
                 ),
-                imageId = "965417/06ppvroy2gmlwpvx66e8",
+                imageId = "997614/sl4m93g4iexy37nbb2m2",
             ),
             QuizItem(
                 number = 4,
                 question = "Кого встретил колобок последним?",
                 answers = listOf("лиса", "лису", "лисичку", "лисичка"),
                 hints = listOf("Она рыжая и хитрая.", "Она его съела."),
-                imageId = "997614/hhilgl049pn6oxwtubyn",
+                imageId = "213044/1gfhobbwnqii3em6l40c",
             ),
             QuizItem(
                 number = 5,
@@ -54,7 +54,7 @@ class Quiz3 : Quiz() {
                     "Начальный слог этого слова - 'ЖУЧ'.",
                     "Последний слог этого слова - 'КА'.",
                 ),
-                imageId = "213044/3x9k4h7rbk510tcq818u",
+                imageId = "213044/fn6tcye576l04syaqxi0",
             ),
             QuizItem(
                 number = 6,
@@ -70,14 +70,14 @@ class Quiz3 : Quiz() {
                     "Им рубят дрова.",
                     "У него деревянная ручка и лезвие."
                 ),
-                imageId = "1652229/3f1r9k26xz6muwk9n81p",
+                imageId = "14236656/upcqw3qf88wd5yba4b1g",
             ),
             QuizItem(
                 number = 8,
                 question = "В какой сказке встречается фраза: 'Кто хлебал в моей чашке'?",
                 answers = listOf("три медведя", "3 медведя"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'три'.", "Второе слово 'медведя'."),
-                imageId = "1521359/tduhbog6egpl7ngrmdtz",
+                imageId = "14236656/q37at1n5a6megrp0xgyt",
             ),
             QuizItem(
                 number = 9,
@@ -103,7 +103,7 @@ class Quiz3 : Quiz() {
                     "Он есть у волка сзади.",
                     "Мёрзни, мёрзни волчий..."
                 ),
-                imageId = "965417/ztbepukko9g18uxdnsaf",
+                imageId = "965417/ac3tpqxre483xk4pbjhz",
             ),
             QuizItem(
                 number = 12,
@@ -114,7 +114,7 @@ class Quiz3 : Quiz() {
                     "Его имя содержит слово 'болит'.",
                     "Начальный слог этого слова - 'АЙ'."
                 ),
-                imageId = "1540737/ip77uwwexw52ak5a6a9z",
+                imageId = "965417/8yivnxo5vyr86lszrj03",
             ),
             QuizItem(
                 number = 13,
@@ -124,7 +124,7 @@ class Quiz3 : Quiz() {
                     "У него есть хобот.",
                     "Это самое крупное животное на земле."
                 ),
-                imageId = "1652229/ef9v88l00kyb51pbknov",
+                imageId = "1521359/52pvlwzc77iv0zdyzuzo",
             ),
             QuizItem(
                 number = 14,
@@ -135,7 +135,7 @@ class Quiz3 : Quiz() {
                     "Это слово начинается на букву 'Е'.",
                     "Последний слог этого слова - 'ЛЯ'."
                 ),
-                imageId = "1652229/b0tr4ri95k06hh1jrcu4",
+                imageId = "1521359/szatcslg2vtkj84vme19",
             ),
             QuizItem(
                 number = 15,
@@ -146,7 +146,7 @@ class Quiz3 : Quiz() {
                     "Первое слово 'гуси'.",
                     "Второе слово 'лебеди'."
                 ),
-                imageId = "1652229/dll6xfhg1eqcd2mxwuw4",
+                imageId = "14236656/yhocc8tsrdekj3viir5a",
             ),
             QuizItem(
                 number = 16,
@@ -156,7 +156,7 @@ class Quiz3 : Quiz() {
                     "Он тяжелый, красный и крепкий.",
                     "Из него строят настоящие дома."
                 ),
-                imageId = "1540737/pdxrfdyvrmza2hfjfl0q",
+                imageId = "1030494/eflhlsj7loxcxd8vsv65",
             ),
             //endregion
 
@@ -171,21 +171,21 @@ class Quiz3 : Quiz() {
                     "Третий слог этого слова - 'ВОЧ'.",
                     "Последний слог этого слова - 'КА'."
                 ),
-                imageId = "997614/td86oatauljcx2rgiqgr",
+                imageId = "1656841/la78y7i5awruid1x9xd2",
             ),
             QuizItem(
                 number = 18,
                 question = "От кого убегала вся посуда, мебель и вещи?",
                 answers = listOf("Федора", "федора", "федоры", "от федоры"),
                 hints = listOf("Это бабушка.", "Если бы это был мужчина, то его звали бы Фёдор."),
-                imageId = "1030494/gqkyvur56nscnr9z983v",
+                imageId = "965417/4wjkyj6tt0l0ezqkyfhg",
             ),
             QuizItem(
                 number = 19,
                 question = "Кто был хозяином кота в сапогах?",
                 answers = listOf("маркиз Карабас", "маркиз карабас"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'маркиз'.", "Второе слово 'карабас'."),
-                imageId = "1030494/0cv3x2wdpj8ibgyz7scm",
+                imageId = "1656841/p8zbs4lsl6xw350pdduj",
             ),
             QuizItem(
                 number = 20,
@@ -207,7 +207,7 @@ class Quiz3 : Quiz() {
                 question = "В чем медведь нес Машу домой?",
                 answers = listOf("короб", "в коробе", "корзина", "в корзине", "корзинка", "в корзинке"),
                 hints = listOf("Это большая плетеная емкость за спиной.", "Там еще лежали пирожки."),
-                imageId = "1652229/20smb4ujj3zpy37wtnhd",
+                imageId = "1656841/nm0bfbt74hfhtza2xrl6",
             ),
             QuizItem(
                 number = 23,

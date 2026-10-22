@@ -12,14 +12,14 @@ class Quiz2 : Quiz() {
                 question = "Кого встретил колобок последним?",
                 answers = listOf("лиса", "лису", "лисичку", "лисичка"),
                 hints = listOf("Она рыжая и хитрая.", "Она его съела."),
-                imageId = "997614/hhilgl049pn6oxwtubyn",
+                imageId = "213044/1gfhobbwnqii3em6l40c",
             ),
             QuizItem(
                 number = 2,
                 question = "Кого позвала Жучка, чтобы вытянуть репку?",
                 answers = listOf("кошка", "кошку"),
                 hints = listOf("Она говорит 'мяу'.", "Она любит ловить мышей."),
-                imageId = "213044/3x9k4h7rbk510tcq818u",
+                imageId = "213044/fn6tcye576l04syaqxi0",
             ),
             QuizItem(
                 number = 3,
@@ -28,7 +28,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Он любит мёд.",
                     "Он спит всю зиму.",
-                )
+                ),
+                imageId = "1656841/nm0bfbt74hfhtza2xrl6",
             ),
             QuizItem(
                 number = 4,
@@ -37,7 +38,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "У него огромные уши и хобот.",
                     "Он прислал ответ: пудов этак пять или шесть."
-                )
+                ),
+                imageId = "1521359/52pvlwzc77iv0zdyzuzo",
             ),
 
             QuizItem(
@@ -48,7 +50,7 @@ class Quiz2 : Quiz() {
                     "В ней пекут пирожки.",
                     "Её топят дровами."
                 ),
-                imageId = "1652229/b0tr4ri95k06hh1jrcu4",
+                imageId = "1521359/szatcslg2vtkj84vme19",
             ),
             QuizItem(
                 number = 6,
@@ -58,7 +60,7 @@ class Quiz2 : Quiz() {
                     "Им укрываются.",
                     "Оно улетело вместе с простыней."
                 ),
-                imageId = "1521359/hnfuzdc86t9rpzkvo400",
+                imageId = "965417/0f8yay4wmwknzzzunsop",
             ),
             QuizItem(
                 number = 7,
@@ -70,54 +72,51 @@ class Quiz2 : Quiz() {
                     "Это слово начинается на букву 'П'.",
                     "Последний слог этого слова - 'ДА'.",
                 ),
-                imageId = "1030494/gqkyvur56nscnr9z983v",
+                imageId = "965417/4wjkyj6tt0l0ezqkyfhg",
             ),
             QuizItem(
                 number = 8,
-
                 question = "Что нашла Муха-Цокотуха, когда по полю пошла?",
                 answers = listOf("денежка", "денежку", "деньги", "денюжка"),
                 hints = listOf(
                     "За это можно что-то купить.",
                     "Они лежат в кошельке.",
                 ),
-                imageId = "965417/06ppvroy2gmlwpvx66e8",
+                imageId = "997614/sl4m93g4iexy37nbb2m2",
             ),
             //region Level 2
             QuizItem(
                 number = 9,
-
                 question = "Из чего построил свой самый прочный дом поросёнок Наф-Наф?",
                 answers = listOf("кирпич", "кирпичи", "из кирпича", "из кирпичей", "с кирпича"),
                 hints = listOf(
                     "Он тяжелый, красный и крепкий.",
                     "Из него строят настоящие дома.",
                 ),
-                imageId = "1540737/pdxrfdyvrmza2hfjfl0q",
+                imageId = "1030494/eflhlsj7loxcxd8vsv65",
             ),
             QuizItem(
                 number = 10,
-
                 question = "Какая избушка была у лисы в сказке: ледяная или лубяная?",
                 answers = listOf("ледяная"),
                 hints = listOf(
                     "Она растаяла весной.",
                     "Это застывшая вода.",
-                )
+                ),
+                imageId = "1533899/6s02hecw6zy23e0x171h",
             ),
             QuizItem(
                 number = 11,
-
                 question = "Что потеряла Золушка на балу, когда убегала?",
                 answers = listOf("туфелька", "туфельку", "башмачок"),
                 hints = listOf(
                     "Это её обувь.",
                     "Она была из хрусталя.",
-                )
+                ),
+                imageId = "1533899/68ypsup8jxv8uvwmkx8g",
             ),
             QuizItem(
                 number = 12,
-
                 question = "В какую страну отправился Айболит, чтобы лечить зверей?",
                 answers = listOf("Африка", "африка", "африку", "в африку"),
                 hints = listOf(
@@ -125,18 +124,17 @@ class Quiz2 : Quiz() {
                     "Там очень жарко и течет Лимпопо.",
                     "Там живут жирафы."
                 ),
-                imageId = "1540737/ip77uwwexw52ak5a6a9z",
+                imageId = "965417/8yivnxo5vyr86lszrj03",
             ),
             QuizItem(
                 number = 13,
-
                 question = "Сколько гномов приютили Белоснежку?",
                 answers = listOf("7", "семь"),
                 hints = listOf(
                     "Их столько же, как дней в неделе.",
                     "Их было столько же, сколько козлят в сказке про волка.",
                 ),
-                imageId = "1540737/ydrzzh0rhxaftotw4t2k",
+                imageId = "213044/gs79m6ezzdja8nxnhdhz",
             ),
             QuizItem(
                 number = 14,
@@ -154,7 +152,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "У него есть рога.",
                     "Это ребёнок козы."
-                )
+                ),
+                imageId = "14236656/2hvrnuk90bibws5jzakf",
             ),
             QuizItem(
                 number = 15,
@@ -164,7 +163,7 @@ class Quiz2 : Quiz() {
                     "Оно сладкое и в банке.",
                     "Его варят из ягод."
                 ),
-                imageId = "13200873/90j73f1q0h24orxdar10",
+                imageId = "1656841/x8wa5s3e1y816x87r5b3",
             ),
             QuizItem(
                 number = 16,
@@ -174,7 +173,7 @@ class Quiz2 : Quiz() {
                     "Они есть у всех на голове.",
                     "Их можно стричь."
                 ),
-                imageId = "997614/du4hbcj95nncs12i6ct9",
+                imageId = "14236656/j0kix1bvjqe3w2iu3aw6",
             ),
             //endregion
 
@@ -186,7 +185,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Она зелёная и живет в болоте.",
                     "Иван-царевич нашёл её со стрелой."
-                )
+                ),
+                imageId = "1656841/iohx8ayk5wvkqiebcrgu",
             ),
             QuizItem(
                 number = 18,
@@ -195,7 +195,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Это царь зверей.",
                     "У него есть грива.",
-                )
+                ),
+                imageId = "1656841/p8zbs4lsl6xw350pdduj",
             ),
 
             QuizItem(
@@ -206,7 +207,7 @@ class Quiz2 : Quiz() {
                     "Он живёт под землёй.",
                     "Он плохо видит.",
                 ),
-                imageId = "997614/td86oatauljcx2rgiqgr",
+                imageId = "1656841/la78y7i5awruid1x9xd2",
             ),
             QuizItem(
                 number = 20,
@@ -216,7 +217,8 @@ class Quiz2 : Quiz() {
                     "Это большой и оранжевый овощ.",
                     "Это слово начинается на букву 'Т'.",
                     "Это слово заканчивается на 'ВА'.",
-                )
+                ),
+                imageId = "937455/fvuah8seqdy9z21qcg34",
             ),
             QuizItem(
                 number = 21,
@@ -232,19 +234,20 @@ class Quiz2 : Quiz() {
                     "тартилла",
                     "тортилла",
                     "Тортилла",
-
-                    ),
+                ),
                 hints = listOf(
                     "Начальный слог этого слова - 'ТОР'.",
                     "Средний слог этого слова - 'ТИ'.",
                     "Последний слог этого слова - 'ЛА'."
-                )
+                ),
+                imageId = "1656841/6gc8f60kp0l1e72lqb9w",
             ),
             QuizItem(
                 number = 22,
                 question = "В кого превратился гадкий утёнок?",
                 answers = listOf("лебедь", "лебедя", "в лебедя"),
-                hints = listOf("Это птица белого цвета.", "У этой птицы длинная шея.")
+                hints = listOf("Это птица белого цвета.", "У этой птицы длинная шея."),
+                imageId = "14236656/ds99t783v5fzk3zo8hdd",
             ),
             QuizItem(
                 number = 23,
@@ -253,7 +256,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Она летает на метле.",
                     "Кощей Бессмертный её друг.",
-                )
+                ),
+                imageId = "1533899/io2yvwzv5oyt0n03slj6",
             ),
             QuizItem(
                 number = 24,
@@ -262,7 +266,8 @@ class Quiz2 : Quiz() {
                 hints = listOf(
                     "Начальный слог этого слова - 'ВЕЧ'.",
                     "Последний слог этого слова - 'НОСТЬ'."
-                )
+                ),
+                imageId = "965417/p9avct598bz0iafjw4au",
             ),
             QuizItem(
                 number = 25,
@@ -273,7 +278,8 @@ class Quiz2 : Quiz() {
                     "Первый слог этого слова 'ЗО'.",
                     "Второй слог этого слова 'ЛУШ'.",
                     "Третий слог этого слова 'КА'.",
-                )
+                ),
+                imageId = "1533899/68ypsup8jxv8uvwmkx8g",
             ),
         )
 }
