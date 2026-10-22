@@ -15,7 +15,8 @@ class Quiz4 : Quiz() {
                     "Это отпиленная часть дерева.",
                     "Начальный слог этого слова - 'ПО'.",
                     "Последний слог этого слова - 'НО'.",
-                )
+                ),
+                imageId = "1656841/6gc8f60kp0l1e72lqb9w",
             ),
             QuizItem(
                 number = 2,
@@ -34,7 +35,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Он косолапый.",
                     "Он собирал шишки."
-                )
+                ),
+                imageId = "997614/1bhh6jcd4rc4wcg3ldm6",
             ),
             QuizItem(
                 number = 4,
@@ -53,7 +55,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "У него большие уши.",
                     "Он жил в телефонной будке."
-                )
+                ),
+                imageId = "937455/2qs1s38o6x9pvwm1ahz4",
             ),
             QuizItem(
                 number = 6,
@@ -62,7 +65,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Это мягкий металл.",
                     "Название этого металла скрыто в имени героя.",
-                )
+                ),
+                imageId = "13200873/jsd8jodstlt4kdn1xxhc",
             ),
             QuizItem(
                 number = 7,
@@ -71,7 +75,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Она носила красный головной убор.",
                     "По пути она встретила волка.",
-                )
+                ),
+                imageId = "14236656/anv5sa3jbtv43budzl3e",
             ),
             QuizItem(
                 number = 8,
@@ -80,7 +85,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Она прыгнула через костер.",
                     "Это внучка Деда Мороза."
-                )
+                ),
+                imageId = "937455/ogl4dv5rxdl4ky98m563"
             ),
             QuizItem(
                 number = 9,
@@ -89,7 +95,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Она учила Буратино писать и считать.",
                     "Её имя начинается на 'МАЛЬ'."
-                )
+                ),
+                imageId = "1656841/6gc8f60kp0l1e72lqb9w",
             ),
             //region Level 2
             QuizItem(
@@ -119,7 +126,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "У него большие зубы.",
                     "Он зеленый и умеет плавать."
-                )
+                ),
+                imageId = "1521359/52pvlwzc77iv0zdyzuzo",
             ),
             QuizItem(
                 number = 13,
@@ -129,7 +137,8 @@ class Quiz4 : Quiz() {
                     "У неё есть рога и копыта.",
                     "Начальный слог этого слова - 'КО'.",
                     "Последний слог этого слова - 'ЗА'.",
-                )
+                ),
+                imageId = "965417/mb8o3axubtjqksc0wpan",
             ),
             QuizItem(
                 number = 14,
@@ -138,7 +147,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "У неё кожа белая, как снег.",
                     "Она съела отравленное яблоко.",
-                )
+                ),
+                imageId = "213044/gs79m6ezzdja8nxnhdhz",
             ),
             QuizItem(
                 number = 15,
@@ -177,7 +187,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Она добрая волшебница.",
                     "У неё есть волшебная палочка."
-                )
+                ),
+                imageId = "1540737/4vvlpjabmuedgj5dvog8",
             ),
             //endregion
 
@@ -189,7 +200,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Они красивые и колючие.",
                     "Они были в ящике на окне."
-                )
+                ),
+                imageId = "1652229/dzx4tygejqli6y9rtsyd",
             ),
             QuizItem(
                 number = 20,
@@ -198,7 +210,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Она живёт во дворце изо льда.",
                     "Она поцеловала Кая."
-                )
+                ),
+                imageId = "1030494/jdv7fdr44psl4dtgnmq5",
             ),
             QuizItem(
                 number = 21,
@@ -217,7 +230,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "Там раньше звонили по телефону.",
                     "Это небольшой домик."
-                )
+                ),
+                imageId = "1652229/2i8uzrhleslh59wsmi27",
             ),
             QuizItem(
                 number = 23,
@@ -235,7 +249,8 @@ class Quiz4 : Quiz() {
                 answers = listOf("куртку", "куртка", "свою куртку"),
                 hints = listOf(
                     "Это предмет одежды.",
-                )
+                ),
+                imageId = "1656841/6gc8f60kp0l1e72lqb9w",
             ),
             QuizItem(
                 number = 25,
@@ -244,7 +259,8 @@ class Quiz4 : Quiz() {
                 hints = listOf(
                     "У него длинная борода.",
                     "Он директор кукольного театра."
-                )
+                ),
+                imageId = "1656841/6gc8f60kp0l1e72lqb9w",
             ),
 
             //endregion
