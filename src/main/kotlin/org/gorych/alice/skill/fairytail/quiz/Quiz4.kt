@@ -46,7 +46,7 @@ class Quiz4 : Quiz() {
                     "Она съела кашу из самой маленькой чашки.",
                     "Она уснула в кроватке Мишутки."
                 ),
-                imageId = "14236656/q37at1n5a6megrp0xgyt",
+                imageId = "1533899/nxzll2bp7yywgevcv5s2",
             ),
             QuizItem(
                 number = 5,

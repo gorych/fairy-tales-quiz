@@ -80,7 +80,7 @@ class Quiz3 : Quiz() {
                 question = "В какой сказке встречается фраза: 'Кто хлебал в моей чашке'?",
                 answers = listOf("три медведя", "3 медведя"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'три'.", "Второе слово 'медведя'."),
-                imageId = "14236656/q37at1n5a6megrp0xgyt",
+                imageId = "1533899/nxzll2bp7yywgevcv5s2",
             ),
             QuizItem(
                 number = 9,
@@ -108,7 +108,7 @@ class Quiz3 : Quiz() {
                     "Он есть у волка сзади.",
                     "Мёрзни, мёрзни волчий..."
                 ),
-                imageId = "965417/ac3tpqxre483xk4pbjhz",
+                imageId = "1652229/9fc18kkise7sk9cekd3y",
             ),
             QuizItem(
                 number = 12,
@@ -183,7 +183,7 @@ class Quiz3 : Quiz() {
                 question = "От кого убегала вся посуда, мебель и вещи?",
                 answers = listOf("Федора", "федора", "федоры", "от федоры"),
                 hints = listOf("Это бабушка.", "Если бы это был мужчина, то его звали бы Фёдор."),
-                imageId = "965417/4wjkyj6tt0l0ezqkyfhg",
+                imageId = "13200873/q2nwm8qflinnba3z77g3",
             ),
             QuizItem(
                 number = 19,
@@ -214,7 +214,7 @@ class Quiz3 : Quiz() {
                 question = "В чем медведь нес Машу домой?",
                 answers = listOf("короб", "в коробе", "корзина", "в корзине", "корзинка", "в корзинке"),
                 hints = listOf("Это большая плетеная емкость за спиной.", "Там еще лежали пирожки."),
-                imageId = "1656841/nm0bfbt74hfhtza2xrl6",
+                imageId = "1533899/zsuxp7afjpdk7n2bscby",
             ),
             QuizItem(
                 number = 23,
@@ -252,7 +252,7 @@ class Quiz3 : Quiz() {
                 question = "Как зовут бабушку, которая живёт в избушке на курьих ножках?",
                 answers = listOf("баба-яга", "баба яга", "яга"),
                 hints = listOf("Она летает на метле.", "Кощей Бессмертный её друг."),
-                imageId = "1533899/io2yvwzv5oyt0n03slj6",
+                imageId = "1533899/zugd8ohxn5wftco7ema8",
             )
         )
 }

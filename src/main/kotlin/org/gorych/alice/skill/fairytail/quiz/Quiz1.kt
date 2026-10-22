@@ -96,7 +96,7 @@ class Quiz1 : Quiz() {
                 question = "В какой сказке встречается фраза: 'Кто хлебал в моей чашке'?",
                 answers = listOf("три медведя", "3 медведя"),
                 hints = listOf("В этой фразе 2 слова.", "Первое слово 'три'.", "Второе слово 'медведя'."),
-                imageId = "14236656/q37at1n5a6megrp0xgyt",
+                imageId = "1533899/nxzll2bp7yywgevcv5s2",
             ),
             QuizItem(
                 number = 11,
@@ -106,7 +106,7 @@ class Quiz1 : Quiz() {
                     "Это имя отличается только одной буквой от слова 'саша'.",
                     "Это слово начинается на букву 'М'."
                 ),
-                imageId = "1656841/nm0bfbt74hfhtza2xrl6",
+                imageId = "1533899/zsuxp7afjpdk7n2bscby",
             ),
             QuizItem(
                 number = 12,
@@ -158,14 +158,14 @@ class Quiz1 : Quiz() {
                 question = "От кого убегала вся посуда, мебель и вещи?",
                 answers = listOf("Федора", "федора", "федоры", "от федоры"),
                 hints = listOf("Это бабушка.", "Если бы это был мужчина, то его звали бы Фёдор."),
-                imageId = "965417/4wjkyj6tt0l0ezqkyfhg",
+                imageId = "13200873/q2nwm8qflinnba3z77g3",
             ),
             QuizItem(
                 number = 18,
                 question = "Продолжи фразу: Ясни ясни на небе звёзды, мёрзни мёрзни...",
                 answers = listOf("волчий хвост"),
                 hints = listOf("В этой фразе два слова.", "Первое слово 'волчий'.", "Второе слово 'хвост'."),
-                imageId = "965417/ac3tpqxre483xk4pbjhz",
+                imageId = "1652229/9fc18kkise7sk9cekd3y",
             ),
             QuizItem(
                 number = 19,

@@ -29,7 +29,7 @@ class Quiz2 : Quiz() {
                     "Он любит мёд.",
                     "Он спит всю зиму.",
                 ),
-                imageId = "1656841/nm0bfbt74hfhtza2xrl6",
+                imageId = "1533899/zsuxp7afjpdk7n2bscby",
             ),
             QuizItem(
                 number = 4,
@@ -72,7 +72,7 @@ class Quiz2 : Quiz() {
                     "Это слово начинается на букву 'П'.",
                     "Последний слог этого слова - 'ДА'.",
                 ),
-                imageId = "965417/4wjkyj6tt0l0ezqkyfhg",
+                imageId = "13200873/q2nwm8qflinnba3z77g3",
             ),
             QuizItem(
                 number = 8,
@@ -257,7 +257,7 @@ class Quiz2 : Quiz() {
                     "Она летает на метле.",
                     "Кощей Бессмертный её друг.",
                 ),
-                imageId = "1533899/io2yvwzv5oyt0n03slj6",
+                imageId = "1533899/zugd8ohxn5wftco7ema8",
             ),
             QuizItem(
                 number = 24,
