@@ -254,7 +254,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 rightAnswersCount = 5,
                 text = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
                 tts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "13200873/bu2umubiu4bghyuzkqqx"
+                imageId = "1540737/ar9xw2gs3u5u0s8isg36"
             ),
             Achievement(
                 rightAnswersCount = 10,
@@ -266,7 +266,7 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
                 rightAnswersCount = 20,
                 text = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
                 tts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "997614/axt31t41h10q2y2wzjmj"
+                imageId = "965417/337lwmj31hmdidyh2sw4"
             ),
         )
 
