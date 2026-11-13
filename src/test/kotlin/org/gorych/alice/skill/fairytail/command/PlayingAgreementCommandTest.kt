@@ -14,7 +14,7 @@ class PlayingAgreementCommandTest {
     @Test
     fun `WHEN name call THEN should return class simple name`() {
         //given
-        val command = PlayingAgreementCommand()
+        val command = PlayingAgreementCommand { Quiz1() }
         val expected = PlayingAgreementCommand::class.java.simpleName
 
         //when
@@ -38,7 +38,7 @@ class PlayingAgreementCommandTest {
         whenDescription: String
     ) {
         //given
-        val command = PlayingAgreementCommand()
+        val command = PlayingAgreementCommand { Quiz1() }
         val requestObject = RequestObject.getByIntentKey(key)
 
         //when
@@ -63,13 +63,12 @@ class PlayingAgreementCommandTest {
         whenDescription: String
     ) {
         //given
-        val command = PlayingAgreementCommand()
+        val command = PlayingAgreementCommand { Quiz1() }
         val requestObject = RequestObject.getBySessionStateKey(key)
         val expectedState = SessionState(transitionCommands = setOf("NextQuestionCommand"))
-        val quiz = Quiz1()
 
         //when
-        val actual: ResponseObject = command.execute(requestObject, quiz)
+        val actual: ResponseObject = command.execute(requestObject)
 
         //then
         assertFalse { actual.response.endSession }

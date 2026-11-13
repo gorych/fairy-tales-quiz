@@ -4,7 +4,6 @@ import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.command.Command
-import org.gorych.alice.skill.core.quiz.Quiz
 
 class RateCommand : Command {
 
@@ -14,7 +13,7 @@ class RateCommand : Command {
         return requestObject.containsIntent(RATE_INTENT_ID) && requestObject.containsCommand(name())
     }
 
-    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
+    override fun execute(requestObject: RequestObject): ResponseObject {
         requestObject.let {
             val responseText = "\uD83D\uDE4F Спасибо! С твоей помощью викторина будет только интереснее!"
             return ResponseObject.of(

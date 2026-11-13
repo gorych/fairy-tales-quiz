@@ -1,7 +1,6 @@
 package org.gorych.alice.skill.core.command
 
 import org.gorych.alice.skill.core.api.*
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test
@@ -74,10 +73,9 @@ class GreetingCommandTest {
         val expectedState = if (hasState) notEmptySessionState else SessionState()
         val command = GreetingCommand()
         val requestObject = RequestObject.Companion.getByNluTokenKey(key)
-        val quiz = Quiz1()
 
         //when
-        val result: ResponseObject = command.execute(requestObject, quiz)
+        val result: ResponseObject = command.execute(requestObject)
 
         //then
         assertEquals(false, result.response.endSession)

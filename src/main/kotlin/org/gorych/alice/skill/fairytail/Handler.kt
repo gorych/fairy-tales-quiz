@@ -9,13 +9,15 @@ import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
 
+private val quizHolder = QuizHolder()
+
 //The order is important here
 private val commandRegistry: List<Command> = listOf(
     PingCommand(),
     HelpCommand(),
     WhatCanYouDoCommand(),
 
-    IntroductionCommand(),
+    IntroductionCommand(quizHolder),
 
     GreetingCommand(),
     PartingCommand(),
@@ -26,16 +28,14 @@ private val commandRegistry: List<Command> = listOf(
     IKnowHowToRateCommand(),
     IDoNotKnowHowToRateCommand(),
 
-    PlayingAgreementCommand(),
+    PlayingAgreementCommand(quizHolder),
     PlayingDisagreementCommand(),
 
-    HintCommand(),
-    RepeatQuestionCommand(),
-    SkipQuestionCommand(),
-    NextQuestionCommand(),
+    HintCommand(quizHolder),
+    RepeatQuestionCommand(quizHolder),
+    SkipQuestionCommand(quizHolder),
+    NextQuestionCommand(quizHolder),
 )
-
-private val quizHolder = QuizHolder()
 
 fun handle(input: String): String {
     val mapper = jacksonObjectMapper()
@@ -64,14 +64,8 @@ private fun processRequest(requestObject: RequestObject): ResponseObject {
         .map { wrapIfLoggingNotDisabled(it) }
         .firstOrNull { it.canHandle(requestObject) }
     return when {
-        command != null -> {
-            val quiz = quizHolder.getQuiz(requestObject)
-            return command.execute(requestObject, quiz)
-        }
-
-        else -> {
-            ResponseObject.ofUnclearCommand(requestObject)
-        }
+        command != null -> command.execute(requestObject)
+        else -> ResponseObject.ofUnclearCommand(requestObject)
     }
 }
 

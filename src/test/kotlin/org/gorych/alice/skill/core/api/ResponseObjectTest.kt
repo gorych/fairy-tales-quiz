@@ -2,7 +2,7 @@ package org.gorych.alice.skill.core.api
 
 import io.kotest.assertions.json.shouldContainJsonKey
 import org.gorych.alice.skill.core.quiz.Achievement
-import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuestionAnswerQuiz
 import org.gorych.alice.skill.core.quiz.QuizItem
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.jacksonObjectMapper
 
-private class QuizWithImage : Quiz() {
+private class QuizWithImage : QuestionAnswerQuiz() {
     override val items = listOf(
         QuizItem(1, "Кто посадил репку?", listOf("дед"), listOf("Он живёт с бабкой."), imageId = "image-1")
     )
 }
 
-private class QuizWithoutImage : Quiz() {
+private class QuizWithoutImage : QuestionAnswerQuiz() {
     override val items = listOf(
         QuizItem(1, "Кто посадил репку?", listOf("дед"), listOf("Он живёт с бабкой."))
     )
@@ -59,10 +59,9 @@ class ResponseObjectTest {
     @Test
     fun `question response should contain card built from the question`() {
         //when
-        val response = ResponseObject.ofQuestion(
-            quiz = QuizWithImage(),
-            questionNumber = 1,
-            phrase = "Слушай вопрос.",
+        val quiz = QuizWithImage()
+        val response = ResponseObject.ofPrompt(
+            prompt = quiz.prompt(number = 1, phrase = "Слушай вопрос."),
             buttons = emptyList(),
             sessionState = SessionState(),
             endSession = false
@@ -81,10 +80,9 @@ class ResponseObjectTest {
     @Test
     fun `question response should not contain card when question has no image`() {
         //when
-        val response = ResponseObject.ofQuestion(
-            quiz = QuizWithoutImage(),
-            questionNumber = 1,
-            phrase = "Слушай вопрос.",
+        val quiz = QuizWithoutImage()
+        val response = ResponseObject.ofPrompt(
+            prompt = quiz.prompt(number = 1, phrase = "Слушай вопрос."),
             buttons = emptyList(),
             sessionState = SessionState(),
             endSession = false

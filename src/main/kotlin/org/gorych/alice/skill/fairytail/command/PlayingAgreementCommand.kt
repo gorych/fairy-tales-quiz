@@ -2,10 +2,12 @@ package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.Command
+import org.gorych.alice.skill.core.quiz.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuizSource
 
 
-class PlayingAgreementCommand : Command {
+class PlayingAgreementCommand(private val quizzes: QuizSource) : Command {
 
     override fun name(): String = PlayingAgreementCommand.name()
 
@@ -13,7 +15,9 @@ class PlayingAgreementCommand : Command {
         return requestObject.containsIntent(AGREEMENT_INTENT_ID) && requestObject.containsCommand(name())
     }
 
-    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
+    override fun execute(requestObject: RequestObject): ResponseObject {
+        val quiz = quizzes.getQuiz(requestObject)
+
         return when {
             !requestObject.hasCurrentQuestion() -> firstQuestionResponse(quiz)
             else -> nextQuestionResponse(requestObject, quiz)
@@ -22,11 +26,9 @@ class PlayingAgreementCommand : Command {
 
     private fun firstQuestionResponse(quiz: Quiz): ResponseObject {
         val questionNumber = 1
-        return ResponseObject.ofQuestion(
-            quiz = quiz,
-            questionNumber = questionNumber,
-            phrase = "Отлично. Слушай первый вопрос.",
-            buttons = Button.skip_repeat_hint(),
+        return ResponseObject.ofPrompt(
+            prompt = quiz.prompt(questionNumber, "Отлично. Слушай первый вопрос."),
+            buttons = ModeProfiles.of(quiz.gameMode).buttons,
             sessionState = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
             endSession = false,
             appState = ApplicationState(quiz)
@@ -41,11 +43,12 @@ class PlayingAgreementCommand : Command {
         requireNotNull(currentQuestionNumber) { "Current question number must not be NULL" }
 
         val nextQuestionNumber = currentQuestionNumber + 1
-        return ResponseObject.ofQuestion(
-            quiz = quiz,
-            questionNumber = nextQuestionNumber,
-            phrase = "${CONTINUE_PLAYING_OPENING_PHRASES.random()} Слушай следующий вопрос.",
-            buttons = Button.skip_repeat_hint(),
+        return ResponseObject.ofPrompt(
+            prompt = quiz.prompt(
+                nextQuestionNumber,
+                "${CONTINUE_PLAYING_OPENING_PHRASES.random()} Слушай следующий вопрос."
+            ),
+            buttons = ModeProfiles.of(quiz.gameMode).buttons,
             sessionState = requestSessionState.copy(
                 currentQuestion = nextQuestionNumber,
                 transitionCommands = setOf(NextQuestionCommand.name())

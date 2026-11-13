@@ -5,9 +5,11 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
+import org.gorych.alice.skill.core.quiz.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuizSource
 
-class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
+class SkipQuestionCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCommand(quizzes) {
 
     override fun name() = SkipQuestionCommand.name()
 
@@ -32,11 +34,9 @@ class SkipQuestionCommand : RequestSessionStatedQuestionCommand() {
     private fun nextQuestionResponse(
         nextQuestionNumber: Int, sessionState: SessionState, quiz: Quiz
     ): ResponseObject {
-        return ResponseObject.ofQuestion(
-            quiz = quiz,
-            questionNumber = nextQuestionNumber,
-            phrase = BEFORE_QUESTION_PHRASES.random(),
-            buttons = Button.skip_repeat_hint(),
+        return ResponseObject.ofPrompt(
+            prompt = quiz.prompt(nextQuestionNumber, BEFORE_QUESTION_PHRASES.random()),
+            buttons = ModeProfiles.of(quiz.gameMode).buttons,
             sessionState = sessionState.copy(
                 currentQuestion = nextQuestionNumber,
                 transitionCommands = setOf(NextQuestionCommand.name()),

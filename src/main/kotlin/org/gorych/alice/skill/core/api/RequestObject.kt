@@ -1,6 +1,7 @@
 package org.gorych.alice.skill.core.api
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.gorych.alice.skill.core.mode.GameMode
 import org.gorych.alice.skill.fairytail.command.*
 
 data class RequestObject(
@@ -23,6 +24,8 @@ data class RequestObject(
     fun containsNextQuestionCommand(): Boolean = containsCommand(NextQuestionCommand.name())
 
     fun containsCommand(commandName: String) = state?.containsTransitionCommand(commandName) ?: false
+
+    fun gameMode(): GameMode = state?.application?.gameMode ?: GameMode.QUESTION_ANSWER
 
     companion object
 }

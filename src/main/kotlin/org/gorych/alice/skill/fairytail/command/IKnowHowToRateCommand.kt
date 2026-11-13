@@ -6,7 +6,6 @@ import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.core.command.PartingCommand
-import org.gorych.alice.skill.core.quiz.Quiz
 
 class IKnowHowToRateCommand : Command {
 
@@ -16,7 +15,7 @@ class IKnowHowToRateCommand : Command {
         return requestObject.containsIntent(I_KNOW_HOW_TO_RATE_INTENT_ID) && requestObject.containsCommand(name())
     }
 
-    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
+    override fun execute(requestObject: RequestObject): ResponseObject {
         return ResponseObject.of(
             text = "Отлично! С удовольствием ознакомлюсь с твоим мнением. Пока!",
             endSession = false,

@@ -6,10 +6,13 @@ import org.gorych.alice.skill.core.api.ApplicationState
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.api.State
+import org.gorych.alice.skill.core.mode.GameMode
+import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import org.gorych.alice.skill.fairytail.quiz.Quiz2
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class QuizHolderTest {
 
@@ -26,6 +29,7 @@ class QuizHolderTest {
         val request = mockk<RequestObject>()
         every { request.isNewSession() } returns true
         every { request.state } returns null
+        every { request.gameMode() } returns GameMode.QUESTION_ANSWER
 
         //when
         val result = quizHolder.getQuiz(request)
@@ -44,6 +48,7 @@ class QuizHolderTest {
 
         every { request.isNewSession() } returns false
         every { request.state } returns state
+        every { request.gameMode() } returns GameMode.QUESTION_ANSWER
 
         //when
         val result = quizHolder.getQuiz(request)
@@ -62,6 +67,7 @@ class QuizHolderTest {
 
         every { request.isNewSession() } returns false
         every { request.state } returns state
+        every { request.gameMode() } returns GameMode.QUESTION_ANSWER
 
         //when
         val result = quizHolder.getQuiz(request)
@@ -71,7 +77,7 @@ class QuizHolderTest {
     }
 
     @Test
-    fun `getQuiz should return DEFAULT_QUIZ if quiz name not found`() {
+    fun `getQuiz should return a stable quiz of the same mode if quiz name not found`() {
         //given
         val request = mockk<RequestObject>()
         val appState = ApplicationState(quizName = "NonExistentQuiz")
@@ -79,11 +85,37 @@ class QuizHolderTest {
 
         every { request.isNewSession() } returns false
         every { request.state } returns state
+        every { request.gameMode() } returns GameMode.QUESTION_ANSWER
 
         //when
         val result = quizHolder.getQuiz(request)
 
         //then
-        assertEquals(QuizHolder.DEFAULT_QUIZ, result)
+        assertEquals(GameMode.QUESTION_ANSWER, result.gameMode)
+        assertEquals(Quiz1::class.simpleName, result.name())
+    }
+
+    @Test
+    fun `available modes should not contain modes without quizzes`() {
+        //when
+        val actual = quizHolder.availableModes
+
+        //then
+        assertEquals(setOf(GameMode.QUESTION_ANSWER), actual)
+    }
+
+    @Test
+    fun `getQuiz should fail when the mode has no quizzes at all`() {
+        //given
+        val request = mockk<RequestObject>()
+        val appState = ApplicationState(quizName = null, bonusQuiz = true)
+        val state = State(application = appState, session = SessionState())
+
+        every { request.isNewSession() } returns false
+        every { request.state } returns state
+        every { request.gameMode() } returns GameMode.GUESS_SOUND
+
+        //then
+        assertThrows<IllegalStateException> { quizHolder.getQuiz(request) }
     }
 }

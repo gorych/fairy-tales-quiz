@@ -3,9 +3,9 @@ package org.gorych.alice.skill.fairytail.command
 import org.gorych.alice.skill.core.COIN
 import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.Command
-import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuizSource
 
-class IntroductionCommand : Command {
+class IntroductionCommand(private val quizzes: QuizSource) : Command {
 
     override fun name(): String = IntroductionCommand.name()
 
@@ -13,7 +13,9 @@ class IntroductionCommand : Command {
         return requestObject.isNewSession()
     }
 
-    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
+    override fun execute(requestObject: RequestObject): ResponseObject {
+        val quiz = quizzes.getQuiz(requestObject)
+
         val responseText = "" +
                 "Рада слышать тебя снова! Ты в гостях у 'Викторины по сказкам'. " +
                 "Я подготовила для тебя каверзные вопросы, а от тебя жду верных ответов. " +

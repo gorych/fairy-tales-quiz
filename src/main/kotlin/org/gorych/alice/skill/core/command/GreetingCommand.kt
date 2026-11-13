@@ -2,7 +2,6 @@ package org.gorych.alice.skill.core.command
 
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
-import org.gorych.alice.skill.core.quiz.Quiz
 
 private const val GREETING_INTENT_ID = "g911.greeting"
 
@@ -14,7 +13,7 @@ class GreetingCommand : Command {
         return requestObject.containsIntent(GREETING_INTENT_ID)
     }
 
-    override fun execute(requestObject: RequestObject, quiz: Quiz): ResponseObject {
+    override fun execute(requestObject: RequestObject): ResponseObject {
         requestObject.let {
             val responseText = when {
                 it.containsToken("привет") -> "И тебе, привет!"

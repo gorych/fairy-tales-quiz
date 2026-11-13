@@ -5,9 +5,13 @@ import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.PartingCommand
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Achievement
+import org.gorych.alice.skill.core.quiz.ModeProfile
+import org.gorych.alice.skill.core.quiz.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuizSource
+import org.gorych.alice.skill.core.quiz.Verdict
 
-class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
+class NextQuestionCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCommand(quizzes) {
 
     override fun name() = NextQuestionCommand.name()
 
@@ -19,27 +23,29 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         requestObject: RequestObject, requestSessionState: SessionState, currentQuestionNumber: Int, quiz: Quiz
     ): ResponseObject {
         log("execute: question number: $currentQuestionNumber")
-        val rightAnswers: List<String> = quiz.answerTo(currentQuestionNumber)
 
-        if (rightAnswers.any { it == requestObject.command() }) {
+        if (quiz.evaluate(requestObject, currentQuestionNumber) == Verdict.CORRECT) {
+            val profile = ModeProfiles.of(quiz.gameMode)
             val rightAnswersCount: Int = getRightAnswersCount(requestSessionState, currentQuestionNumber)
 
             val nextQuestionNumber = currentQuestionNumber + 1
             if (nextQuestionNumber <= quiz.countOfQuestions()) {
                 if (rightAnswersCount > requestSessionState.rightAnswersCount) {
                     val achievementResponse: ResponseObject? =
-                        processAchievements(rightAnswersCount, currentQuestionNumber, requestSessionState)
+                        processAchievements(profile, rightAnswersCount, currentQuestionNumber, requestSessionState)
                     if (achievementResponse != null) {
                         return achievementResponse
                     }
                 }
 
-                return nextQuestionResponse(nextQuestionNumber, rightAnswersCount, requestSessionState, quiz)
+                return nextQuestionResponse(
+                    profile, nextQuestionNumber, rightAnswersCount, requestSessionState, quiz
+                )
             }
-            return endQuizResponse(rightAnswersCount, quiz)
+            return endQuizResponse(profile, rightAnswersCount, quiz)
         }
 
-        return wrongAnswerResponse(requestSessionState)
+        return wrongAnswerResponse(ModeProfiles.of(quiz.gameMode), requestSessionState)
     }
 
     private fun getRightAnswersCount(sessionState: SessionState, currentQuestion: Int): Int {
@@ -53,10 +59,14 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     }
 
     private fun nextQuestionResponse(
-        nextQuestionNumber: Int, rightAnswersCount: Int, sessionState: SessionState, quiz: Quiz
+        profile: ModeProfile,
+        nextQuestionNumber: Int,
+        rightAnswersCount: Int,
+        sessionState: SessionState,
+        quiz: Quiz
     ): ResponseObject {
-        val rightAnswerPhrase = RIGHT_ANSWER_PHRASES.random()
-        val nextQuestionPhrase = NEXT_QUESTION_PHRASES.random()
+        val rightAnswerPhrase = profile.rightAnswerPhrases.random()
+        val nextQuestionPhrase = profile.nextQuestionPhrases.random()
 
         val responseSessionState = SessionState(
             nextQuestionNumber,
@@ -66,38 +76,38 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
             setOf(NextQuestionCommand.name())
         )
 
-        return ResponseObject.ofQuestion(
-            quiz = quiz,
-            questionNumber = nextQuestionNumber,
-            phrase = "$rightAnswerPhrase $nextQuestionPhrase",
-            buttons = Button.skip_repeat_hint(),
+        return ResponseObject.ofPrompt(
+            prompt = quiz.prompt(nextQuestionNumber, "$rightAnswerPhrase $nextQuestionPhrase"),
+            buttons = profile.buttons,
             sessionState = responseSessionState,
             endSession = false
         )
     }
 
-    private fun wrongAnswerResponse(sessionState: SessionState): ResponseObject {
+    private fun wrongAnswerResponse(profile: ModeProfile, sessionState: SessionState): ResponseObject {
         log("execute: wrong answer")
         return ResponseObject.of(
-            text = WRONG_ANSWER_PHRASES.random(),
+            text = profile.wrongAnswerPhrases.random(),
             endSession = false,
-            buttons = Button.skip_repeat_hint(),
+            buttons = profile.buttons,
             sessionState = sessionState
         )
     }
 
     //region End of quiz logic
-    private fun endQuizResponse(rightAnswersCount: Int, quiz: Quiz): ResponseObject {
+    private fun endQuizResponse(profile: ModeProfile, rightAnswersCount: Int, quiz: Quiz): ResponseObject {
         val countOfAllQuestions = quiz.countOfQuestions()
 
         val score = rightAnswersCount.toDouble() / countOfAllQuestions * 100
-        val scorePhrase = getScorePhrase(quiz, score, rightAnswersCount, countOfAllQuestions)
+        val scorePhrase = getScorePhrase(profile, quiz, score, rightAnswersCount, countOfAllQuestions)
 
         log("execute: end of quiz. ${quiz.name()}, score: $score")
 
         val responseParams: ResponseParams = when {
-            quiz.usualQuiz && score >= EXCELLENT_SCORE_MIN_VALUE -> bonusQuizProposalParams()
-            quiz.bonusQuiz || (quiz.usualQuiz && score >= GOOD_SCORE_MIN_VALUE) -> askToRateParams()
+            quiz.usualQuiz && profile.offersBonusQuiz && score >= profile.excellentScore ->
+                bonusQuizProposalParams(quiz)
+
+            quiz.bonusQuiz || (quiz.usualQuiz && score >= profile.goodScore) -> askToRateParams()
             else -> endOfQuizParams()
         }
 
@@ -111,21 +121,23 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         )
     }
 
-    private fun getScorePhrase(quiz: Quiz, score: Double, rightAnswersCount: Int, countOfAllQuestions: Int): String {
+    private fun getScorePhrase(
+        profile: ModeProfile, quiz: Quiz, score: Double, rightAnswersCount: Int, countOfAllQuestions: Int
+    ): String {
         return when {
-            quiz.bonusQuiz && (score >= EXCELLENT_SCORE_MIN_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
-            quiz.bonusQuiz && (score < EXCELLENT_SCORE_MIN_VALUE) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
-            score >= EXCELLENT_SCORE_MIN_VALUE -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
-            score >= GOOD_SCORE_MIN_VALUE -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
-            score < BAD_SCORE_MAX_VALUE -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
+            quiz.bonusQuiz && (score >= profile.excellentScore) -> BONUS_QUIZ_WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            quiz.bonusQuiz && (score < profile.excellentScore) -> BONUS_QUIZ_WINNING_PHRASE_RESULT_TEMPLATE
+            score >= profile.excellentScore -> WINNING_PHRASE_EXCELLENT_RESULT_TEMPLATE
+            score >= profile.goodScore -> WINNING_PHRASE_GOOD_RESULT_TEMPLATE
+            score < profile.badScore -> WINNING_PHRASE_BAD_RESULT_TEMPLATE
             else -> WINNING_PHRASE_NORMAL_RESULT_TEMPLATE
         }.format(rightAnswersCount, countOfAllQuestions)
     }
 
-    private fun bonusQuizProposalParams() = ResponseParams(
+    private fun bonusQuizProposalParams(quiz: Quiz) = ResponseParams(
         buttons = listOf(Button.agreement(), Button.disagreement()),
         transitionCommands = setOf(PlayingAgreementCommand.name(), PlayingDisagreementCommand.name()),
-        appState = ApplicationState(quizName = null, bonusQuiz = true)
+        appState = ApplicationState(quizName = null, bonusQuiz = true, gameMode = quiz.gameMode)
     )
 
     private fun askToRateParams() = ResponseParams(
@@ -147,9 +159,12 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
 
     //region Achievements logic
     private fun processAchievements(
-        rightAnswersCount: Int, currentQuestionNumber: Int, requestSessionState: SessionState
+        profile: ModeProfile,
+        rightAnswersCount: Int,
+        currentQuestionNumber: Int,
+        requestSessionState: SessionState
     ): ResponseObject? {
-        return ACHIEVEMENTS
+        return profile.achievements
             .filter { it.rightAnswersCount == rightAnswersCount }
             .map { achievement -> achievementResponse(achievement, currentQuestionNumber, rightAnswersCount, requestSessionState) }
             .firstOrNull()
@@ -176,10 +191,6 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
     //endregion Achievements logic
 
     companion object {
-        private const val EXCELLENT_SCORE_MIN_VALUE = 90
-        private const val GOOD_SCORE_MIN_VALUE = 80
-        private const val BAD_SCORE_MAX_VALUE = 30
-
         private const val WINNING_PHRASE_CONGRATULATION_AND_SCORE_TEMPLATE = "" +
                 "Поздравляю, это был последний вопрос. " +
                 "%s"
@@ -220,55 +231,6 @@ class NextQuestionCommand : RequestSessionStatedQuestionCommand() {
         private const val WINNING_PHRASE_NORMAL_RESULT_TEMPLATE = "" +
                 "%d из %d неплохой результат, но ты явно способен на большее! " +
                 "Буду рада новой встрече, если решишь снова испытать себя. Пока!"
-
-        private val RIGHT_ANSWER_PHRASES: Set<String> =
-            setOf("Верно!", "Правильно!", "Ты молодец!", "Совершенно верно! Так держать!")
-
-        private val NEXT_QUESTION_PHRASES: Set<String> = setOf(
-            "Слушай следующий вопрос.",
-            "Следующий вопрос звучит так.",
-            "Приготовься, следующий вопрос будет сложнее."
-        )
-
-        private val WRONG_ANSWER_PHRASES: Set<String> =
-            setOf("Неверно. Подумай ещё!", "Нет. Попытайся ещё раз!", "Неправильно. Попробуй другой вариант!")
-
-        private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
-            "Поздравляю! Первое достижение из пяти правильных ответов у тебя в кармане. Идём дальше?"
-        private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE = "5\uFE0F⃣ $FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT"
-        private const val FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS = VICTORY_FANFARE + FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
-
-        private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
-            "Десять правильных ответов - это серьезная заявка на победу. Перейдём к вопросам посложнее?"
-        private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE = "\uD83D\uDD1F $TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT"
-        private const val TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS = VICTORY_FANFARE + TEN_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
-
-        private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT =
-            "Твои успехи впечатляют — уже 20 правильных ответов. Продолжим? Впереди самое интересное."
-        private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE =
-            "2\uFE0F⃣0\uFE0F⃣ $TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT"
-        private const val TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS = VICTORY_FANFARE + TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TEXT
-
-        private val ACHIEVEMENTS: List<Achievement> = listOf(
-            Achievement(
-                rightAnswersCount = 5,
-                text = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-                tts = FIVE_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "1540737/fouu4y25mjlerkqbj001"
-            ),
-            Achievement(
-                rightAnswersCount = 10,
-                text = TEN_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-                tts = TEN_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "1533899/q2r93hurlg0sobsr1jqf"
-            ),
-            Achievement(
-                rightAnswersCount = 20,
-                text = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_MESSAGE,
-                tts = TWENTY_RIGHT_ANSWERS_ACHIEVEMENT_TTS,
-                imageId = "1030494/68kybvayf4ptqww27auq"
-            ),
-        )
 
         fun name(): String = NextQuestionCommand::class.java.simpleName
     }

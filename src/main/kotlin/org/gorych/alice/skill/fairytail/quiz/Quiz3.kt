@@ -1,9 +1,9 @@
 package org.gorych.alice.skill.fairytail.quiz
 
-import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuestionAnswerQuiz
 import org.gorych.alice.skill.core.quiz.QuizItem
 
-class Quiz3 : Quiz() {
+class Quiz3 : QuestionAnswerQuiz() {
 
     override val items: List<QuizItem>
         get() = listOf(

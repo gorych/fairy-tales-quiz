@@ -4,7 +4,6 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getByIntentKey
 import org.gorych.alice.skill.core.api.getByNluTokenKey
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test
@@ -72,10 +71,9 @@ class PartingCommandTest {
         //given
         val command = PartingCommand()
         val requestObject = RequestObject.Companion.getByNluTokenKey(key)
-        val quiz = Quiz1()
 
         //when
-        val result: ResponseObject = command.execute(requestObject, quiz)
+        val result: ResponseObject = command.execute(requestObject)
 
         //then
         assertEquals(true, result.response.endSession)

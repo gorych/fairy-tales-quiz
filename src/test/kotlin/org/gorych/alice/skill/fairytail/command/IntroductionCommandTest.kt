@@ -14,7 +14,7 @@ class IntroductionCommandTest {
     @Test
     fun `WHEN name call THEN should return class simple name`() {
         //given
-        val command = IntroductionCommand()
+        val command = IntroductionCommand { Quiz1() }
         val expected = IntroductionCommand::class.java.simpleName
 
         //when
@@ -37,7 +37,7 @@ class IntroductionCommandTest {
         whenDescription: String
     ) {
         //given
-        val command = IntroductionCommand()
+        val command = IntroductionCommand { Quiz1() }
         val requestObject = RequestObject.Companion.getBySessionKey(key)
 
         //when
@@ -58,12 +58,11 @@ class IntroductionCommandTest {
         whenDescription: String
     ) {
         //given
-        val command = IntroductionCommand()
+        val command = IntroductionCommand { Quiz1() }
         val requestObject = RequestObject.Companion.getBySessionKey(key)
-        val quiz = Quiz1()
 
         //when
-        val result: ResponseObject = command.execute(requestObject, quiz)
+        val result: ResponseObject = command.execute(requestObject)
 
         //then
         val expectedValue = "" +

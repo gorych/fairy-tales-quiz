@@ -3,7 +3,7 @@ package org.gorych.alice.skill.core.api
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.gorych.alice.skill.core.quiz.Achievement
-import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.Prompt
 
 private const val HTTP_VERSION = "1.0"
 
@@ -37,28 +37,21 @@ data class ResponseObject(
             )
         }
 
-        fun ofQuestion(
-            quiz: Quiz,
-            questionNumber: Int,
-            phrase: String,
+        fun ofPrompt(
+            prompt: Prompt,
             buttons: List<Button>,
             sessionState: SessionState?,
             endSession: Boolean,
             appState: ApplicationState? = null
         ): ResponseObject {
-            val question = quiz.question(questionNumber)
-            val card = quiz.imageIdTo(questionNumber)?.let {
-                BigImageCard(imageId = it, title = phrase, description = "$questionNumber. $question")
-            }
-
             return response(
-                text = "$phrase $question",
-                tts = "$phrase $question",
+                text = prompt.text,
+                tts = prompt.tts,
                 buttons = buttons,
                 sessionState = sessionState,
                 appState = appState,
                 endSession = endSession,
-                card = card
+                card = prompt.card
             )
         }
 

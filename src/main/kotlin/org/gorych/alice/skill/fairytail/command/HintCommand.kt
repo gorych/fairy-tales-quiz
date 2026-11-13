@@ -1,13 +1,14 @@
 package org.gorych.alice.skill.fairytail.command
 
-import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
+import org.gorych.alice.skill.core.quiz.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuizSource
 
-class HintCommand : RequestSessionStatedQuestionCommand() {
+class HintCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCommand(quizzes) {
 
     override fun name() = HintCommand.name()
 
@@ -28,7 +29,7 @@ class HintCommand : RequestSessionStatedQuestionCommand() {
         return ResponseObject.of(
             text = "${BEFORE_HINT_PHRASES.random()} ${quiz.hintTo(currentQuestionNumber, currentHintNumber)}",
             endSession = false,
-            buttons = Button.skip_repeat_hint(),
+            buttons = ModeProfiles.of(quiz.gameMode).buttons,
             sessionState = requestSessionState.copy(
                 hintedQuestions = hintedQuestions,
                 previousHintNumber = currentHintNumber

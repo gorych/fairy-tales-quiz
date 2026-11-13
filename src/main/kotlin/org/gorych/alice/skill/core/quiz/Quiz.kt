@@ -1,40 +1,23 @@
 package org.gorych.alice.skill.core.quiz
 
+import org.gorych.alice.skill.core.api.RequestObject
+import org.gorych.alice.skill.core.mode.GameMode
+
+enum class Verdict { CORRECT, WRONG, UNCLEAR }
+
 abstract class Quiz(val bonusQuiz: Boolean = false) {
 
     val usualQuiz = !bonusQuiz
-    open val items: List<QuizItem> = listOf()
+
+    abstract val gameMode: GameMode
 
     fun name(): String = javaClass.simpleName
 
-    fun question(number: Int): String {
-        require(number > 0) { "Question number must be greater than zero" }
-        return items[number - 1].question
-    }
+    abstract fun countOfQuestions(): Int
 
-    fun answerTo(questionNumber: Int): List<String> {
-        require(questionNumber > 0) { "Question number must be greater than zero" }
-        return items[questionNumber - 1].answers
-    }
+    abstract fun prompt(number: Int, phrase: String): Prompt
 
-    fun hintTo(questionNumber: Int, hintNumber: Int): String {
-        require(questionNumber > 0) { "Question number must be greater than zero" }
-        require(hintNumber > 0) { "Hint number must be greater than zero" }
+    abstract fun evaluate(requestObject: RequestObject, number: Int): Verdict
 
-        val quizItem = items[questionNumber - 1]
-        val hints = quizItem.hints
-
-        return when {
-            hints.isEmpty() -> "Это слово начинается на букву '${answerTo(questionNumber)[0].first().uppercase()}'"
-            (hintNumber <= hints.size) -> hints[hintNumber - 1]
-            else -> "Правильный ответ - ${quizItem.answers[0]}."
-        }
-    }
-
-    fun countOfQuestions(): Int = items.size
-
-    fun imageIdTo(questionNumber: Int): String? {
-        require(questionNumber > 0) { "Question number must be greater than zero" }
-        return items[questionNumber - 1].imageId
-    }
+    abstract fun hintTo(number: Int, hintNumber: Int): String
 }
