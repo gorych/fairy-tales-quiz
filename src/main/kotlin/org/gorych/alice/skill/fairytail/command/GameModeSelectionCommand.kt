@@ -6,7 +6,7 @@ import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.Command
 import org.gorych.alice.skill.core.mode.GameMode
-import org.gorych.alice.skill.core.quiz.ModeProfiles
+import org.gorych.alice.skill.core.mode.ModeProfiles
 import org.gorych.alice.skill.core.quiz.QuizSource
 
 class GameModeSelectionCommand(private val quizzes: QuizSource) : Command {

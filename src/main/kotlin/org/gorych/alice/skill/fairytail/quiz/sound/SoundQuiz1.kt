@@ -1,7 +1,7 @@
-package org.gorych.alice.skill.fairytail.quiz
+package org.gorych.alice.skill.fairytail.quiz.sound
 
-import org.gorych.alice.skill.core.quiz.SoundQuestion
-import org.gorych.alice.skill.core.quiz.SoundQuiz
+import org.gorych.alice.skill.core.quiz.sound.SoundQuestion
+import org.gorych.alice.skill.core.quiz.sound.SoundQuiz
 
 class SoundQuiz1 : SoundQuiz() {
 

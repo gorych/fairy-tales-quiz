@@ -7,8 +7,8 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.api.State
 import org.gorych.alice.skill.core.mode.GameMode
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
-import org.gorych.alice.skill.fairytail.quiz.Quiz2
+import org.gorych.alice.skill.fairytail.quiz.question_answer.Quiz1
+import org.gorych.alice.skill.fairytail.quiz.question_answer.Quiz2
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

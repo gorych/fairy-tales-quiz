@@ -1,6 +1,7 @@
-package org.gorych.alice.skill.core.quiz
+package org.gorych.alice.skill.core.mode
 
 import org.gorych.alice.skill.core.api.Button
+import org.gorych.alice.skill.core.quiz.Achievement
 
 data class ModeProfile(
     val achievements: List<Achievement>,

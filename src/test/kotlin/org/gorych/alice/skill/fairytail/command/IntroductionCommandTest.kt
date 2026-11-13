@@ -3,7 +3,7 @@ package org.gorych.alice.skill.fairytail.command
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.getBySessionKey
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
+import org.gorych.alice.skill.fairytail.quiz.question_answer.Quiz1
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import kotlin.test.Test

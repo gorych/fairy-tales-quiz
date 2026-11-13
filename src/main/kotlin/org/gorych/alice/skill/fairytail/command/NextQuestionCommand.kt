@@ -5,8 +5,8 @@ import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.PartingCommand
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
 import org.gorych.alice.skill.core.quiz.Achievement
-import org.gorych.alice.skill.core.quiz.ModeProfile
-import org.gorych.alice.skill.core.quiz.ModeProfiles
+import org.gorych.alice.skill.core.mode.ModeProfile
+import org.gorych.alice.skill.core.mode.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
 import org.gorych.alice.skill.core.quiz.QuizSource
 

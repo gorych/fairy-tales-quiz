@@ -1,6 +1,7 @@
-package org.gorych.alice.skill.core.quiz
+package org.gorych.alice.skill.core.quiz.sound
 
 import org.gorych.alice.skill.core.api.Button
+import org.gorych.alice.skill.core.mode.ModeProfile
 
 internal val soundModeProfile = ModeProfile(
     achievements = emptyList(),

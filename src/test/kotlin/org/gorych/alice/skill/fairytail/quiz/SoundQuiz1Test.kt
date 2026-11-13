@@ -1,6 +1,7 @@
 package org.gorych.alice.skill.fairytail.quiz
 
-import org.gorych.alice.skill.core.quiz.SoundQuestion
+import org.gorych.alice.skill.core.quiz.sound.SoundQuestion
+import org.gorych.alice.skill.fairytail.quiz.sound.SoundQuiz1
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

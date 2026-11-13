@@ -4,7 +4,7 @@ import org.gorych.alice.skill.core.api.Button
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.of
 import org.gorych.alice.skill.core.mode.GameMode
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
+import org.gorych.alice.skill.fairytail.quiz.question_answer.Quiz1
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue

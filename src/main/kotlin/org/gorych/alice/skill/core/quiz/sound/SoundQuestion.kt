@@ -1,4 +1,4 @@
-package org.gorych.alice.skill.core.quiz
+package org.gorych.alice.skill.core.quiz.sound
 
 data class SoundQuestion(
     val number: Int,

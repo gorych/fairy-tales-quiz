@@ -1,8 +1,11 @@
-package org.gorych.alice.skill.core.quiz
+package org.gorych.alice.skill.core.quiz.question_answer
 
 import org.gorych.alice.skill.core.api.BigImageCard
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.mode.GameMode
+import org.gorych.alice.skill.core.quiz.Prompt
+import org.gorych.alice.skill.core.quiz.Quiz
+import org.gorych.alice.skill.core.quiz.QuizItem
 
 abstract class QuestionAnswerQuiz(bonusQuiz: Boolean = false) : Quiz(bonusQuiz) {
 

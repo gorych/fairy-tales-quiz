@@ -2,7 +2,7 @@ package org.gorych.alice.skill.fairytail.command
 
 import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.command.Command
-import org.gorych.alice.skill.core.quiz.ModeProfiles
+import org.gorych.alice.skill.core.mode.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
 import org.gorych.alice.skill.core.quiz.QuizSource
 

@@ -9,7 +9,7 @@ import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.api.State
 import org.gorych.alice.skill.core.mode.GameMode
 import org.gorych.alice.skill.core.quiz.QuizSource
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
+import org.gorych.alice.skill.fairytail.quiz.question_answer.Quiz1
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue

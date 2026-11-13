@@ -1,7 +1,7 @@
-package org.gorych.alice.skill.fairytail.quiz
+package org.gorych.alice.skill.fairytail.quiz.question_answer
 
-import org.gorych.alice.skill.core.quiz.QuestionAnswerQuiz
 import org.gorych.alice.skill.core.quiz.QuizItem
+import org.gorych.alice.skill.core.quiz.question_answer.QuestionAnswerQuiz
 
 class BonusQuiz4 : QuestionAnswerQuiz(bonusQuiz = true) {
 

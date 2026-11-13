@@ -1,6 +1,7 @@
 package org.gorych.alice.skill.fairytail.quiz
 
-import org.gorych.alice.skill.core.quiz.TruthStatement
+import org.gorych.alice.skill.core.quiz.truth_or_lie.TruthStatement
+import org.gorych.alice.skill.fairytail.quiz.truth_or_lie.TruthOrLieQuiz1
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

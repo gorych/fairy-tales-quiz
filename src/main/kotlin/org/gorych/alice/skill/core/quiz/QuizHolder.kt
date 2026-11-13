@@ -3,7 +3,9 @@ package org.gorych.alice.skill.core.quiz
 import org.gorych.alice.skill.core.api.ApplicationState
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.mode.GameMode
-import org.gorych.alice.skill.fairytail.quiz.*
+import org.gorych.alice.skill.fairytail.quiz.question_answer.*
+import org.gorych.alice.skill.fairytail.quiz.sound.SoundQuiz1
+import org.gorych.alice.skill.fairytail.quiz.truth_or_lie.TruthOrLieQuiz1
 
 class QuizHolder : QuizSource {
 

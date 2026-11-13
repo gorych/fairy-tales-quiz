@@ -1,16 +1,9 @@
 package org.gorych.alice.skill.fairytail.command
 
-import org.gorych.alice.skill.core.api.Request
-import org.gorych.alice.skill.core.api.RequestObject
-import org.gorych.alice.skill.core.api.SessionState
-import org.gorych.alice.skill.core.api.State
-import org.gorych.alice.skill.core.api.of
-import org.gorych.alice.skill.core.quiz.QuestionAnswerQuiz
+import org.gorych.alice.skill.core.api.*
 import org.gorych.alice.skill.core.quiz.QuizItem
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.gorych.alice.skill.core.quiz.question_answer.QuestionAnswerQuiz
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 private class QuizWithImages : QuestionAnswerQuiz() {

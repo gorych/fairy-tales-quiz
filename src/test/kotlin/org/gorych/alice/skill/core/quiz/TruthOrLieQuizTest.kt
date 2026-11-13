@@ -3,10 +3,9 @@ package org.gorych.alice.skill.core.quiz
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.of
 import org.gorych.alice.skill.core.mode.GameMode
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.gorych.alice.skill.core.quiz.truth_or_lie.TruthOrLieQuiz
+import org.gorych.alice.skill.core.quiz.truth_or_lie.TruthStatement
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 private class TestTruthOrLieQuiz : TruthOrLieQuiz() {

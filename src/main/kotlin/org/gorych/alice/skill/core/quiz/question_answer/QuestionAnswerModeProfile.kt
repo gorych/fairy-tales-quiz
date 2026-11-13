@@ -1,7 +1,9 @@
-package org.gorych.alice.skill.core.quiz
+package org.gorych.alice.skill.core.quiz.question_answer
 
 import org.gorych.alice.skill.core.VICTORY_FANFARE
 import org.gorych.alice.skill.core.api.Button
+import org.gorych.alice.skill.core.mode.ModeProfile
+import org.gorych.alice.skill.core.quiz.Achievement
 
 private const val EXCELLENT_SCORE_MIN_VALUE = 90
 private const val GOOD_SCORE_MIN_VALUE = 80

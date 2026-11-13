@@ -5,7 +5,7 @@ import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.api.ResponseObject
 import org.gorych.alice.skill.core.api.SessionState
 import org.gorych.alice.skill.core.command.RequestSessionStatedQuestionCommand
-import org.gorych.alice.skill.core.quiz.ModeProfiles
+import org.gorych.alice.skill.core.mode.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
 import org.gorych.alice.skill.core.quiz.QuizSource
 

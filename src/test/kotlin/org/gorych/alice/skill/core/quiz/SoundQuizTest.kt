@@ -3,11 +3,10 @@ package org.gorych.alice.skill.core.quiz
 import org.gorych.alice.skill.core.api.Request
 import org.gorych.alice.skill.core.api.RequestObject
 import org.gorych.alice.skill.core.mode.GameMode
+import org.gorych.alice.skill.core.quiz.sound.SoundQuestion
+import org.gorych.alice.skill.core.quiz.sound.SoundQuiz
 import org.gorych.alice.skill.core.soundTag
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 private class TestSoundQuiz : SoundQuiz() {

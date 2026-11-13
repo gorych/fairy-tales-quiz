@@ -1,4 +1,4 @@
-package org.gorych.alice.skill.core.quiz
+package org.gorych.alice.skill.core.quiz.truth_or_lie
 
 data class TruthStatement(
     val number: Int,

@@ -2,8 +2,8 @@ package org.gorych.alice.skill.core.api
 
 import io.kotest.assertions.json.shouldContainJsonKey
 import org.gorych.alice.skill.core.quiz.Achievement
-import org.gorych.alice.skill.core.quiz.QuestionAnswerQuiz
 import org.gorych.alice.skill.core.quiz.QuizItem
+import org.gorych.alice.skill.core.quiz.question_answer.QuestionAnswerQuiz
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull

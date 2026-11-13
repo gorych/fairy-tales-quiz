@@ -3,7 +3,7 @@ package org.gorych.alice.skill.fairytail
 import org.gorych.alice.skill.core.command.*
 import org.gorych.alice.skill.core.quiz.QuizSource
 import org.gorych.alice.skill.fairytail.command.*
-import org.gorych.alice.skill.fairytail.quiz.Quiz1
+import org.gorych.alice.skill.fairytail.quiz.question_answer.Quiz1
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

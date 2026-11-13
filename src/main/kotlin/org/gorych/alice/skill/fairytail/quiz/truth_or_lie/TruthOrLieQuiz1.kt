@@ -1,7 +1,7 @@
-package org.gorych.alice.skill.fairytail.quiz
+package org.gorych.alice.skill.fairytail.quiz.truth_or_lie
 
-import org.gorych.alice.skill.core.quiz.TruthOrLieQuiz
-import org.gorych.alice.skill.core.quiz.TruthStatement
+import org.gorych.alice.skill.core.quiz.truth_or_lie.TruthOrLieQuiz
+import org.gorych.alice.skill.core.quiz.truth_or_lie.TruthStatement
 
 class TruthOrLieQuiz1 : TruthOrLieQuiz() {
 
