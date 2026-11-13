@@ -11,7 +11,7 @@ private fun selectTruthOrLieRequest() = """
   "request": {
     "command": "правда или ложь",
     "original_utterance": "правда или ложь",
-    "nlu": {"tokens": ["правда", "или", "ложь"], "entities": [], "intents": {"g911.mode_truth": {"slots": {}}}},
+    "nlu": {"tokens": ["правда", "или", "ложь"], "entities": [], "intents": {"g911.mode_truth_or_lie": {"slots": {}}}},
     "type": "SimpleUtterance"
   },
   "state": {
