@@ -9,6 +9,9 @@ import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.System.err
 
+private const val CHOOSE_MODE_PHRASE = "Сначала нужно выбрать режим. Какой режим выберешь?"
+private const val UNCLEAR_WITHOUT_MODE_PHRASE = "Я вас не поняла. Какой режим выберешь?"
+
 private val quizHolder = QuizHolder()
 
 //The order is important here
@@ -18,6 +21,9 @@ private val commandRegistry: List<Command> = listOf(
     WhatCanYouDoCommand(),
 
     IntroductionCommand(quizHolder),
+    ModesHelpCommand(quizHolder),
+    ChangeGameModeCommand(quizHolder),
+    GameModeSelectionCommand(quizHolder),
 
     GreetingCommand(),
     PartingCommand(),
@@ -63,8 +69,15 @@ private fun processRequest(requestObject: RequestObject): ResponseObject {
     val command: Command? = commandRegistry
         .map { wrapIfLoggingNotDisabled(it) }
         .firstOrNull { it.canHandle(requestObject) }
+
     return when {
+        command != null && command.needsGameMode() && requestObject.gameMode() == null ->
+            GameModeMenu.of(CHOOSE_MODE_PHRASE, quizHolder.availableModes, requestObject)
+
         command != null -> command.execute(requestObject)
+        requestObject.gameMode() == null ->
+            GameModeMenu.of(UNCLEAR_WITHOUT_MODE_PHRASE, quizHolder.availableModes, requestObject)
+
         else -> ResponseObject.ofUnclearCommand(requestObject)
     }
 }

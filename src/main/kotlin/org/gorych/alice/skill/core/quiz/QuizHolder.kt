@@ -25,8 +25,8 @@ class QuizHolder : QuizSource {
         )
     }
 
-    private val soundQuizzes: List<Quiz> by lazy { emptyList() }
-    private val truthOrLieQuizzes: List<Quiz> by lazy { emptyList() }
+    private val soundQuizzes: List<Quiz> by lazy { listOf(SoundQuiz1()) }
+    private val truthOrLieQuizzes: List<Quiz> by lazy { listOf(TruthOrLieQuiz1()) }
 
     private val usualByMode: Map<GameMode, List<Quiz>> by lazy {
         mapOf(
@@ -50,10 +50,11 @@ class QuizHolder : QuizSource {
         }
     }
 
-    val availableModes: Set<GameMode> by lazy { usualByMode.filterValues { it.isNotEmpty() }.keys }
+    override val availableModes: Set<GameMode> by lazy { usualByMode.filterValues { it.isNotEmpty() }.keys }
 
     override fun getQuiz(requestObject: RequestObject): Quiz {
         val mode: GameMode = requestObject.gameMode()
+            ?: error("A game mode must be selected before a quiz can be resolved")
         val usual: List<Quiz> = usualByMode.getValue(mode)
         val bonus: List<Quiz> = bonusByMode.getValue(mode)
 

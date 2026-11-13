@@ -34,7 +34,7 @@
       ]
     },
     "user": {},
-    "application": {}
+    "application": { "gameMode": "QUESTION_ANSWER" }
   },
   "version": "1.0"
 }

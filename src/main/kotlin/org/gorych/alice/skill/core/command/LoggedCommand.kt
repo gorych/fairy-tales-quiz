@@ -10,6 +10,8 @@ class LoggedCommand(private val innerCommand: Command) : Command {
 
     override fun canHandle(requestObject: RequestObject) = innerCommand.canHandle(requestObject)
 
+    override fun needsGameMode() = innerCommand.needsGameMode()
+
     override fun execute(requestObject: RequestObject): ResponseObject {
         log("execute: start. ${requestObject.gameMode()}, user id: ${truncatedUserId(requestObject)}")
         return innerCommand.execute(requestObject)

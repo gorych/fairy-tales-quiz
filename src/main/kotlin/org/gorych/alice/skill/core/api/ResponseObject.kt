@@ -2,6 +2,7 @@ package org.gorych.alice.skill.core.api
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.gorych.alice.skill.core.mode.GameMode
 import org.gorych.alice.skill.core.quiz.Achievement
 import org.gorych.alice.skill.core.quiz.Prompt
 
@@ -143,8 +144,16 @@ data class Button(val title: String, val hide: Boolean = true, val payload: Stri
         fun stop() = Button("❌ Выйти")
         fun whatCanYouDo() = Button("ℹ\uFE0F Что ты умеешь?")
 
+        fun truth() = Button("✅ Правда")
+        fun lie() = Button("❌ Ложь")
+
+        fun gameMode(mode: GameMode) = when (mode) {
+            GameMode.QUESTION_ANSWER -> Button("❓ Вопрос-ответ")
+            GameMode.GUESS_SOUND -> Button("\uD83D\uDD0A Угадай по звуку")
+            GameMode.TRUE_OR_FALSE -> Button("\uD83E\uDD14 Правда или ложь")
+        }
+
         fun agreement_and_disagreement() = listOf(agreement(), disagreement())
-        fun agreement_disagreement_whatCanYouDo() = listOf(agreement(), whatCanYouDo(), disagreement())
 
         fun skip_repeat_hint() = listOf(skipQuestion(), repeatQuestion(), hint())
         fun skip_repeat_hint_stop() = listOf(skipQuestion(), repeatQuestion(), hint(), stop())

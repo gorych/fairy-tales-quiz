@@ -20,16 +20,6 @@ class UserInteractionTest {
     }
 
     @Test
-    fun `WHEN user doesn't agree to play THEN regret phrase should be returned and session closed`() {
-        shouldEqualJsonTest("step2-no.json")
-    }
-
-    @Test
-    fun `WHEN user agrees to play THEN first question should be returned`() {
-        shouldEqualJsonTest("step2-yes.json")
-    }
-
-    @Test
     fun `WHEN user sends right answer to question #1 THEN second question should be returned`() {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step3-answer1.json",
@@ -148,11 +138,13 @@ class UserInteractionTest {
         shouldEqualSpecifiedJsonAndContainText(
             fileName = "step5-what-can-you-do.json",
             expectedText = arrayOf(
-                "Я прочитала много известных сказок и могу проверить как хорошо их знаешь ты. ",
-                "Игра происходит в режиме 'вопрос-ответ'. Я спрашиваю, а ты - отвечаешь. ",
-                "Если ты не знаешь ответа на вопрос, просто скажи 'Алиса, помоги' или 'Алиса, следующий вопрос'. ",
-                "Чтобы послушать вопрос еще раз - скажи 'Алиса, повтори вопрос'. ",
-                "Для выхода - скажи 'стоп' или 'хватит'."
+                "Я прочитала много известных сказок и могу проверить, как хорошо их знаешь ты. У меня три режима игры:",
+                "«Вопрос-ответ» — я задаю вопросы по сказкам, а ты отвечаешь.",
+                "«Угадай по звуку» — я включаю аудиодорожку, а ты угадываешь сказку по услышанным звукам.",
+                "«Правда или ложь» — я зачитываю утверждение об известных сказках, а ты говоришь, правда это или ложь.",
+                "Если не знаешь ответа — скажи «Алиса, помоги» или «Алиса, следующий вопрос».",
+                "Чтобы сменить режим — скажи «Алиса, другой режим».",
+                "Для выхода — скажи «стоп» или «хватит»."
             ),
         )
     }

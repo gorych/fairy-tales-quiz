@@ -9,7 +9,6 @@ import org.gorych.alice.skill.core.quiz.ModeProfile
 import org.gorych.alice.skill.core.quiz.ModeProfiles
 import org.gorych.alice.skill.core.quiz.Quiz
 import org.gorych.alice.skill.core.quiz.QuizSource
-import org.gorych.alice.skill.core.quiz.Verdict
 
 class NextQuestionCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCommand(quizzes) {
 
@@ -24,7 +23,7 @@ class NextQuestionCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCom
     ): ResponseObject {
         log("execute: question number: $currentQuestionNumber")
 
-        if (quiz.evaluate(requestObject, currentQuestionNumber) == Verdict.CORRECT) {
+        if (quiz.isCorrectAnswer(requestObject, currentQuestionNumber)) {
             val profile = ModeProfiles.of(quiz.gameMode)
             val rightAnswersCount: Int = getRightAnswersCount(requestSessionState, currentQuestionNumber)
 
@@ -39,13 +38,22 @@ class NextQuestionCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCom
                 }
 
                 return nextQuestionResponse(
-                    profile, nextQuestionNumber, rightAnswersCount, requestSessionState, quiz
+                    profile,
+                    nextQuestionNumber,
+                    rightAnswersCount,
+                    requestSessionState,
+                    quiz,
+                    quiz.correctAnswerNote(currentQuestionNumber)
                 )
             }
             return endQuizResponse(profile, rightAnswersCount, quiz)
         }
 
-        return wrongAnswerResponse(ModeProfiles.of(quiz.gameMode), requestSessionState)
+        return wrongAnswerResponse(
+            ModeProfiles.of(quiz.gameMode),
+            requestSessionState,
+            quiz.wrongAnswerNote(currentQuestionNumber)
+        )
     }
 
     private fun getRightAnswersCount(sessionState: SessionState, currentQuestion: Int): Int {
@@ -63,10 +71,14 @@ class NextQuestionCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCom
         nextQuestionNumber: Int,
         rightAnswersCount: Int,
         sessionState: SessionState,
-        quiz: Quiz
+        quiz: Quiz,
+        note: String
     ): ResponseObject {
-        val rightAnswerPhrase = profile.rightAnswerPhrases.random()
-        val nextQuestionPhrase = profile.nextQuestionPhrases.random()
+        val phrase = listOf(
+            profile.rightAnswerPhrases.random(),
+            note,
+            profile.nextQuestionPhrases.random(),
+        ).filter { it.isNotEmpty() }.joinToString(" ")
 
         val responseSessionState = SessionState(
             nextQuestionNumber,
@@ -77,17 +89,21 @@ class NextQuestionCommand(quizzes: QuizSource) : RequestSessionStatedQuestionCom
         )
 
         return ResponseObject.ofPrompt(
-            prompt = quiz.prompt(nextQuestionNumber, "$rightAnswerPhrase $nextQuestionPhrase"),
+            prompt = quiz.prompt(nextQuestionNumber, phrase),
             buttons = profile.buttons,
             sessionState = responseSessionState,
             endSession = false
         )
     }
 
-    private fun wrongAnswerResponse(profile: ModeProfile, sessionState: SessionState): ResponseObject {
+    private fun wrongAnswerResponse(profile: ModeProfile, sessionState: SessionState, note: String): ResponseObject {
         log("execute: wrong answer")
+        val text = listOf(profile.wrongAnswerPhrases.random(), note)
+            .filter { it.isNotEmpty() }
+            .joinToString(" ")
+
         return ResponseObject.of(
-            text = profile.wrongAnswerPhrases.random(),
+            text = text,
             endSession = false,
             buttons = profile.buttons,
             sessionState = sessionState

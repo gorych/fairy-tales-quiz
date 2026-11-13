@@ -33,6 +33,7 @@
       ]
     },
     "application": {
+      "gameMode": "QUESTION_ANSWER",
       "quizName": null,
       "bonusQuiz": true
     }

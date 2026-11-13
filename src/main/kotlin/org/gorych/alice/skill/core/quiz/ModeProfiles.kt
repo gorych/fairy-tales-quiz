@@ -6,7 +6,7 @@ object ModeProfiles {
 
     fun of(mode: GameMode): ModeProfile = when (mode) {
         GameMode.QUESTION_ANSWER -> questionAnswerModeProfile
-        GameMode.GUESS_SOUND, GameMode.TRUE_OR_FALSE ->
-            error("Profile of the $mode mode is not implemented yet")
+        GameMode.GUESS_SOUND -> soundModeProfile
+        GameMode.TRUE_OR_FALSE -> truthOrLieModeProfile
     }
 }

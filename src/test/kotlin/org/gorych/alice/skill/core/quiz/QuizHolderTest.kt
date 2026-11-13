@@ -12,7 +12,6 @@ import org.gorych.alice.skill.fairytail.quiz.Quiz2
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 class QuizHolderTest {
 
@@ -96,26 +95,25 @@ class QuizHolderTest {
     }
 
     @Test
-    fun `available modes should not contain modes without quizzes`() {
+    fun `every game mode should have at least one quiz`() {
         //when
         val actual = quizHolder.availableModes
 
         //then
-        assertEquals(setOf(GameMode.QUESTION_ANSWER), actual)
+        assertEquals(GameMode.entries.toSet(), actual)
     }
 
     @Test
-    fun `getQuiz should fail when the mode has no quizzes at all`() {
-        //given
-        val request = mockk<RequestObject>()
-        val appState = ApplicationState(quizName = null, bonusQuiz = true)
-        val state = State(application = appState, session = SessionState())
+    fun `every game mode should resolve a quiz`() {
+        GameMode.entries.forEach { mode ->
+            val request = mockk<RequestObject>()
+            val state = State(application = ApplicationState(quizName = null), session = SessionState())
 
-        every { request.isNewSession() } returns false
-        every { request.state } returns state
-        every { request.gameMode() } returns GameMode.GUESS_SOUND
+            every { request.isNewSession() } returns true
+            every { request.state } returns state
+            every { request.gameMode() } returns mode
 
-        //then
-        assertThrows<IllegalStateException> { quizHolder.getQuiz(request) }
+            assertEquals(mode, quizHolder.getQuiz(request).gameMode, "Mode $mode")
+        }
     }
 }

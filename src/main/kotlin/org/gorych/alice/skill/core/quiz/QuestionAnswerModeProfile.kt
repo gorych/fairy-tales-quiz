@@ -47,6 +47,7 @@ internal val questionAnswerModeProfile = ModeProfile(
     excellentScore = EXCELLENT_SCORE_MIN_VALUE,
     goodScore = GOOD_SCORE_MIN_VALUE,
     badScore = BAD_SCORE_MAX_VALUE,
+    openingPhrase = "Отлично. Слушай первый вопрос.",
     offersBonusQuiz = true,
     buttons = Button.skip_repeat_hint(),
     rightAnswerPhrases = setOf("Верно!", "Правильно!", "Ты молодец!", "Совершенно верно! Так держать!"),

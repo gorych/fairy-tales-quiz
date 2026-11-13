@@ -8,6 +8,8 @@ import org.gorych.alice.skill.core.quiz.QuizSource
 
 abstract class RequestSessionStatedQuestionCommand(protected val quizzes: QuizSource) : Command {
 
+    override fun needsGameMode(): Boolean = true
+
     override fun execute(requestObject: RequestObject): ResponseObject {
         val requestSessionState = requestObject.state?.session
         requireNotNull(requestSessionState) { "Session state must not be NULL" }

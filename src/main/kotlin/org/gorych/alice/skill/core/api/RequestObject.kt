@@ -25,7 +25,7 @@ data class RequestObject(
 
     fun containsCommand(commandName: String) = state?.containsTransitionCommand(commandName) ?: false
 
-    fun gameMode(): GameMode = state?.application?.gameMode ?: GameMode.QUESTION_ANSWER
+    fun gameMode(): GameMode? = state?.application?.gameMode
 
     companion object
 }

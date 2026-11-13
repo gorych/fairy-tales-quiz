@@ -15,5 +15,11 @@
     },
     "type": "SimpleUtterance"
   },
+  "state": {
+    "session": {},
+    "application": {
+      "gameMode": "QUESTION_ANSWER"
+    }
+  },
   "version": "1.0"
 }

@@ -7,6 +7,7 @@ data class ModeProfile(
     val excellentScore: Int,
     val goodScore: Int,
     val badScore: Int,
+    val openingPhrase: String,
     val offersBonusQuiz: Boolean,
     val buttons: List<Button>,
     val rightAnswerPhrases: Set<String>,

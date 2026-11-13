@@ -39,6 +39,7 @@
     },
     "user": {},
     "application": {
+      "gameMode": "QUESTION_ANSWER",
       "quizName": "QuizTest"
     }
   },

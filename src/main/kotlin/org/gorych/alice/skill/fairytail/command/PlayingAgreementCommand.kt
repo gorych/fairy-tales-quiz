@@ -11,6 +11,8 @@ class PlayingAgreementCommand(private val quizzes: QuizSource) : Command {
 
     override fun name(): String = PlayingAgreementCommand.name()
 
+    override fun needsGameMode(): Boolean = true
+
     override fun canHandle(requestObject: RequestObject): Boolean {
         return requestObject.containsIntent(AGREEMENT_INTENT_ID) && requestObject.containsCommand(name())
     }
@@ -26,9 +28,10 @@ class PlayingAgreementCommand(private val quizzes: QuizSource) : Command {
 
     private fun firstQuestionResponse(quiz: Quiz): ResponseObject {
         val questionNumber = 1
+        val profile = ModeProfiles.of(quiz.gameMode)
         return ResponseObject.ofPrompt(
-            prompt = quiz.prompt(questionNumber, "Отлично. Слушай первый вопрос."),
-            buttons = ModeProfiles.of(quiz.gameMode).buttons,
+            prompt = quiz.prompt(questionNumber, profile.openingPhrase),
+            buttons = profile.buttons,
             sessionState = SessionState(questionNumber, setOf(NextQuestionCommand.name())),
             endSession = false,
             appState = ApplicationState(quiz)

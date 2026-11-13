@@ -27,6 +27,7 @@
     },
     "user": {},
     "application": {
+      "gameMode": "QUESTION_ANSWER",
       "quizName": "BonusQuiz1",
       "bonusQuiz": true
     }

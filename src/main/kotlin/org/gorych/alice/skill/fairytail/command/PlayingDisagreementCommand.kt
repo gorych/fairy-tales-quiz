@@ -8,6 +8,8 @@ class PlayingDisagreementCommand : Command {
 
     override fun name() = PlayingDisagreementCommand.name()
 
+    override fun needsGameMode(): Boolean = true
+
     override fun canHandle(requestObject: RequestObject): Boolean {
         return requestObject.containsIntent(DISAGREEMENT_INTENT_ID) && requestObject.containsCommand(name())
     }

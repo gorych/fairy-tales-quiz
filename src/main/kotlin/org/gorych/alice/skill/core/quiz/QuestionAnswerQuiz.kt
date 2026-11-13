@@ -25,11 +25,8 @@ abstract class QuestionAnswerQuiz(bonusQuiz: Boolean = false) : Quiz(bonusQuiz) 
         )
     }
 
-    override fun evaluate(requestObject: RequestObject, number: Int): Verdict {
-        return when {
-            answerTo(number).any { it == requestObject.command() } -> Verdict.CORRECT
-            else -> Verdict.WRONG
-        }
+    override fun isCorrectAnswer(requestObject: RequestObject, number: Int): Boolean {
+        return answerTo(number).any { it == requestObject.command() }
     }
 
     override fun hintTo(number: Int, hintNumber: Int): String {
